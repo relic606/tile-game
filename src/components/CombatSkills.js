@@ -7,39 +7,41 @@ export default function CombatSkills(props) {
 	const [defendValue, setDefendValue] = useState(1);
 	const [strengthBuff, setStrengthBuff] = useState(0);
 	const [weakness, setWeakness] = useState(1);
-
+	const [randomActionNum, setRandomActionNum] = useState(
+		Math.floor(Math.random() * props.enemy.actions.length)
+	);
 	/////////Enemy action taken after player turn ends
 
 	function enemyAction(defendValue) {
-		const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
+		// const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
 
-		if (props.enemy.actions[randomNum].effect) {
-			props.setStatusEffect(props.enemy.actions[randomNum].effect);
+		if (props.enemy.actions[randomActionNum].effect) {
+			props.setStatusEffect(props.enemy.actions[randomActionNum].effect);
 		}
 		props.setCombatMessage(
-			`${props.enemy.actions[randomNum].message} ${Math.floor(
-				props.enemy.actions[randomNum].value * defendValue
+			`${props.enemy.actions[randomActionNum].message} ${Math.floor(
+				props.enemy.actions[randomActionNum].value * defendValue
 			)} damage taken.`
 		);
-		if (props.enemy.actions[randomNum].effect === "weakness") {
+		if (props.enemy.actions[randomActionNum].effect === "weakness") {
 			setWeakness(0.5);
 		}
-
+		setRandomActionNum(Math.floor(Math.random() * props.enemy.actions.length));
 		///////////// Attack value less than player health value
 
-		if (props.player.health > props.enemy.actions[randomNum].value) {
+		if (props.player.health > props.enemy.actions[randomActionNum].value) {
 			setTimeout(() => {
 				props.healthChange(
-					Math.floor(-props.enemy.actions[randomNum].value * defendValue)
+					Math.floor(-props.enemy.actions[randomActionNum].value * defendValue)
 				);
 			}, 1500);
 		}
 		///////////Attack greater than health, player is slain
 		else {
-			props.healthChange(-props.enemy.actions[randomNum].value);
+			props.healthChange(-props.enemy.actions[randomActionNum].value);
 			props.setCombatMessage(
-				`${props.enemy.actions[randomNum].message} ${
-					props.enemy.actions[randomNum].value * defendValue
+				`${props.enemy.actions[randomActionNum].message} ${
+					props.enemy.actions[randomActionNum].value * defendValue
 				} damage taken. You have been slain!`
 			);
 			setTimeout(() => {
@@ -60,7 +62,7 @@ export default function CombatSkills(props) {
 			) {
 				if (props.statusEffect === "stun") {
 					props.setCombatMessage(
-						"You are stunned!  No actions can be taken this turn."
+						"You are stunned.  No actions can be taken this turn."
 					);
 					setTimeout(() => {
 						props.setCombatMessage("");
@@ -238,12 +240,28 @@ export default function CombatSkills(props) {
 		}
 	};
 	useEffect(() => {
+		console.log();
 		if (props.turn === 1) {
+			console.log(props.enemy);
+			props.setCombatMessage(
+				`${props.enemy.actions[randomActionNum].forecast}`
+			);
+			setTimeout(() => {
+				props.setCombatMessage("");
+			}, 1500);
 		} else {
 			props.setStatusEffect("");
 			setWeakness(1);
 			enemyAction(defendValue);
 			setDefendValue(1);
+			setTimeout(() => {
+				props.setCombatMessage(
+					`${props.enemy.actions[randomActionNum].forecast}`
+				);
+				setTimeout(() => {
+					props.setCombatMessage("");
+				}, 1500);
+			}, 1500);
 		}
 	}, [props.turn]);
 	useEffect(() => {
