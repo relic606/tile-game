@@ -6,7 +6,6 @@ export default function CombatSkills(props) {
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [defendValue, setDefendValue] = useState(1);
 	const [strengthBuff, setStrengthBuff] = useState(0);
-	const [statusEffect, setStatusEffect] = useState("");
 	const [weakness, setWeakness] = useState(1);
 
 	/////////Enemy action taken after player turn ends
@@ -15,7 +14,7 @@ export default function CombatSkills(props) {
 		const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
 
 		if (props.enemy.actions[randomNum].effect) {
-			setStatusEffect(props.enemy.actions[randomNum].effect);
+			props.setStatusEffect(props.enemy.actions[randomNum].effect);
 		}
 		props.setCombatMessage(
 			`${props.enemy.actions[randomNum].message} ${Math.floor(
@@ -59,7 +58,7 @@ export default function CombatSkills(props) {
 				skillList.combatSkillsArray[i].name ===
 				skill.target.getAttribute("value").toLowerCase()
 			) {
-				if (statusEffect === "stun") {
+				if (props.statusEffect === "stun") {
 					props.setCombatMessage(
 						"You are stunned!  No actions can be taken this turn."
 					);
@@ -241,7 +240,7 @@ export default function CombatSkills(props) {
 	useEffect(() => {
 		if (props.turn === 1) {
 		} else {
-			setStatusEffect("");
+			props.setStatusEffect("");
 			setWeakness(1);
 			enemyAction(defendValue);
 			setDefendValue(1);
@@ -266,7 +265,7 @@ export default function CombatSkills(props) {
 			<div>
 				{props.enemy.name} Health: {enemyHealth > 0 ? enemyHealth : 0}
 			</div>
-			<div>Status Effects: {statusEffect}</div>
+			<div>Status Effects: {props.statusEffect}</div>
 			<br></br>
 			<div>Draw pile: {props.drawPileLength}</div>
 			<div>Discard pile: {props.discardPileLength}</div>

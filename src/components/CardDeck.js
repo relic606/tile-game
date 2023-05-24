@@ -37,34 +37,40 @@ export default function CardDeck(props) {
 	};
 
 	const handleCardClick = (event) => {
-		// if()
-		switch (event.target.children[0].innerHTML) {
-			case "Sword":
-				props.setSwordResource(1);
-				discardCard(event);
-				break;
-			case "Shield":
-				props.setShieldResource(1);
-				discardCard(event);
-				break;
-			case "Heart":
-				props.setHeartResource(1);
-				discardCard(event);
-				break;
-			case "Draw":
-				props.setDrawResource(2);
-				if (event.target.children[2].innerHTML === "Exhaust") {
-					exhaustCard(event);
-				} else {
+		if (props.statusEffect === "stun") {
+			props.setCombatMessage("You cannot play a card while stunned");
+			setTimeout(() => {
+				props.setCombatMessage("");
+			}, 1500);
+		} else {
+			switch (event.target.children[0].innerHTML) {
+				case "Sword":
+					props.setSwordResource(1);
 					discardCard(event);
-				}
+					break;
+				case "Shield":
+					props.setShieldResource(1);
+					discardCard(event);
+					break;
+				case "Heart":
+					props.setHeartResource(1);
+					discardCard(event);
+					break;
+				case "Draw":
+					props.setDrawResource(2);
+					if (event.target.children[2].innerHTML === "Exhaust") {
+						exhaustCard(event);
+					} else {
+						discardCard(event);
+					}
 
-				break;
-			case "Curse":
-				exhaustCard(event);
-				break;
-			default:
-				console.log("card not recognized");
+					break;
+				case "Curse":
+					exhaustCard(event);
+					break;
+				default:
+					console.log("card not recognized");
+			}
 		}
 	};
 

@@ -105,7 +105,7 @@ function EnemyImage(props) {
 
 function CombatInteraction(props) {
 	const [combatMessage, setCombatMessage] = useState("");
-
+	const [statusEffect, setStatusEffect] = useState("");
 	const [currentHand, setCurrentHand] = useState([]);
 	const [discardPile, setDiscardPile] = useState([]);
 	const [drawPile, setDrawPile] = useState([...shuffle(props.player.cardDeck)]);
@@ -143,7 +143,7 @@ function CombatInteraction(props) {
 		// may need to adjust/add conditionals due to combinations of 1 in draw + 2 in discard, for example, not being accounted for.
 
 		if (newDrawPile.length === 0 && newDiscardPile.length === 0) {
-			////no cards in left to draw
+			////no cards left to draw
 			alert("No cards remaining");
 		} else if (newDrawPile.length < x && newDiscardPile.length === 0) {
 			/////   not enough cards in draw pile to draw x amount, none available in discard.
@@ -250,6 +250,8 @@ function CombatInteraction(props) {
 				</div>
 
 				<CardDeck
+					statusEffect={statusEffect}
+					setCombatMessage={setCombatMessageCB}
 					turn={props.turn}
 					cardDeck={props.player.cardDeck}
 					setSwordResource={props.setSwordResource}
@@ -265,6 +267,8 @@ function CombatInteraction(props) {
 					setDrawPile={setNewDrawPile}
 				></CardDeck>
 				<CombatSkills
+					statusEffect={statusEffect}
+					setStatusEffect={setStatusEffect}
 					drawPileLength={drawPile.length}
 					discardPileLength={discardPile.length}
 					setExperience={props.setExperience}
