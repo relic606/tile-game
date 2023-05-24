@@ -1,38 +1,234 @@
-.App {
-  text-align: center;
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: radial-gradient(#e3edfc, #bed3f4);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.square {
+	box-sizing: border-box;
+	width: 150px;
+	height: 150px;
+	display: block;
+	float: left;
+	margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.selected {
+	border: solid 5px #fff;
+	box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.3);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.selected::before {
+	position: absolute;
+	content: "";
+	background-image: url("./assets/character.png");
+	background-repeat: no-repeat;
+	background-size: 120px 300px;
+	background-position: 13% 0%;
+	width: 200px;
+	height: 300px;
+	pointer-events: none;
+	transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
 }
 
-.App-link {
-  color: #61dafb;
+.grid-box {
+	position: relative;
+	margin: 40px auto 0;
+	transform: rotateX(60deg) rotateY(0deg) rotateZ(-135deg);
+	z-index: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grid-box:focus {
+	outline: none;
+}
+
+.red {
+	background-color: #ba1446;
+}
+.black {
+	background-color: black;
+}
+.black::before {
+	position: absolute;
+	content: "";
+	background-image: url("./assets/skull&crossbones.png");
+	background-repeat: no-repeat;
+	background-size: 100px 240px;
+	background-position: 13% 0%;
+	width: 200px;
+	height: 300px;
+	pointer-events: none;
+	transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
+}
+
+.blue {
+	background-color: #1f1f91;
+}
+
+.purple {
+	background-color: #6b1087;
+}
+
+.green {
+	background-color: #237031;
+}
+
+.yellow {
+	background-color: #d39e17;
+}
+
+.combat {
+	position: fixed;
+	background-image: url(./assets/combatImage2.jpg);
+	background-repeat: no-repeat;
+	background-position: top, center;
+
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+}
+.combat-content {
+	justify-content: space-evenly;
+	display: flex;
+	width: 100%;
+	height: 728px;
+}
+
+.player-combat-div {
+	content: "";
+	background-image: url("./assets/character.png");
+	background-repeat: no-repeat;
+	background-size: 226px 300px;
+	width: 226px;
+	height: 300px;
+	transform: scalex(-1);
+	margin-top: 300px;
+}
+
+.enemy-combat-div {
+	position: absolute;
+	bottom: 10%;
+	right: 0;
+}
+
+.card-deck > div:hover {
+	cursor: pointer;
+}
+.combat-menu {
+	border: 1px black dotted;
+}
+
+.combat-interaction {
+	display: flex;
+	justify-content: space-evenly;
+	position: relative;
+	background-color: white;
+	width: 1920px;
+	height: 250px;
+	border: 3px black solid;
+	margin: auto;
+}
+
+.skill-list {
+	list-style-type: none;
+}
+
+.skill-list > li:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+.combat-message {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	border: black 1px solid;
+	background-color: white;
+	padding: 10px;
+	margin: auto;
+	width: 1900px;
+}
+
+.sword {
+	color: blue;
+}
+
+.card-deck-container {
+	position: absolute;
+	height: 300px;
+	width: 600px;
+	left: calc(50% - 300px);
+	display: flex;
+}
+
+.card {
+	display: flex;
+	height: 200px;
+	width: 140px;
+	background-color: #17141d;
+	border-radius: 10px;
+	box-shadow: -1rem 0 3rem #000;
+	transition: 0.4s ease-out;
+	position: relative;
+	left: 0px;
+}
+
+.card > p {
+	visibility: hidden;
+}
+
+.card:not(:first-child) {
+	margin-left: -50px;
+}
+
+.card:hover {
+	transform: translateY(-20px);
+	transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+	position: relative;
+	left: 50px;
+	transition: 0.4s ease-out;
+}
+
+.card-title {
+	color: white;
+	font-weight: 300;
+	position: absolute;
+	left: 20px;
+	top: 15px;
+}
+
+.card-title span.description {
+	pointer-events: none;
+}
+
+.turn-resource-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.event-tile {
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	position: relative;
+	height: 80vh;
+	width: 80vw;
+	background-color: white;
+	z-index: 0;
+	top: -750px;
+	padding-bottom: 40px;
+}
+.event-tile > p {
+	width: 75%;
+}
+
+.event-image {
+	margin: auto;
 }

@@ -1,0 +1,153 @@
+import React from "react";
+import Square from "./Square";
+
+class Grid extends React.Component {
+	state = {
+		gridWidth: this.props.gridWidth,
+		selectedSquare: [0, 0]
+	};
+
+	makeSquares = () => {
+		const tiles = [
+			"red",
+			// "red",
+			"red",
+			"yellow",
+			"yellow",
+			"green",
+			"green",
+			"green",
+			"green",
+			"green",
+			"green",
+			// "blue",
+			// "blue", "yellow", "purple",
+			"green"
+		];
+		let arr = [];
+		let key = 0;
+		for (let i = 0; i < this.props.gridWidth; i++) {
+			for (let j = 0; j < this.props.gridWidth; j++) {
+				arr.push(
+					<Square
+						isHiddenToggle={this.props.eventIsHiddenToggle}
+						eventIsHidden={this.props.eventIsHidden}
+						dungeonFloor={this.props.dungeonFloor}
+						gridWidth={this.props.gridWidth}
+						inCombat={this.props.inCombat}
+						x={j}
+						y={i}
+						key={key++}
+						tile={tiles[Math.floor(Math.random() * tiles.length)]}
+						selectedSquare={this.state.selectedSquare}
+					/>
+				);
+			}
+		}
+		return arr;
+	};
+
+	handleKeyPress = (e) => {
+		if (this.props.inCombat === "false" && this.props.eventIsHidden) {
+			switch (e.which) {
+				case 87:
+					this.move(0, 1, e);
+					break;
+				case 68:
+					this.move(1, 1, e);
+					break;
+				case 83:
+					this.move(0, -1, e);
+					break;
+				case 65:
+					this.move(1, -1, e);
+					break;
+			}
+		}
+	};
+
+	move = (dir, change, e) => {
+		let coords = this.state.selectedSquare;
+
+		if (
+			coords[dir] + change > -1 &&
+			coords[dir] + change < this.props.gridWidth
+		) {
+			coords[dir] += change;
+
+			//Performs movement above, and then searches for the newly "selected" square below
+
+			setTimeout(() => {
+				for (let i = 0; i < this.props.gridWidth * this.props.gridWidth; i++) {
+					//collide with Red Square
+					if (
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("selected") &&
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("red")
+					) {
+						alert("Combat Engaged!");
+						this.props.inCombatChange("true");
+					}
+					/// collide with yellow square
+					else if (
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("selected") &&
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("yellow")
+					) {
+						alert("Event Square!");
+						this.props.eventIsHiddenToggle();
+					}
+
+					//collide with black Square
+					else if (
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("selected") &&
+						e.target.children[1].children[0].children[0].children[0].children[
+							i
+						].className.includes("black")
+					) {
+						this.props.setBossFight("true");
+						alert("Boss battle!");
+						this.props.inCombatChange("true");
+						this.setState({ selectedSquare: [0, 0] });
+					}
+				}
+			}, 10);
+			///////need minor timout delay for character to visually move before combat engages
+		}
+		this.setState({
+			selectedSquare: coords
+		});
+	};
+
+	componentDidMount = () => {
+		window.addEventListener("keydown", this.handleKeyPress);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener("keydown", this.handleKeyPress);
+	};
+
+	render() {
+		return (
+			<div
+				className="grid-box"
+				style={{
+					width: this.props.gridWidth * 150,
+					height: this.props.gridWidth * 150
+				}}
+			>
+				<div>{this.makeSquares()}</div>
+			</div>
+		);
+	}
+}
+
+export default Grid;
