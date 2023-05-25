@@ -6,6 +6,7 @@ import CombatOverlay from "./components/CombatOverlay";
 import { levelTables } from "./components/controllers/levelControllers";
 
 import { events } from "./components/controllers/eventControllers";
+import { enemies } from "./components/controllers/enemyControllers";
 
 function App() {
 	const [gridWidth, setGridWidth] = useState(5);
@@ -17,6 +18,11 @@ function App() {
 	const [event, setEvent] = useState(
 		eventsArray[Math.floor(Math.random() * eventsArray.length)]
 	);
+	const [enemy, setEnemy] = useState(enemies.normalEnemies.goblin);
+
+	const setNewEnemy = (enemy) => {
+		setEnemy(enemy);
+	};
 
 	//////////  Grows grid size with each floor passed, resetting to 5x5 after 3
 
@@ -38,9 +44,11 @@ function App() {
 
 	const inCombatChange = (combatStatus) => {
 		setInCombat(combatStatus);
+		// setNewEnemy({});
 	};
 	const setNewBossFight = (fightingBoss) => {
 		setBossFight(fightingBoss);
+		setEnemy(enemies.bossEnemies.ogre);
 	};
 
 	const [level, setLevel] = useState(1);
@@ -113,6 +121,16 @@ function App() {
 		}
 	}, [player.experience]);
 
+	useEffect(() => {
+		let enemy = {};
+		if (bossFight === "false") {
+			enemy = enemies.normalEnemies.goblin;
+		} else {
+			enemy = enemies.bossEnemies.ogre;
+		}
+		setEnemy(enemy);
+	}, [bossFight]);
+
 	return (
 		<div className="App">
 			<Grid
@@ -134,6 +152,8 @@ function App() {
 				/>
 			)}
 			<CombatOverlay
+				enemy={enemy}
+				setEnemy={setNewEnemy}
 				dungeonFloorIncr={dungeonFloorIncr}
 				setExperience={setNewExperience}
 				cardDeck={player.cardDeck}

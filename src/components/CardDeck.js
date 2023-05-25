@@ -95,7 +95,7 @@ export default function CardDeck(props) {
 							{card[0]}
 						</h3>
 						<p>{card[1]}</p>
-						<p>{card[2]}</p>
+						<div onClick={textUnclickable}> {card[2]}</div>
 					</div>
 				))}
 			</div>

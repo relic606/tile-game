@@ -177,6 +177,12 @@ body {
 .card > p {
 	visibility: hidden;
 }
+.card > div {
+	font-size: small;
+	color: white;
+	margin-top: auto;
+	margin-bottom: auto;
+}
 
 .card:not(:first-child) {
 	margin-left: -50px;
@@ -199,10 +205,6 @@ body {
 	position: absolute;
 	left: 20px;
 	top: 15px;
-}
-
-.card-title span.description {
-	pointer-events: none;
 }
 
 .turn-resource-container {

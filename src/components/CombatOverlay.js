@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CombatInteraction from "./combatInteraction";
-import { enemies } from "./controllers/enemyControllers";
 
 export default function CombatOverlay(props) {
 	const [turn, setTurn] = useState(1);
@@ -36,22 +35,6 @@ export default function CombatOverlay(props) {
 		draw: drawResource
 	};
 
-	const [enemy, setEnemy] = useState({});
-
-	const setNewEnemy = (enemy) => {
-		setEnemy(enemy);
-	};
-
-	useEffect(() => {
-		let enemy = {};
-		if (props.bossFight === "false") {
-			enemy = enemies.normalEnemies.goblin;
-		} else {
-			enemy = enemies.bossEnemies.ogre;
-		}
-		setEnemy(enemy);
-	}, [props.bossFight]);
-
 	if (props.inCombat === "false") {
 		return <div className="no-combat"></div>;
 	} else {
@@ -59,7 +42,7 @@ export default function CombatOverlay(props) {
 			<div className="combat">
 				<div className="combat-content">
 					<div className="player-combat-div"></div>
-					<EnemyImage enemyImage={enemy.image}></EnemyImage>
+					<EnemyImage enemyImage={props.enemy.image}></EnemyImage>
 				</div>
 				<CombatInteraction
 					setExperience={props.setExperience}
@@ -78,8 +61,8 @@ export default function CombatOverlay(props) {
 					setTurn={setTurnCB}
 					turnIncr={turnIncr}
 					player={props.player}
-					enemy={enemy}
-					setEnemy={setNewEnemy}
+					enemy={props.enemy}
+					setEnemy={props.setEnemy}
 					bossFight={props.bossFight}
 					setBossFight={props.setBossFight}
 					dungeonFloorIncr={props.dungeonFloorIncr}

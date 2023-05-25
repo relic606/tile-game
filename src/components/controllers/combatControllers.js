@@ -22,7 +22,7 @@ const defend = {
 	name: "defend",
 	message: "You take a defensive posture.",
 	actionType: "defend",
-	value: 0.6,
+	value: 0.3,
 	cost: 1
 };
 

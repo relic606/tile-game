@@ -13,8 +13,6 @@ export default function CombatSkills(props) {
 	/////////Enemy action taken after player turn ends
 
 	function enemyAction(defendValue) {
-		// const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
-
 		if (props.enemy.actions[randomActionNum].effect) {
 			props.setStatusEffect(props.enemy.actions[randomActionNum].effect);
 		}
@@ -26,7 +24,8 @@ export default function CombatSkills(props) {
 		if (props.enemy.actions[randomActionNum].effect === "weakness") {
 			setWeakness(0.5);
 		}
-		setRandomActionNum(Math.floor(Math.random() * props.enemy.actions.length));
+		// setRandomActionNum(Math.floor(Math.random() * props.enemy.actions.length));
+
 		///////////// Attack value less than player health value
 
 		if (props.player.health > props.enemy.actions[randomActionNum].value) {
@@ -85,7 +84,8 @@ export default function CombatSkills(props) {
 									} The enemy has taken ${Math.floor(
 										skillList.combatSkillsArray[i].value *
 											(props.player.strength + strengthBuff) *
-											weakness
+											weakness *
+											props.combatResources.sword
 									)} damage.`
 								);
 								///////////////////////////////// conditional if enemy is slain.
@@ -94,7 +94,8 @@ export default function CombatSkills(props) {
 									Math.floor(
 										skillList.combatSkillsArray[i].value *
 											(props.player.strength + strengthBuff) *
-											weakness
+											weakness *
+											props.combatResources.sword
 									)
 								) {
 									props.setTurn();
@@ -122,13 +123,17 @@ export default function CombatSkills(props) {
 										} The enemy has taken ${Math.floor(
 											skillList.combatSkillsArray[i].value *
 												(props.player.strength + strengthBuff) *
-												weakness
+												weakness *
+												props.combatResources.sword
 										)} damage. ${props.enemy.name} slain! You have gained ${
 											props.enemy.experience
 										} experience.`
 									);
 								}
-								props.setSwordResource(-skillList.combatSkillsArray[i].cost);
+								props.setSwordResource(
+									-skillList.combatSkillsArray[i].cost *
+										props.combatResources.sword
+								);
 								setTimeout(() => {
 									props.setCombatMessage("");
 								}, 1500);
@@ -138,7 +143,8 @@ export default function CombatSkills(props) {
 										Math.floor(
 											skillList.combatSkillsArray[i].value *
 												(props.player.strength + strengthBuff) *
-												weakness
+												weakness *
+												props.combatResources.sword
 										)
 								);
 							}
@@ -156,13 +162,17 @@ export default function CombatSkills(props) {
 							} else {
 								props.setCombatMessage(
 									`${skillList.combatSkillsArray[i].message} ${
-										skillList.combatSkillsArray[i].value * props.player.wisdom
+										skillList.combatSkillsArray[i].value *
+										props.player.wisdom *
+										props.combatResources.heart
 									} health replenished.`
 								);
 								props.healthChange(
-									skillList.combatSkillsArray[i].value * props.player.wisdom
+									skillList.combatSkillsArray[i].value *
+										props.player.wisdom *
+										props.combatResources.heart
 								);
-								props.setHeartResource(-1);
+								props.setHeartResource(-props.combatResources.heart);
 
 								setTimeout(() => {
 									props.setCombatMessage("");
@@ -180,14 +190,30 @@ export default function CombatSkills(props) {
 									props.setCombatMessage("");
 								}, 1500);
 							} else if (defendValue !== 1) {
-								props.setCombatMessage("You have already defended this turn.");
+								props.setCombatMessage("You reinforce your defenses.");
+								setDefendValue(
+									defendValue -
+										skillList.combatSkillsArray[i].value *
+											props.combatResources.shield
+								);
+								props.setShieldResource(
+									-skillList.combatSkillsArray[i].cost *
+										props.combatResources.shield
+								);
 								setTimeout(() => {
 									props.setCombatMessage("");
 								}, 1500);
 							} else {
 								props.setCombatMessage(skillList.combatSkillsArray[i].message);
-								setDefendValue(skillList.combatSkillsArray[i].value);
-								props.setShieldResource(-skillList.combatSkillsArray[i].cost);
+								setDefendValue(
+									1 -
+										skillList.combatSkillsArray[i].value *
+											props.combatResources.shield
+								);
+								props.setShieldResource(
+									-skillList.combatSkillsArray[i].cost *
+										props.combatResources.shield
+								);
 
 								setTimeout(() => {
 									props.setCombatMessage("");
@@ -240,24 +266,21 @@ export default function CombatSkills(props) {
 		}
 	};
 	useEffect(() => {
-		console.log();
+		const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
+		setRandomActionNum(randomNum);
 		if (props.turn === 1) {
-			console.log(props.enemy);
-			props.setCombatMessage(
-				`${props.enemy.actions[randomActionNum].forecast}`
-			);
+			props.setCombatMessage(`${props.enemy.actions[randomNum].forecast}`);
+
 			setTimeout(() => {
 				props.setCombatMessage("");
-			}, 1500);
+			}, 2500);
 		} else {
 			props.setStatusEffect("");
 			setWeakness(1);
 			enemyAction(defendValue);
 			setDefendValue(1);
 			setTimeout(() => {
-				props.setCombatMessage(
-					`${props.enemy.actions[randomActionNum].forecast}`
-				);
+				props.setCombatMessage(`${props.enemy.actions[randomNum].forecast}`);
 				setTimeout(() => {
 					props.setCombatMessage("");
 				}, 1500);
