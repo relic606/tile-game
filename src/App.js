@@ -35,16 +35,20 @@ function App() {
 			setDungeonFloor(dungeonFloor + 1);
 		}
 	};
+
+	const setNewEventsArray = (arr) => {
+		setEventsArray(arr);
+	};
+
 	const eventIsHiddenToggle = () => {
 		setEventIsHidden(!eventIsHidden);
 		if (!eventIsHidden) {
-			setEvent(eventsArray[Math.floor(Math.random() * eventsArray.length)]);
+			setEvent(eventsArray[0]);
 		}
 	};
 
 	const inCombatChange = (combatStatus) => {
 		setInCombat(combatStatus);
-		// setNewEnemy({});
 	};
 	const setNewBossFight = (fightingBoss) => {
 		setBossFight(fightingBoss);
@@ -108,7 +112,7 @@ function App() {
 	useEffect(() => {
 		if (player.experience >= player.expToNextLevel) {
 			alert(`You have reached level ${player.level + 1}!`);
-			setLevel(levelTables[player.level + 1]);
+			setLevel(player.level + 1);
 			setExperience(0);
 			setExpToNextLevel(levelTables[player.level + 1].expToNextLevel);
 			setMaxHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
@@ -117,6 +121,11 @@ function App() {
 			setWisdom(player.wisdom + levelTables[player.level + 1].wisdom);
 			if (levelTables[player.level + 1].skills) {
 				setSkills([...player.skills, levelTables[player.level + 1].skills]);
+				alert(`New skill: ${levelTables[player.level + 1].skills}`);
+			}
+			if (levelTables[player.level + 1].card) {
+				addCardToDeck(levelTables[player.level + 1].card);
+				alert(`New card: ${levelTables[player.level + 1].card[0]}`);
 			}
 		}
 	}, [player.experience]);
@@ -146,6 +155,7 @@ function App() {
 				<EventTile
 					event={event}
 					eventsArray={eventsArray}
+					setEventsArray={setNewEventsArray}
 					isHiddenToggle={eventIsHiddenToggle}
 					healthChange={healthChange}
 					addCardToDeck={addCardToDeck}

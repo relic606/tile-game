@@ -16,7 +16,7 @@ const bite = {
 const goblin = {
 	name: "Goblin",
 	maxHealth: 25,
-	experience: 200,
+	experience: 1000,
 	actions: [hack, bite],
 	image: goblinImage
 };
@@ -73,7 +73,7 @@ const weakness = {
 const slime = {
 	name: "Slime",
 	maxHealth: 20,
-	experience: 200,
+	experience: 1000,
 	actions: [slimed, envelop, weakness],
 	image: slimeImage
 };

@@ -154,6 +154,7 @@ export default function CombatInteraction(props) {
 
 				<CardDeck
 					statusEffect={statusEffect}
+					setStatusEffect={setStatusEffect}
 					setCombatMessage={setCombatMessageCB}
 					turn={props.turn}
 					cardDeck={props.player.cardDeck}

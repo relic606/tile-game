@@ -37,7 +37,10 @@ export default function CardDeck(props) {
 	};
 
 	const handleCardClick = (event) => {
-		if (props.statusEffect === "stun") {
+		if (
+			props.statusEffect === "stun" &&
+			event.target.children[0].innerHTML !== "Cleanse"
+		) {
 			props.setCombatMessage("You cannot play a card while stunned");
 			setTimeout(() => {
 				props.setCombatMessage("");
@@ -68,8 +71,16 @@ export default function CardDeck(props) {
 				case "Curse":
 					exhaustCard(event);
 					break;
+				case "Cleanse":
+					props.setCombatMessage("You have been cleansed of your ailments.");
+					props.setStatusEffect("");
+					exhaustCard(event);
+					setTimeout(() => {
+						props.setCombatMessage("");
+					}, 1500);
+					break;
 				default:
-					console.log("card not recognized");
+					alert("card not recognized");
 			}
 		}
 	};

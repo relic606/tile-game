@@ -4,7 +4,7 @@ const slash = {
 	name: "slash",
 	message: "You slashed the enemy!",
 	actionType: "attack",
-	value: 1,
+	value: 5,
 	cost: 1
 };
 
