@@ -293,7 +293,7 @@ export default function CombatSkills(props) {
 				props.setCombatMessage(`${props.enemy.actions[randomNum].forecast}`);
 				setTimeout(() => {
 					props.setCombatMessage("");
-				}, 1500);
+				}, 2500);
 			}, 1500);
 		}
 	}, [props.turn]);
@@ -320,7 +320,6 @@ export default function CombatSkills(props) {
 			<br></br>
 			<div>Draw pile: {props.drawPileLength}</div>
 			<div>Discard pile: {props.discardPileLength}</div>
-			<div>{strengthBuff}</div>
 		</div>
 	);
 }

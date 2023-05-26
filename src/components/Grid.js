@@ -10,9 +10,9 @@ class Grid extends React.Component {
 	makeSquares = () => {
 		const tiles = [
 			"red",
-			// "red",
 			"red",
-			"yellow",
+			"red",
+			// "yellow",
 			"yellow",
 			"green",
 			"green",

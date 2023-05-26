@@ -103,12 +103,12 @@ body {
 	width: 226px;
 	height: 300px;
 	transform: scalex(-1);
-	margin-top: 300px;
+	margin-top: 240px;
 }
 
 .enemy-combat-div {
 	position: absolute;
-	bottom: 10%;
+	bottom: 20%;
 	right: 0;
 }
 
@@ -119,6 +119,10 @@ body {
 	border: 1px black dotted;
 }
 
+.combat-interaction-container {
+	position: relative;
+	bottom: 111px;
+}
 .combat-interaction {
 	display: flex;
 	justify-content: space-evenly;
@@ -146,6 +150,7 @@ body {
 	border: black 1px solid;
 	background-color: white;
 	padding: 10px;
+	height: 19px;
 	margin: auto;
 	width: 1900px;
 }

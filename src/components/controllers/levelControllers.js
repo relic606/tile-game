@@ -7,7 +7,7 @@ export const levelTables = {
 		skills: "Holy Strength"
 	},
 	3: {
-		expToNextLevel: 9999,
+		expToNextLevel: 99999,
 		maxHealth: 20,
 		strength: 2,
 		wisdom: 1,

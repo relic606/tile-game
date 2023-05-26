@@ -17,8 +17,8 @@ const bite = {
 
 const goblin = {
 	name: "Goblin",
-	maxHealth: 25,
-	experience: 1000,
+	maxHealth: 30,
+	experience: 500,
 	actions: [hack, bite],
 	image: goblinImage
 };
@@ -44,7 +44,7 @@ const stomp = {
 
 const ogre = {
 	name: "Ogre",
-	maxHealth: 30,
+	maxHealth: 50,
 	experience: 1000,
 	actions: [club, bash, stomp],
 	image: ogreImage
@@ -74,8 +74,8 @@ const weakness = {
 
 const slime = {
 	name: "Slime",
-	maxHealth: 20,
-	experience: 1000,
+	maxHealth: 24,
+	experience: 500,
 	actions: [slimed, envelop, weakness],
 	image: slimeImage
 };
@@ -90,13 +90,13 @@ const slack = {
 const fite = {
 	forecast: "The goblin gnashes his teeth together.",
 	message: "The goblin bit you!",
-	value: 5
+	value: 10
 };
 
 const boblin = {
 	name: "Boblin",
-	maxHealth: 50,
-	experience: 1000,
+	maxHealth: 70,
+	experience: 700,
 	actions: [slack, fite],
 	image: goblinImage
 };
@@ -121,8 +121,8 @@ const tomp = {
 
 const bogre = {
 	name: "Bogre",
-	maxHealth: 30,
-	experience: 1000,
+	maxHealth: 120,
+	experience: 1500,
 	actions: [blub, pash, tomp],
 	image: ogreImage
 };

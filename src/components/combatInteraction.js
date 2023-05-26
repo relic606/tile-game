@@ -133,12 +133,12 @@ export default function CombatInteraction(props) {
 			{combatMessage ? (
 				<div className="combat-message">{combatMessage}</div>
 			) : (
-				<div></div>
+				<div className="combat-message"></div>
 			)}
 			<div className="combat-interaction">
 				<div className="turn-resource-container">
-					<div>Turn: {props.turn}</div>{" "}
 					<div>Dungeon Floor: {props.dungeonFloor}</div>
+					<div>Turn: {props.turn}</div>{" "}
 					<div>
 						<img src={swordImg} alt="sword" /> {props.combatResources.sword}
 					</div>

@@ -58,7 +58,7 @@ function App() {
 
 	const [level, setLevel] = useState(1);
 	const [experience, setExperience] = useState(0);
-	const [expToNextLevel, setExpToNextLevel] = useState(1000);
+	const [expToNextLevel, setExpToNextLevel] = useState(500);
 	const [health, setHealth] = useState(100);
 	const [maxHealth, setMaxHealth] = useState(100);
 	const [strength, setStrength] = useState(10);
