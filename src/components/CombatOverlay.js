@@ -35,7 +35,7 @@ export default function CombatOverlay(props) {
 		draw: drawResource
 	};
 
-	if (props.inCombat === "false") {
+	if (!props.inCombat) {
 		return <div className="no-combat"></div>;
 	} else {
 		return (
@@ -45,6 +45,10 @@ export default function CombatOverlay(props) {
 					<EnemyImage enemyImage={props.enemy.image}></EnemyImage>
 				</div>
 				<CombatInteraction
+					setBoss={props.setBoss}
+					enemyPool={props.enemyPool}
+					setEnemyPool={props.setEnemyPool}
+					enemies={props.enemies}
 					setExperience={props.setExperience}
 					setSwordResource={setNewSwordResource}
 					setShieldResource={setNewShieldResource}

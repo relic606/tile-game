@@ -11,14 +11,19 @@ import { enemies } from "./components/controllers/enemyControllers";
 function App() {
 	const [gridWidth, setGridWidth] = useState(5);
 	const [eventIsHidden, setEventIsHidden] = useState(true);
-	const [inCombat, setInCombat] = useState("false");
-	const [bossFight, setBossFight] = useState("false");
+	const [inCombat, setInCombat] = useState(false);
+	const [bossFight, setBossFight] = useState(false);
 	const [dungeonFloor, setDungeonFloor] = useState(1);
 	const [eventsArray, setEventsArray] = useState(events);
 	const [event, setEvent] = useState(
 		eventsArray[Math.floor(Math.random() * eventsArray.length)]
 	);
-	const [enemy, setEnemy] = useState(enemies.normalEnemies.goblin);
+	const [enemyPool, setEnemyPool] = useState(
+		enemies.normalEnemiesAll.normalEnemiesDL1
+	);
+	const [boss, setBoss] = useState(enemies.bossEnemiesAll.bossEnemiesDL1[0]);
+
+	const [enemy, setEnemy] = useState({});
 
 	const setNewEnemy = (enemy) => {
 		setEnemy(enemy);
@@ -47,12 +52,8 @@ function App() {
 		}
 	};
 
-	const inCombatChange = (combatStatus) => {
-		setInCombat(combatStatus);
-	};
-	const setNewBossFight = (fightingBoss) => {
-		setBossFight(fightingBoss);
-		setEnemy(enemies.bossEnemies.ogre);
+	const setNewBossFight = (boolean) => {
+		setBossFight(boolean);
 	};
 
 	const [level, setLevel] = useState(1);
@@ -164,25 +165,60 @@ function App() {
 		}
 	}, [player.experience]);
 
-	useEffect(() => {
-		let enemy = {};
-		if (bossFight === "false") {
-			enemy = enemies.normalEnemies.goblin;
-		} else {
-			enemy = enemies.bossEnemies.ogre;
-		}
-		setEnemy(enemy);
-	}, [bossFight]);
+	// useEffect(() => {
+	// 	let enemy = {};
+	// 	switch (dungeonFloor) {
+	// 		case 1:
+	// 			if (!bossFight) {
+	// 				enemy = enemyPool[Math.floor(Math.random() * enemyPool.length)];
+	// 			} else {
+	// 				const DL1bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
+	// 				enemy = DL1bosses[Math.floor(Math.random() * DL1bosses.length)];
+	// 			}
+	// 			setEnemy(enemy);
+	// 			break;
+	// 		case 2:
+	// 			if (!bossFight) {
+	// 				enemy = enemyPool[Math.floor(Math.random() * enemyPool.length)];
+	// 			} else {
+	// 				const DL2bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
+	// 				enemy = DL2bosses[Math.floor(Math.random() * DL2bosses.length)];
+	// 			}
+	// 			setEnemy(enemy);
+	// 			break;
+	// 		default:
+	// 	}
+	// }, [bossFight, inCombat]);
+	// useEffect(() => {
+	// 	let enemy = {};
+	// 	switch (dungeonFloor) {
+	// 		case 1:
+	// 			if (!bossFight) {
+	// 				const DL1enemies = enemies.normalEnemiesAll.normalEnemiesDL1;
+	// 				enemy = DL1enemies[Math.floor(Math.random() * DL1enemies.length)];
+	// 			} else {
+	// 				const DL1bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
+	// 				enemy = DL1bosses[Math.floor(Math.random() * DL1bosses.length)];
+	// 			}
+	// 			setEnemy(enemy);
+
+	// 			break;
+	// 		default:
+	// 	}
+	// }, [dungeonFloor]);
 
 	return (
 		<div className="App">
 			<Grid
+				setEnemy={setEnemy}
+				enemyPool={enemyPool}
+				boss={boss}
 				eventIsHiddenToggle={eventIsHiddenToggle}
 				eventIsHidden={eventIsHidden}
 				dungeonFloor={dungeonFloor}
 				gridWidth={gridWidth}
 				inCombat={inCombat}
-				inCombatChange={inCombatChange}
+				inCombatChange={setInCombat}
 				setBossFight={setNewBossFight}
 			/>
 			{!eventIsHidden && (
@@ -196,6 +232,7 @@ function App() {
 				/>
 			)}
 			<CombatOverlay
+				setBoss={setBoss}
 				enemy={enemy}
 				setEnemy={setNewEnemy}
 				dungeonFloorIncr={dungeonFloorIncr}
@@ -204,12 +241,15 @@ function App() {
 				setCardDeck={setCardDeck}
 				setHealthToMax={setHealthToMax}
 				healthChange={healthChange}
-				inCombat={`${inCombat}`}
-				inCombatChange={inCombatChange}
+				inCombat={inCombat}
+				inCombatChange={setInCombat}
 				player={player}
 				bossFight={bossFight}
 				setBossFight={setNewBossFight}
 				dungeonFloor={dungeonFloor}
+				setEnemyPool={setEnemyPool}
+				enemies={enemies}
+				enemyPool={enemyPool}
 			></CombatOverlay>
 		</div>
 	);

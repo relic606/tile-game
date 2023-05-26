@@ -48,7 +48,7 @@ class Grid extends React.Component {
 	};
 
 	handleKeyPress = (e) => {
-		if (this.props.inCombat === "false" && this.props.eventIsHidden) {
+		if (!this.props.inCombat && this.props.eventIsHidden) {
 			switch (e.which) {
 				case 87:
 					this.move(0, 1, e);
@@ -89,7 +89,12 @@ class Grid extends React.Component {
 						].className.includes("red")
 					) {
 						alert("Combat Engaged!");
-						this.props.inCombatChange("true");
+						this.props.inCombatChange(true);
+						this.props.setEnemy(
+							this.props.enemyPool[
+								Math.floor(Math.random() * this.props.enemyPool.length)
+							]
+						);
 					}
 					/// collide with yellow square
 					else if (
@@ -113,9 +118,10 @@ class Grid extends React.Component {
 							i
 						].className.includes("black")
 					) {
-						this.props.setBossFight("true");
+						this.props.setBossFight(true);
+						this.props.setEnemy(this.props.boss);
 						alert("Boss battle!");
-						this.props.inCombatChange("true");
+						this.props.inCombatChange(true);
 						this.setState({ selectedSquare: [0, 0] });
 					}
 				}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import * as skillList from "./controllers/combatControllers";
-import { enemies } from "./controllers/enemyControllers";
 
 export default function CombatSkills(props) {
 	const [enemyHealth, setEnemyHealth] = useState(0);
@@ -10,6 +9,7 @@ export default function CombatSkills(props) {
 	const [randomActionNum, setRandomActionNum] = useState(
 		Math.floor(Math.random() * props.enemy.actions.length)
 	);
+
 	/////////Enemy action taken after player turn ends
 
 	function enemyAction(defendValue) {
@@ -99,23 +99,25 @@ export default function CombatSkills(props) {
 									)
 								) {
 									props.setTurn();
-									if (props.bossFight === "true") {
-										props.setBossFight("false");
+									if (props.bossFight === true) {
 										props.dungeonFloorIncr();
+
+										props.setEnemyPool(
+											props.enemies.normalEnemiesAll.normalEnemiesDL2
+										);
+										props.setBoss(
+											props.enemies.bossEnemiesAll.bossEnemiesDL2[0]
+										);
+										props.setBossFight(false);
 									}
-									props.inCombatChange("false");
+
+									props.inCombatChange(false);
 									props.setSwordResource(-props.combatResources.sword);
 									props.setShieldResource(-props.combatResources.shield);
 									props.setHeartResource(-props.combatResources.heart);
 									props.setExperience(props.enemy.experience);
 									setStrengthBuff(0);
 									setWeakness(1);
-
-									if (props.enemy.name === "Goblin") {
-										props.setEnemy(enemies.normalEnemies.slime);
-									} else if (props.enemy.name === "slime") {
-										props.setEnemy(enemies.normalEnemies.goblin);
-									}
 
 									alert(
 										`${
@@ -272,6 +274,7 @@ export default function CombatSkills(props) {
 		}
 	};
 	useEffect(() => {
+		console.log(props.enemy);
 		const randomNum = Math.floor(Math.random() * props.enemy.actions.length);
 		setRandomActionNum(randomNum);
 		if (props.turn === 1) {
