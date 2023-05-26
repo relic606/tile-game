@@ -12,10 +12,12 @@ export default function CardDeck(props) {
 	};
 
 	const discardCard = (e) => {
-		const selectedCardKey = Number(e.target.children[1].innerHTML);
+		const selectedCardKey = Number(e.target.getAttribute("cardKey"));
+
 		const checkCardID = props.currentHand.filter(
 			(card) => selectedCardKey === card.key
 		);
+
 		const keyOfRmvCard = checkCardID[0].key;
 
 		const newCurrentHand = props.currentHand.filter(
@@ -31,7 +33,7 @@ export default function CardDeck(props) {
 		props.setDiscardPile([...props.discardPile, cardRemoved[0]]);
 	};
 	const exhaustCard = (e) => {
-		const selectedCardKey = Number(e.target.children[1].innerHTML);
+		const selectedCardKey = Number(e.target.getAttribute("cardKey"));
 		const checkCardKey = props.currentHand.filter(
 			(card) => selectedCardKey === card.key
 		);
@@ -45,6 +47,9 @@ export default function CardDeck(props) {
 	};
 
 	const handleCardClick = (event) => {
+		if (event.target.getAttribute("effect") === "Exhaust") {
+			console.log(event.target.getAttribute("effect"));
+		}
 		if (
 			props.statusEffect === "stun" &&
 			event.target.children[0].innerHTML !== "Cleanse"
@@ -55,31 +60,32 @@ export default function CardDeck(props) {
 			}, 1500);
 		} else {
 			const cardText = event.target.children[0].innerHTML;
+			const cardEffect = event.target.getAttribute("effect");
+
+			if (cardEffect === "Exhaust") {
+				exhaustCard(event);
+			} else {
+				discardCard(event);
+			}
 
 			switch (cardText) {
 				case "Sword":
 					props.setSwordResource(1);
-					discardCard(event);
 					break;
 				case "Shield":
 					props.setShieldResource(1);
-					discardCard(event);
 					break;
 				case "Heart":
 					props.setHeartResource(1);
-					discardCard(event);
 					break;
 				case "Draw":
 					props.setDrawResource(2);
-					exhaustCard(event);
 
 					break;
 				case "Curse":
-					exhaustCard(event);
 					break;
 				case "Cleanse":
 					props.setCombatMessage("You have been cleansed of your ailments.");
-					exhaustCard(event);
 					props.setStatusEffect("");
 					setTimeout(() => {
 						props.setCombatMessage("");
@@ -107,11 +113,16 @@ export default function CardDeck(props) {
 		<div>
 			<div className="card-deck-container">
 				{props.currentHand.map((card) => (
-					<div className="card" onClick={handleCardClick} key={card.key}>
+					<div
+						className="card"
+						onClick={handleCardClick}
+						key={card.key}
+						cardkey={card.key}
+						effect={card.effect}
+					>
 						<h3 className="card-title" onClick={textUnclickable}>
 							{card.text}
 						</h3>
-						<p>{card.key}</p>
 						<div onClick={textUnclickable}> {card.effect}</div>
 					</div>
 				))}

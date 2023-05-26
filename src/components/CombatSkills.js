@@ -232,9 +232,15 @@ export default function CombatSkills(props) {
 							} else {
 								props.setCombatMessage(skillList.combatSkillsArray[i].message);
 								setStrengthBuff(
-									skillList.combatSkillsArray[i].value * props.player.wisdom
+									strengthBuff +
+										skillList.combatSkillsArray[i].value *
+											props.player.wisdom *
+											props.combatResources.heart
 								);
-								props.setHeartResource(-skillList.combatSkillsArray[i].cost);
+								props.setHeartResource(
+									-skillList.combatSkillsArray[i].cost *
+										props.combatResources.heart
+								);
 
 								setTimeout(() => {
 									props.setCombatMessage("");
@@ -279,6 +285,7 @@ export default function CombatSkills(props) {
 			setWeakness(1);
 			enemyAction(defendValue);
 			setDefendValue(1);
+			setStrengthBuff(0);
 			setTimeout(() => {
 				props.setCombatMessage(`${props.enemy.actions[randomNum].forecast}`);
 				setTimeout(() => {
@@ -310,6 +317,7 @@ export default function CombatSkills(props) {
 			<br></br>
 			<div>Draw pile: {props.drawPileLength}</div>
 			<div>Discard pile: {props.discardPileLength}</div>
+			<div>{strengthBuff}</div>
 		</div>
 	);
 }

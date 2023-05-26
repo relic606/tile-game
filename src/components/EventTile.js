@@ -31,11 +31,9 @@ export default function EventTile(props) {
 
 		switch (event.type) {
 			case "health":
-				console.log(event);
 				props.healthChange(event.value);
 				break;
 			case "card":
-				console.log(event);
 				props.addCardToDeck(event.card);
 				break;
 			default:

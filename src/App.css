@@ -174,14 +174,10 @@ body {
 	left: 0px;
 }
 
-.card > p {
-	visibility: hidden;
-}
 .card > div {
 	font-size: small;
 	color: white;
-	margin-top: auto;
-	margin-bottom: auto;
+	margin: auto;
 }
 
 .card:not(:first-child) {

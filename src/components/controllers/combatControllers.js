@@ -4,7 +4,7 @@ const slash = {
 	name: "slash",
 	message: "You slashed the enemy!",
 	actionType: "attack",
-	value: 5,
+	value: 1,
 	cost: 1
 };
 
@@ -41,7 +41,7 @@ const holyStrength = {
 	message: "Your muscles surge with divine strength.",
 	actionType: "strength buff",
 	value: 1,
-	cost: 2
+	cost: 1
 };
 
 const combatSkillsArray = [slash, heal, defend, draw, holyStrength];

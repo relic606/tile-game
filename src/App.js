@@ -64,20 +64,6 @@ function App() {
 	const [wisdom, setWisdom] = useState(5);
 	const [skills, setSkills] = useState(["Slash", "Heal", "Defend", "Draw"]);
 
-	////// second of card element is the key, third element is special effect text (ie "Exhaust")
-
-	// const [cardDeck, setCardDeck] = useState([
-	// 	["Sword", 1, null],
-	// 	["Sword", 2, null],
-	// 	["Sword", 3, null],
-	// 	["Shield", 4, null],
-	// 	["Shield", 5, null],
-	// 	["Shield", 6, null],
-	// 	["Heart", 7, null],
-	// 	["Heart", 8, null],
-	// 	["Heart", 9, null]
-	// ]);
-
 	const [cardDeck, setCardDeck] = useState([
 		{
 			text: "Sword",
