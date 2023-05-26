@@ -1,6 +1,8 @@
-import goblinImage from "../../assets/goblin.png";
-import ogreImage from "../../assets/ogre.png";
-import slimeImage from "../../assets/slime.png";
+import goblinImage from "../../assets/enemies/goblin.png";
+import ogreImage from "../../assets/enemies/ogre.png";
+import slimeImage from "../../assets/enemies/slime.png";
+import skeletonImage from "../../assets/enemies/skeleton.png";
+import evilKnightImage from "../../assets/enemies/evilknight.png";
 
 ////////////////////////////////////////////////////// DL 1 enemies
 
@@ -83,13 +85,13 @@ const slime = {
 /////////////////////////////////////// Dungeon level 2
 
 const slack = {
-	forecast: "The goblin raises his axe above his head.",
-	message: "The goblin swung his axe at you!",
+	forecast: "The boblin raises his axe above his head.",
+	message: "The boblin swung his axe at you!",
 	value: 20
 };
 const fite = {
-	forecast: "The goblin gnashes his teeth together.",
-	message: "The goblin bit you!",
+	forecast: "The boblin gnashes his teeth together.",
+	message: "The boblin bit you!",
 	value: 10
 };
 
@@ -102,20 +104,40 @@ const boblin = {
 };
 ////////////////////////////////
 
+const stab = {
+	forecast: "The skeleton is poised, ready to strike.",
+	message: "The skeleton stabs you with his sword!",
+	value: 25
+};
+const headbutt = {
+	forecast: "The skeleton rears his head back.",
+	message: "The skeleton headbutts you!",
+	value: 15
+};
+
+const skeleton = {
+	name: "Skeleton",
+	maxHealth: 50,
+	experience: 500,
+	actions: [stab, headbutt],
+	image: skeletonImage
+};
+////////////////////////////////
+
 const blub = {
-	forecast: "The ogre grips his club tightly, preparing to swing",
+	forecast: "The bogre grips his club tightly, preparing to swing",
 	message: "The ogre slams you with his club!",
 	value: 30
 };
 const pash = {
-	forecast: "The ogre clenches his off hand in a fist",
+	forecast: "The bogre clenches his off hand in a fist",
 	message: "The ogre bashes you with his off hand.  You are stunned!",
 	value: 5,
 	effect: "stun"
 };
 const tomp = {
-	forecast: "The ogre raises foot, ready to lunge at you",
-	message: "The ogre stomps your toes.",
+	forecast: "The bogre raises foot, ready to lunge at you",
+	message: "The bogre stomps your toes.",
 	value: 10
 };
 
@@ -127,13 +149,30 @@ const bogre = {
 	image: ogreImage
 };
 
-/////Enemies determined by dungeon level
+///////////////////////////////////////////
+
+const eviscerate = {
+	forecast: "The knights blade begins to glow",
+	message:
+		"The knight strikes you with his blade, searing your skill with unholy energy",
+	value: 25
+};
+
+const evilKnight = {
+	name: "Evil Knight",
+	maxHealth: 120,
+	experience: 1500,
+	actions: [eviscerate],
+	image: evilKnightImage
+};
+
+///////////////////////////////////////////
 
 const normalEnemiesDL1 = [goblin, slime];
 const bossEnemiesDL1 = [ogre];
 
-const normalEnemiesDL2 = [boblin];
-const bossEnemiesDL2 = [bogre];
+const normalEnemiesDL2 = [boblin, skeleton];
+const bossEnemiesDL2 = [evilKnight];
 
 const normalEnemiesAll = { normalEnemiesDL1, normalEnemiesDL2 };
 const bossEnemiesAll = { bossEnemiesDL1, bossEnemiesDL2 };
