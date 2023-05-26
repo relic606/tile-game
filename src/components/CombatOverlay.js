@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CombatInteraction from "./combatInteraction";
 
 export default function CombatOverlay(props) {
@@ -51,7 +51,7 @@ export default function CombatOverlay(props) {
 					setHeartResource={setNewHeartResource}
 					setDrawResource={setNewDrawResource}
 					drawResource={drawResource}
-					cardDeck={props.player.card}
+					cardDeck={props.player.cardDeckTest}
 					combatResources={combatResources}
 					setHealthToMax={props.setHealthToMax}
 					inCombat={props.inCombat}

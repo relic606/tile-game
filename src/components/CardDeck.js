@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 export default function CardDeck(props) {
 	const handleNewHand = () => {
@@ -12,28 +12,36 @@ export default function CardDeck(props) {
 	};
 
 	const discardCard = (e) => {
-		const idOfRmvCard = Number(e.target.children[1].innerHTML);
+		const selectedCardKey = Number(e.target.children[1].innerHTML);
+		const checkCardID = props.currentHand.filter(
+			(card) => selectedCardKey === card.key
+		);
+		const keyOfRmvCard = checkCardID[0].key;
 
-		for (let i = 0; i < props.currentHand.length; i++) {
-			if (props.currentHand[i][1] === idOfRmvCard) {
-				const newHand = [...props.currentHand];
-				const cardRemoved = newHand.splice(i, 1);
-				const newDiscardPile = [...props.discardPile];
-				newDiscardPile.push([cardRemoved[0][0], cardRemoved[0][1]]);
-				props.setDiscardPile(newDiscardPile);
-				props.setCurrentHand(newHand);
-			}
-		}
+		const newCurrentHand = props.currentHand.filter(
+			(card) => card.key !== keyOfRmvCard
+		);
+
+		props.setCurrentHand(newCurrentHand);
+
+		const cardRemoved = props.cardDeck.filter(
+			(card) => card.key === keyOfRmvCard
+		);
+
+		props.setDiscardPile([...props.discardPile, cardRemoved[0]]);
 	};
 	const exhaustCard = (e) => {
-		const idOfRmvCard = Number(e.target.children[1].innerHTML);
-		for (let i = 0; i < props.currentHand.length; i++) {
-			if (props.currentHand[i][1] === idOfRmvCard) {
-				const newHand = [...props.currentHand];
-				newHand.splice(i, 1);
-				props.setCurrentHand(newHand);
-			}
-		}
+		const selectedCardKey = Number(e.target.children[1].innerHTML);
+		const checkCardKey = props.currentHand.filter(
+			(card) => selectedCardKey === card.key
+		);
+		const keyOfRmvCard = checkCardKey[0].key;
+
+		const newCurrentHand = props.currentHand.filter(
+			(card) => card.key !== keyOfRmvCard
+		);
+
+		props.setCurrentHand(newCurrentHand);
 	};
 
 	const handleCardClick = (event) => {
@@ -46,7 +54,9 @@ export default function CardDeck(props) {
 				props.setCombatMessage("");
 			}, 1500);
 		} else {
-			switch (event.target.children[0].innerHTML) {
+			const cardText = event.target.children[0].innerHTML;
+
+			switch (cardText) {
 				case "Sword":
 					props.setSwordResource(1);
 					discardCard(event);
@@ -61,11 +71,7 @@ export default function CardDeck(props) {
 					break;
 				case "Draw":
 					props.setDrawResource(2);
-					if (event.target.children[2].innerHTML === "Exhaust") {
-						exhaustCard(event);
-					} else {
-						discardCard(event);
-					}
+					exhaustCard(event);
 
 					break;
 				case "Curse":
@@ -73,8 +79,8 @@ export default function CardDeck(props) {
 					break;
 				case "Cleanse":
 					props.setCombatMessage("You have been cleansed of your ailments.");
-					props.setStatusEffect("");
 					exhaustCard(event);
+					props.setStatusEffect("");
 					setTimeout(() => {
 						props.setCombatMessage("");
 					}, 1500);
@@ -101,12 +107,12 @@ export default function CardDeck(props) {
 		<div>
 			<div className="card-deck-container">
 				{props.currentHand.map((card) => (
-					<div className="card" onClick={handleCardClick}>
+					<div className="card" onClick={handleCardClick} key={card.key}>
 						<h3 className="card-title" onClick={textUnclickable}>
-							{card[0]}
+							{card.text}
 						</h3>
-						<p>{card[1]}</p>
-						<div onClick={textUnclickable}> {card[2]}</div>
+						<p>{card.key}</p>
+						<div onClick={textUnclickable}> {card.effect}</div>
 					</div>
 				))}
 			</div>

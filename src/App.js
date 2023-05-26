@@ -66,16 +66,64 @@ function App() {
 
 	////// second of card element is the key, third element is special effect text (ie "Exhaust")
 
+	// const [cardDeck, setCardDeck] = useState([
+	// 	["Sword", 1, null],
+	// 	["Sword", 2, null],
+	// 	["Sword", 3, null],
+	// 	["Shield", 4, null],
+	// 	["Shield", 5, null],
+	// 	["Shield", 6, null],
+	// 	["Heart", 7, null],
+	// 	["Heart", 8, null],
+	// 	["Heart", 9, null]
+	// ]);
+
 	const [cardDeck, setCardDeck] = useState([
-		["Sword", 1, null],
-		["Sword", 2, null],
-		["Sword", 3, null],
-		// ["Shield", 4, null],
-		["Shield", 5, null],
-		["Shield", 6, null],
-		["Heart", 7, null],
-		["Heart", 8, null]
-		// ["Heart", 9, null]
+		{
+			text: "Sword",
+			effect: null,
+			key: 1
+		},
+		{
+			text: "Sword",
+			effect: null,
+			key: 2
+		},
+		{
+			text: "Sword",
+			effect: null,
+			key: 3
+		},
+		{
+			text: "Shield",
+			effect: null,
+			key: 4
+		},
+		{
+			text: "Shield",
+			effect: null,
+			key: 5
+		},
+		{
+			text: "Shield",
+			effect: null,
+			key: 6
+		},
+		{
+			text: "Heart",
+			effect: null,
+			key: 7
+		},
+		{
+			text: "Heart",
+			effect: null,
+			key: 8
+		},
+		{
+			text: "Heart",
+			effect: null,
+			key: 9
+		}
 	]);
 
 	const addCardToDeck = (card) => {
@@ -125,7 +173,7 @@ function App() {
 			}
 			if (levelTables[player.level + 1].card) {
 				addCardToDeck(levelTables[player.level + 1].card);
-				alert(`New card: ${levelTables[player.level + 1].card[0]}`);
+				alert(`New card: ${levelTables[player.level + 1].card.text}`);
 			}
 		}
 	}, [player.experience]);

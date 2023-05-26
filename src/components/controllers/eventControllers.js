@@ -17,8 +17,11 @@ const seerStone = {
 	name: "Seer Stone",
 	message: "Seer Stone grants you the ability to draw more cards.",
 	type: "card",
-	card: ["Draw", 10, "Exhaust"],
-	draw: 2
+	card: {
+		text: "Draw",
+		effect: "Exhaust",
+		key: 10
+	}
 };
 const healthTrap = {
 	id: 2,
@@ -35,7 +38,11 @@ const cardCurse = {
 	message:
 		"An evil wizard appears before you, warning you to abandon your foolish quest.  He gestures with his staff and mutters a curse upon you, before vanishing.",
 	type: "card",
-	card: ["Curse", 11, "Exhaust"]
+	card: {
+		text: "Curse",
+		effect: "Exhaust",
+		key: 11
+	}
 };
 
 const events = [unicorn, seerStone, healthTrap, cardCurse];

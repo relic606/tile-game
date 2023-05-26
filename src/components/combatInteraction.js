@@ -11,6 +11,7 @@ export default function CombatInteraction(props) {
 	const [statusEffect, setStatusEffect] = useState("");
 	const [currentHand, setCurrentHand] = useState([]);
 	const [discardPile, setDiscardPile] = useState([]);
+
 	const [drawPile, setDrawPile] = useState([...shuffle(props.player.cardDeck)]);
 
 	const setNewCurrentHand = (newHand) => {

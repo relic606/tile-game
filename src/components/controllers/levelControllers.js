@@ -4,14 +4,13 @@ export const levelTables = {
 		maxHealth: 20,
 		strength: 2,
 		wisdom: 1,
-		skills: "Holy Strength",
-		card: ["Bash", 12, "Exhaust"]
+		skills: "Holy Strength"
 	},
 	3: {
 		expToNextLevel: 9999,
 		maxHealth: 20,
 		strength: 2,
 		wisdom: 1,
-		card: ["Cleanse", 13, "Exhaust"]
+		card: { text: "Cleanse", key: 13, effect: "Exhaust" }
 	}
 };
