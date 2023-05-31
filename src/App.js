@@ -7,6 +7,8 @@ import { levelTables } from "./components/controllers/levelControllers";
 
 import { events } from "./components/controllers/eventControllers";
 import { enemies } from "./components/controllers/enemyControllers";
+import { combatSkills } from "./components/controllers/combatControllers";
+import { starterCardsArr } from "./components/controllers/cardControllers";
 
 function App() {
 	const [gridWidth, setGridWidth] = useState(5);
@@ -63,55 +65,14 @@ function App() {
 	const [maxHealth, setMaxHealth] = useState(100);
 	const [strength, setStrength] = useState(10);
 	const [wisdom, setWisdom] = useState(5);
-	const [skills, setSkills] = useState(["Slash", "Heal", "Defend", "Draw"]);
-
-	const [cardDeck, setCardDeck] = useState([
-		{
-			text: "Sword",
-			effect: null,
-			key: 1
-		},
-		{
-			text: "Sword",
-			effect: null,
-			key: 2
-		},
-		{
-			text: "Sword",
-			effect: null,
-			key: 3
-		},
-		{
-			text: "Shield",
-			effect: null,
-			key: 4
-		},
-		{
-			text: "Shield",
-			effect: null,
-			key: 5
-		},
-		{
-			text: "Shield",
-			effect: null,
-			key: 6
-		},
-		{
-			text: "Heart",
-			effect: null,
-			key: 7
-		},
-		{
-			text: "Heart",
-			effect: null,
-			key: 8
-		},
-		{
-			text: "Heart",
-			effect: null,
-			key: 9
-		}
+	const [skills, setSkills] = useState([
+		combatSkills.slash,
+		combatSkills.heal,
+		combatSkills.defend,
+		combatSkills.draw
 	]);
+
+	const [cardDeck, setCardDeck] = useState(starterCardsArr);
 
 	const addCardToDeck = (card) => {
 		const newCardDeck = [...cardDeck];
@@ -156,7 +117,7 @@ function App() {
 			setWisdom(player.wisdom + levelTables[player.level + 1].wisdom);
 			if (levelTables[player.level + 1].skills) {
 				setSkills([...player.skills, levelTables[player.level + 1].skills]);
-				alert(`New skill: ${levelTables[player.level + 1].skills}`);
+				alert(`New skill: ${levelTables[player.level + 1].skills.name}`);
 			}
 			if (levelTables[player.level + 1].card) {
 				addCardToDeck(levelTables[player.level + 1].card);
@@ -164,48 +125,6 @@ function App() {
 			}
 		}
 	}, [player.experience]);
-
-	// useEffect(() => {
-	// 	let enemy = {};
-	// 	switch (dungeonFloor) {
-	// 		case 1:
-	// 			if (!bossFight) {
-	// 				enemy = enemyPool[Math.floor(Math.random() * enemyPool.length)];
-	// 			} else {
-	// 				const DL1bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
-	// 				enemy = DL1bosses[Math.floor(Math.random() * DL1bosses.length)];
-	// 			}
-	// 			setEnemy(enemy);
-	// 			break;
-	// 		case 2:
-	// 			if (!bossFight) {
-	// 				enemy = enemyPool[Math.floor(Math.random() * enemyPool.length)];
-	// 			} else {
-	// 				const DL2bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
-	// 				enemy = DL2bosses[Math.floor(Math.random() * DL2bosses.length)];
-	// 			}
-	// 			setEnemy(enemy);
-	// 			break;
-	// 		default:
-	// 	}
-	// }, [bossFight, inCombat]);
-	// useEffect(() => {
-	// 	let enemy = {};
-	// 	switch (dungeonFloor) {
-	// 		case 1:
-	// 			if (!bossFight) {
-	// 				const DL1enemies = enemies.normalEnemiesAll.normalEnemiesDL1;
-	// 				enemy = DL1enemies[Math.floor(Math.random() * DL1enemies.length)];
-	// 			} else {
-	// 				const DL1bosses = enemies.bossEnemiesAll.bossEnemiesDL1;
-	// 				enemy = DL1bosses[Math.floor(Math.random() * DL1bosses.length)];
-	// 			}
-	// 			setEnemy(enemy);
-
-	// 			break;
-	// 		default:
-	// 	}
-	// }, [dungeonFloor]);
 
 	return (
 		<div className="App">

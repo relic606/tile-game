@@ -1,35 +1,39 @@
 /////For attack, damage amount is = value * player strength, applied in CombatSkills componenet
 
 const slash = {
-	name: "slash",
+	name: "Slash",
 	message: "You slashed the enemy!",
 	actionType: "attack",
 	value: 1,
-	cost: 1
+	cost: 1,
+	description: "test"
 };
 
 //// heal amount is wisdom*value
 
 const heal = {
-	name: "heal",
+	name: "Heal",
 	message: "You are bathed in holy light.",
 	actionType: "heal",
 	value: 2,
-	cost: 1
+	cost: 1,
+	description: "test"
 };
 
 const defend = {
-	name: "defend",
+	name: "Defend",
 	message: "You take a defensive posture.",
 	actionType: "defend",
 	value: 0.3,
-	cost: 1
+	cost: 1,
+	description: "test"
 };
 
 const draw = {
-	name: "draw",
+	name: "Draw",
 	message: "You channel energy.",
-	actionType: "draw"
+	actionType: "draw",
+	description: "test"
 };
 
 ///level 2
@@ -37,13 +41,14 @@ const draw = {
 ///strength is added to player = value * wisdom
 
 const holyStrength = {
-	name: "holy strength",
+	name: "Holy Strength",
 	message: "Your muscles surge with divine strength.",
 	actionType: "strength buff",
 	value: 1,
-	cost: 1
+	cost: 1,
+	description: "test"
 };
 
-const combatSkillsArray = [slash, heal, defend, draw, holyStrength];
+const combatSkills = { slash, heal, defend, draw, holyStrength };
 
-export { combatSkillsArray };
+export { combatSkills };

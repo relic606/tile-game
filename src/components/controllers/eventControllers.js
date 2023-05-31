@@ -1,5 +1,6 @@
 import unicornImg from "../../assets/events/unicorn.png";
 import seerStoneImg from "../../assets/events/seerStone.jpg";
+import { eventCards } from "./cardControllers";
 
 const unicorn = {
 	id: 0,
@@ -17,11 +18,7 @@ const seerStone = {
 	name: "Seer Stone",
 	message: "Seer Stone grants you the ability to draw more cards.",
 	type: "card",
-	card: {
-		text: "Draw",
-		effect: "Exhaust",
-		key: 10
-	}
+	card: eventCards.seerStone
 };
 const healthTrap = {
 	id: 2,
@@ -38,11 +35,7 @@ const cardCurse = {
 	message:
 		"An evil wizard appears before you, warning you to abandon your foolish quest.  He gestures with his staff and mutters a curse upon you, before vanishing.",
 	type: "card",
-	card: {
-		text: "Curse",
-		effect: "Exhaust",
-		key: 11
-	}
+	card: eventCards.cardCurse
 };
 
 const events = [unicorn, seerStone, healthTrap, cardCurse];

@@ -136,11 +136,24 @@ body {
 
 .skill-list {
 	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	height: 5em;
+}
+.skill-list > li {
+	padding-right: 10px;
 }
 
 .skill-list > li:hover {
 	color: blue;
 	cursor: pointer;
+}
+.skill-hover {
+	position: absolute;
+	background-color: black;
+	height: 100px;
+	width: 100px;
 }
 
 .combat-message {

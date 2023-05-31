@@ -47,9 +47,6 @@ export default function CardDeck(props) {
 	};
 
 	const handleCardClick = (event) => {
-		if (event.target.getAttribute("effect") === "Exhaust") {
-			console.log(event.target.getAttribute("effect"));
-		}
 		if (
 			props.statusEffect === "stun" &&
 			event.target.children[0].innerHTML !== "Cleanse"
@@ -59,30 +56,38 @@ export default function CardDeck(props) {
 				props.setCombatMessage("");
 			}, 1500);
 		} else {
-			const cardText = event.target.children[0].innerHTML;
-			const cardEffect = event.target.getAttribute("effect");
+			const cardUsed = props.currentHand.filter((card) => {
+				return card.key === Number(event.target.getAttribute("cardKey"));
+			})[0];
 
-			if (cardEffect === "Exhaust") {
+			if (cardUsed.effect === "Exhaust") {
 				exhaustCard(event);
 			} else {
 				discardCard(event);
 			}
 
-			switch (cardText) {
+			switch (cardUsed.type) {
 				case "Sword":
-					props.setSwordResource(1);
+					props.setSwordResource(cardUsed.value);
 					break;
 				case "Shield":
-					props.setShieldResource(1);
+					props.setShieldResource(cardUsed.value);
 					break;
 				case "Heart":
-					props.setHeartResource(1);
+					props.setHeartResource(cardUsed.value);
 					break;
 				case "Draw":
-					props.setDrawResource(2);
+					props.setDrawResource(cardUsed.value);
 
 					break;
 				case "Curse":
+					props.setCombatMessage(
+						"Your energy has been sapped by a mysterious force."
+					);
+					props.setStatusEffect("");
+					setTimeout(() => {
+						props.setCombatMessage("");
+					}, 1500);
 					break;
 				case "Cleanse":
 					props.setCombatMessage("You have been cleansed of your ailments.");
@@ -121,7 +126,7 @@ export default function CardDeck(props) {
 						effect={card.effect}
 					>
 						<h3 className="card-title" onClick={textUnclickable}>
-							{card.text}
+							{card.name ? card.name : card.type}
 						</h3>
 						<div onClick={textUnclickable}> {card.effect}</div>
 					</div>
