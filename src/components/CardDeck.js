@@ -125,10 +125,22 @@ export default function CardDeck(props) {
 						cardkey={card.key}
 						effect={card.effect}
 					>
-						<h3 className="card-title" onClick={textUnclickable}>
-							{card.name ? card.name : card.type}
-						</h3>
-						<div onClick={textUnclickable}> {card.effect}</div>
+						{card.name ? (
+							<p className="card-title" onClick={textUnclickable}>
+								{card.name}
+							</p>
+						) : null}
+
+						<div className="card-image">
+							<img src={card.image} alt="card_img" className="card-image" />
+						</div>
+						{card.effect ? (
+							<div onClick={textUnclickable} className="card-effect">
+								{card.effect}
+							</div>
+						) : (
+							<div> </div>
+						)}
 					</div>
 				))}
 			</div>

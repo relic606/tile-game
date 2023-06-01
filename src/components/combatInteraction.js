@@ -5,6 +5,7 @@ import CardDeck from "./CardDeck";
 import heartImg from "../assets/heart.png";
 import swordImg from "../assets/sword.png";
 import shieldImg from "../assets/shield.png";
+import cardImg from "../assets/cards.png";
 
 export default function CombatInteraction(props) {
 	const [combatMessage, setCombatMessage] = useState("");
@@ -149,7 +150,10 @@ export default function CombatInteraction(props) {
 					<div>
 						<img src={heartImg} alt="sword" /> {props.combatResources.heart}
 					</div>
-					<div>Draw: {props.drawResource}</div>
+					<div>
+						<img src={cardImg} width={35} height={35} alt="draw_img" />
+						{props.drawResource}
+					</div>
 					<button onClick={endPlayerTurn}>End Turn</button>
 				</div>
 

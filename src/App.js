@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Grid from "./components/Grid";
 import EventTile from "./components/EventTile";
+import PlayerStats from "./components/PlayerStats";
 import CombatOverlay from "./components/CombatOverlay";
+
 import { levelTables } from "./components/controllers/levelControllers";
 
 import { events } from "./components/controllers/eventControllers";
@@ -13,6 +15,7 @@ import { starterCardsArr } from "./components/controllers/cardControllers";
 function App() {
 	const [gridWidth, setGridWidth] = useState(5);
 	const [eventIsHidden, setEventIsHidden] = useState(true);
+	const [playerStatsHidden, setPlayerStatsHidden] = useState(true);
 	const [inCombat, setInCombat] = useState(false);
 	const [bossFight, setBossFight] = useState(false);
 	const [dungeonFloor, setDungeonFloor] = useState(1);
@@ -52,6 +55,10 @@ function App() {
 		if (!eventIsHidden) {
 			setEvent(eventsArray[0]);
 		}
+	};
+
+	const playerStatsHiddenToggle = () => {
+		setPlayerStatsHidden(!playerStatsHidden);
 	};
 
 	const setNewBossFight = (boolean) => {
@@ -128,6 +135,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<button onClick={playerStatsHiddenToggle}>Player Info</button>
 			<Grid
 				setEnemy={setEnemy}
 				enemyPool={enemyPool}
@@ -150,6 +158,7 @@ function App() {
 					addCardToDeck={addCardToDeck}
 				/>
 			)}
+			{!playerStatsHidden && <PlayerStats player={player}></PlayerStats>}
 			<CombatOverlay
 				setBoss={setBoss}
 				enemy={enemy}

@@ -1,57 +1,71 @@
+import swordImg from "../../assets/sword.png";
+import shieldImg from "../../assets/shield.png";
+import heartImg from "../../assets/heart.png";
+import cardImg from "../../assets/cards1.png";
+
 const starterCardsArr = [
 	{
 		type: "Sword",
 		value: 1,
 		effect: null,
-		key: 1
+		key: 1,
+		image: swordImg
 	},
 	{
 		type: "Sword",
 		value: 1,
 		effect: null,
-		key: 2
+		key: 2,
+		image: swordImg
 	},
 	{
 		type: "Sword",
 		value: 1,
 		effect: null,
-		key: 3
+		key: 3,
+		image: swordImg
 	},
 	{
 		type: "Shield",
 		value: 1,
 		effect: null,
-		key: 4
+		key: 4,
+		image: shieldImg
 	},
 	{
 		type: "Shield",
 		value: 1,
 		effect: null,
-		key: 5
+		key: 5,
+		image: shieldImg
 	},
 	{
 		type: "Shield",
 		value: 1,
 		effect: null,
-		key: 6
+		key: 6,
+		image: shieldImg
 	},
 	{
 		type: "Heart",
 		value: 1,
 		effect: null,
-		key: 7
+		key: 7,
+		image: heartImg
 	},
 	{
 		type: "Heart",
 		value: 1,
 		effect: null,
-		key: 8
+		key: 8,
+		image: heartImg
 	},
 	{
 		type: "Heart",
 		value: 1,
 		effect: null,
-		key: 9
+		key: 9,
+		image: heartImg
 	}
 ];
 const eventCards = {
@@ -60,7 +74,8 @@ const eventCards = {
 		type: "Draw",
 		effect: "Exhaust",
 		value: 2,
-		key: 10
+		key: 10,
+		image: cardImg
 	},
 	cardCurse: {
 		name: "Wizard's Curse",

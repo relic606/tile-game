@@ -32,7 +32,6 @@ export default function CombatSkills(props) {
 		if (props.enemy.actions[randomActionNum].effect === "weakness") {
 			setWeakness(0.5);
 		}
-		// setRandomActionNum(Math.floor(Math.random() * props.enemy.actions.length));
 
 		///////////// Attack value less than player health value
 
@@ -277,7 +276,7 @@ export default function CombatSkills(props) {
 						value={skill.name}
 						onClick={useSkill}
 						onMouseOver={handleMouseOver}
-						onMouseOut={handleMouseOut}
+						// onMouseOut={handleMouseOut}
 					>
 						{skill.name}
 						{/* {isHovering && (

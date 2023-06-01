@@ -12,7 +12,7 @@ class Grid extends React.Component {
 			"red",
 			"red",
 			"red",
-			// "yellow",
+			"yellow",
 			"yellow",
 			"green",
 			"green",
@@ -78,6 +78,7 @@ class Grid extends React.Component {
 			//Performs movement above, and then searches for the newly "selected" square below
 
 			setTimeout(() => {
+				console.log();
 				for (let i = 0; i < this.props.gridWidth * this.props.gridWidth; i++) {
 					//collide with Red Square
 					if (
