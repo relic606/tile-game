@@ -81,10 +81,13 @@ const eventCards = {
 		name: "Wizard's Curse",
 		type: "Curse",
 		effect: "Exhaust",
-		key: 11
+		key: 11,
+		image: ""
 	}
 };
 
-const levelCards = { cleanse: { type: "Cleanse", key: 13, effect: "Exhaust" } };
+const levelCards = {
+	cleanse: { name: "Cleanse", type: "Cleanse", key: 13, effect: "Exhaust" }
+};
 
 export { starterCardsArr, eventCards, levelCards };

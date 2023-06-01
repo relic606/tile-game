@@ -131,7 +131,7 @@ export default function CardDeck(props) {
 							</p>
 						) : null}
 
-						<div className="card-image">
+						<div className="card-image" onClick={textUnclickable}>
 							<img src={card.image} alt="card_img" className="card-image" />
 						</div>
 						{card.effect ? (
@@ -139,7 +139,7 @@ export default function CardDeck(props) {
 								{card.effect}
 							</div>
 						) : (
-							<div> </div>
+							<div onClick={textUnclickable}> </div>
 						)}
 					</div>
 				))}

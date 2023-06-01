@@ -127,6 +127,7 @@ function App() {
 				alert(`New skill: ${levelTables[player.level + 1].skills.name}`);
 			}
 			if (levelTables[player.level + 1].card) {
+				console.log(levelTables[player.level + 1].card);
 				addCardToDeck(levelTables[player.level + 1].card);
 				alert(`New card: ${levelTables[player.level + 1].card.text}`);
 			}

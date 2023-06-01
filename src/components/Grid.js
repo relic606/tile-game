@@ -78,56 +78,28 @@ class Grid extends React.Component {
 			//Performs movement above, and then searches for the newly "selected" square below
 
 			setTimeout(() => {
-				console.log();
-				for (let i = 0; i < this.props.gridWidth * this.props.gridWidth; i++) {
-					//collide with Red Square
-					if (
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("selected") &&
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("red")
-					) {
-						alert("Combat Engaged!");
-						this.props.inCombatChange(true);
-						this.props.setEnemy(
-							this.props.enemyPool[
-								Math.floor(Math.random() * this.props.enemyPool.length)
-							]
-						);
-					}
-					/// collide with yellow square
-					else if (
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("selected") &&
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("yellow")
-					) {
-						alert("Event Square!");
-						this.props.eventIsHiddenToggle();
-					}
-
-					//collide with black Square
-					else if (
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("selected") &&
-						e.target.children[1].children[0].children[0].children[0].children[
-							i
-						].className.includes("black")
-					) {
-						this.props.setBossFight(true);
-						this.props.setEnemy(this.props.boss);
-						alert("Boss battle!");
-						this.props.inCombatChange(true);
-						this.setState({ selectedSquare: [0, 0] });
-					}
+				const selectedSqrElem = e.target.getElementsByClassName("selected");
+				if (selectedSqrElem[0].className.includes("red")) {
+					alert("Combat Engaged!");
+					this.props.inCombatChange(true);
+					this.props.setEnemy(
+						this.props.enemyPool[
+							Math.floor(Math.random() * this.props.enemyPool.length)
+						]
+					);
+				} else if (selectedSqrElem[0].className.includes("yellow")) {
+					alert("Event Square!");
+					this.props.eventIsHiddenToggle();
+				} else if (selectedSqrElem[0].className.includes("black")) {
+					this.props.setBossFight(true);
+					this.props.setEnemy(this.props.boss);
+					alert("Boss battle!");
+					this.props.inCombatChange(true);
+					this.setState({ selectedSquare: [0, 0] });
 				}
 			}, 10);
-			///////need minor timout delay for character to visually move before combat engages
+
+			///////need minor timout delay for character to visually move before ineracting with square
 		}
 		this.setState({
 			selectedSquare: coords
