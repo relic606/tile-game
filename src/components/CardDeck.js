@@ -125,44 +125,37 @@ export default function CardDeck(props) {
 	}, [props.turn]);
 
 	return (
-		<div>
-			<div className="card-deck-container">
-				{props.currentHand.map((card) => (
-					<div
-						className="card"
-						onClick={handleCardClick}
-						key={card.key}
-						cardkey={card.key}
-						effect={card.effect}
-					>
-						{card.name ? (
-							<p className="card-title" onClick={textUnclickable}>
-								{card.name}
-							</p>
-						) : null}
+		<div className="card-deck-container">
+			{props.currentHand.map((card) => (
+				<div
+					className="card"
+					onClick={handleCardClick}
+					key={card.key}
+					cardkey={card.key}
+					effect={card.effect}
+				>
+					{card.name ? (
+						<p className="card-title" onClick={textUnclickable}>
+							{card.name}
+						</p>
+					) : null}
 
-						<div className="card-image" onClick={textUnclickable}>
-							<img src={card.image} alt="card_img" className="card-image" />
-							{card.imageTwo ? (
-								<img
-									src={card.imageTwo}
-									alt="card_img"
-									className="card-image"
-								/>
-							) : (
-								<div />
-							)}
-						</div>
-						{card.effect ? (
-							<div onClick={textUnclickable} className="card-effect">
-								{card.effect}
-							</div>
-						) : (
-							<div onClick={textUnclickable}> </div>
-						)}
+					<div className="card-image" onClick={textUnclickable}>
+						<img src={card.image} alt="card_img" className="card-image" />
+						{card.value > 1 ? <p>x{card.value}</p> : null}
+						{card.imageTwo ? (
+							<img src={card.imageTwo} alt="card_img" className="card-image" />
+						) : null}
 					</div>
-				))}
-			</div>
+					{card.effect ? (
+						<div onClick={textUnclickable} className="card-effect">
+							{card.effect}
+						</div>
+					) : (
+						<div onClick={textUnclickable}> </div>
+					)}
+				</div>
+			))}
 		</div>
 	);
 }

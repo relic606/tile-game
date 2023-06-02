@@ -268,14 +268,14 @@ export default function CombatSkills(props) {
 		setEnemyHealth(props.enemy.maxHealth);
 	}, [props.enemy]);
 	return (
-		<div>
+		<div className="combat-right-container">
 			<ul className="skill-list">
 				{props.player.skills.map((skill) => (
 					<li
 						key={skill.name}
 						value={skill.name}
 						onClick={useSkill}
-						onMouseOver={handleMouseOver}
+						// onMouseOver={handleMouseOver}
 						// onMouseOut={handleMouseOut}
 					>
 						{skill.name}

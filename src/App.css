@@ -123,15 +123,19 @@ body {
 	position: relative;
 	bottom: 111px;
 }
+
 .combat-interaction {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	position: relative;
 	background-color: white;
 	width: 1920px;
 	height: 250px;
 	border: 3px black solid;
 	margin: auto;
+}
+.combat-right-container {
+	margin-right: 300px;
 }
 
 .skill-list {
@@ -173,8 +177,8 @@ body {
 .card-deck-container {
 	position: absolute;
 	height: 300px;
-	width: 600px;
-	left: calc(50% - 300px);
+	width: 800px;
+	left: calc(50% - 450px);
 	display: flex;
 }
 
@@ -214,6 +218,11 @@ body {
 	margin-left: 5px;
 	margin-top: 5px;
 }
+.card-image > p {
+	position: relative;
+	bottom: 15px;
+	left: 10px;
+}
 .card-effect {
 	position: absolute;
 	bottom: 10px;
@@ -232,6 +241,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+	margin-left: 200px;
 }
 
 .event-tile {
@@ -264,9 +274,4 @@ body {
 	height: 80vh;
 	width: 80vw;
 	top: -750px;
-}
-
-#App > button {
-	position: absolute;
-	z-index: -10;
 }
