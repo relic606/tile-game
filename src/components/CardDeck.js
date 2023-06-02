@@ -51,8 +51,24 @@ export default function CardDeck(props) {
 			return card.key === Number(event.target.getAttribute("cardKey"));
 		})[0];
 
+		const curseInHandBoolean =
+			props.currentHand.filter((card) => {
+				return card.type === "Curse";
+			}).length !== 0;
+
 		if (props.statusEffect === "stun" && !cardUsed.type.includes("Cleanse")) {
 			props.setCombatMessage("You cannot play a card while stunned");
+			setTimeout(() => {
+				props.setCombatMessage("");
+			}, 1500);
+		} else if (
+			!cardUsed.type.includes("Curse") &&
+			curseInHandBoolean &&
+			!cardUsed.type.includes("Cleanse")
+		) {
+			props.setCombatMessage(
+				"You must break through the curse's hold of you before taking action."
+			);
 			setTimeout(() => {
 				props.setCombatMessage("");
 			}, 1500);
