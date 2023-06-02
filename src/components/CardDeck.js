@@ -47,19 +47,16 @@ export default function CardDeck(props) {
 	};
 
 	const handleCardClick = (event) => {
-		if (
-			props.statusEffect === "stun" &&
-			event.target.children[0].innerHTML !== "Cleanse"
-		) {
+		const cardUsed = props.currentHand.filter((card) => {
+			return card.key === Number(event.target.getAttribute("cardKey"));
+		})[0];
+
+		if (props.statusEffect === "stun" && !cardUsed.type.includes("Cleanse")) {
 			props.setCombatMessage("You cannot play a card while stunned");
 			setTimeout(() => {
 				props.setCombatMessage("");
 			}, 1500);
 		} else {
-			const cardUsed = props.currentHand.filter((card) => {
-				return card.key === Number(event.target.getAttribute("cardKey"));
-			})[0];
-
 			if (cardUsed.effect === "Exhaust") {
 				exhaustCard(event);
 			} else {
@@ -135,25 +132,51 @@ export default function CardDeck(props) {
 					effect={card.effect}
 				>
 					{card.name ? (
-						<p className="card-title" onClick={textUnclickable}>
+						<p
+							className="card-title"
+							onClick={handleCardClick}
+							cardkey={card.key}
+						>
 							{card.name}
 						</p>
 					) : null}
 
-					<div className="card-image" onClick={textUnclickable}>
-						<img src={card.image} alt="card_img" className="card-image" />
-						{card.value > 1 ? <p>x{card.value}</p> : null}
+					<div
+						className="card-image"
+						onClick={handleCardClick}
+						cardkey={card.key}
+					>
+						<img
+							src={card.image}
+							alt="card_img"
+							className="card-image"
+							onClick={handleCardClick}
+							cardkey={card.key}
+						/>
+						{card.value > 1 ? (
+							<p onClick={handleCardClick} cardkey={card.key}>
+								x{card.value}
+							</p>
+						) : null}
 						{card.imageTwo ? (
-							<img src={card.imageTwo} alt="card_img" className="card-image" />
+							<img
+								src={card.imageTwo}
+								alt="card_img"
+								className="card-image"
+								onClick={handleCardClick}
+								cardkey={card.key}
+							/>
 						) : null}
 					</div>
 					{card.effect ? (
-						<div onClick={textUnclickable} className="card-effect">
+						<div
+							onClick={handleCardClick}
+							className="card-effect"
+							cardkey={card.key}
+						>
 							{card.effect}
 						</div>
-					) : (
-						<div onClick={textUnclickable}> </div>
-					)}
+					) : null}
 				</div>
 			))}
 		</div>

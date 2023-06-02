@@ -3,6 +3,7 @@ import shieldImg from "../../assets/shield.png";
 import heartImg from "../../assets/heart.png";
 import cardImg from "../../assets/cards1.png";
 import waterImg from "../../assets/water.png";
+import curseImg from "../../assets/curse.png";
 
 const starterCardsArr = [
 	{
@@ -83,7 +84,7 @@ const eventCards = {
 		type: "Curse",
 		effect: "Exhaust",
 		key: 11,
-		image: ""
+		image: curseImg
 	}
 };
 
