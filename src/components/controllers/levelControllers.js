@@ -3,7 +3,7 @@ import { levelCards } from "./cardControllers";
 
 export const levelTables = {
 	2: {
-		expToNextLevel: 1000,
+		expToNextLevel: 500,
 		maxHealth: 20,
 		strength: 2,
 		wisdom: 1,

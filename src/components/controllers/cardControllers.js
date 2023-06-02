@@ -2,6 +2,7 @@ import swordImg from "../../assets/sword.png";
 import shieldImg from "../../assets/shield.png";
 import heartImg from "../../assets/heart.png";
 import cardImg from "../../assets/cards1.png";
+import waterImg from "../../assets/water.png";
 
 const starterCardsArr = [
 	{
@@ -87,7 +88,15 @@ const eventCards = {
 };
 
 const levelCards = {
-	cleanse: { name: "Cleanse", type: "Cleanse", key: 13, effect: "Exhaust" }
+	cleanse: {
+		name: "Cleanse",
+		type: "Draw Cleanse",
+		value: 1,
+		key: 13,
+		effect: "Exhaust",
+		image: cardImg,
+		imageTwo: waterImg
+	}
 };
 
 export { starterCardsArr, eventCards, levelCards };

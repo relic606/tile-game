@@ -66,38 +66,48 @@ export default function CardDeck(props) {
 				discardCard(event);
 			}
 
-			switch (cardUsed.type) {
-				case "Sword":
-					props.setSwordResource(cardUsed.value);
-					break;
-				case "Shield":
-					props.setShieldResource(cardUsed.value);
-					break;
-				case "Heart":
-					props.setHeartResource(cardUsed.value);
-					break;
-				case "Draw":
-					props.setDrawResource(cardUsed.value);
+			const cardTypeArr = cardUsed.type.split(" ");
 
-					break;
-				case "Curse":
-					props.setCombatMessage(
-						"Your energy has been sapped by a mysterious force."
-					);
-					props.setStatusEffect("");
-					setTimeout(() => {
-						props.setCombatMessage("");
-					}, 1500);
-					break;
-				case "Cleanse":
-					props.setCombatMessage("You have been cleansed of your ailments.");
-					props.setStatusEffect("");
-					setTimeout(() => {
-						props.setCombatMessage("");
-					}, 1500);
-					break;
-				default:
-					alert("card not recognized");
+			while (cardTypeArr.length > 0) {
+				switch (cardTypeArr[0]) {
+					case "Sword":
+						props.setSwordResource(cardUsed.value);
+						cardTypeArr.shift();
+						break;
+					case "Shield":
+						props.setShieldResource(cardUsed.value);
+						cardTypeArr.shift();
+						break;
+					case "Heart":
+						props.setHeartResource(cardUsed.value);
+						cardTypeArr.shift();
+						break;
+					case "Draw":
+						props.setDrawResource(cardUsed.value);
+						cardTypeArr.shift();
+
+						break;
+					case "Curse":
+						cardTypeArr.shift();
+						props.setCombatMessage(
+							"Your energy has been sapped by a mysterious force."
+						);
+						props.setStatusEffect("");
+						setTimeout(() => {
+							props.setCombatMessage("");
+						}, 1500);
+						break;
+					case "Cleanse":
+						cardTypeArr.shift();
+						props.setCombatMessage("You have been cleansed of your ailments.");
+						props.setStatusEffect("");
+						setTimeout(() => {
+							props.setCombatMessage("");
+						}, 1500);
+						break;
+					default:
+						alert("card not recognized");
+				}
 			}
 		}
 	};
@@ -133,6 +143,15 @@ export default function CardDeck(props) {
 
 						<div className="card-image" onClick={textUnclickable}>
 							<img src={card.image} alt="card_img" className="card-image" />
+							{card.imageTwo ? (
+								<img
+									src={card.imageTwo}
+									alt="card_img"
+									className="card-image"
+								/>
+							) : (
+								<div />
+							)}
 						</div>
 						{card.effect ? (
 							<div onClick={textUnclickable} className="card-effect">
