@@ -36,7 +36,7 @@ const bash = {
 	forecast: "The ogre clenches his off hand in a fist",
 	message: "The ogre bashes you with his off hand.  You are stunned!",
 	value: 5,
-	effect: "stun"
+	effect: "Stun"
 };
 const stomp = {
 	forecast: "The ogre raises foot, ready to lunge at you",
@@ -63,7 +63,7 @@ const envelop = {
 	forecast: "The slime moves towards you, menacingly.",
 	message: "The slime envelops you inside itself.  You are stunned!",
 	value: 5,
-	effect: "stun"
+	effect: "Stun"
 };
 const weakness = {
 	forecast:
@@ -71,7 +71,7 @@ const weakness = {
 	message:
 		"The slime leans to one side. You weakened by the slime's sudden pungent aroma!",
 	value: 5,
-	effect: "weakness"
+	effect: "Weakness"
 };
 
 const slime = {
@@ -133,7 +133,7 @@ const pash = {
 	forecast: "The bogre clenches his off hand in a fist",
 	message: "The ogre bashes you with his off hand.  You are stunned!",
 	value: 5,
-	effect: "stun"
+	effect: "Stun"
 };
 const tomp = {
 	forecast: "The bogre raises foot, ready to lunge at you",

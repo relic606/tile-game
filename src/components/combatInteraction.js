@@ -5,7 +5,7 @@ import CardDeck from "./CardDeck";
 import heartImg from "../assets/heart.png";
 import swordImg from "../assets/sword.png";
 import shieldImg from "../assets/shield.png";
-import cardImg from "../assets/cards.png";
+import cardImg from "../assets/cards1.png";
 
 export default function CombatInteraction(props) {
 	const [combatMessage, setCombatMessage] = useState("");
@@ -14,6 +14,16 @@ export default function CombatInteraction(props) {
 	const [discardPile, setDiscardPile] = useState([]);
 
 	const [drawPile, setDrawPile] = useState([...shuffle(props.player.cardDeck)]);
+
+	function addStatusEffect(status) {
+		console.log(statusEffect);
+		if (statusEffect === "") {
+			setStatusEffect(status);
+		} else if (statusEffect.includes(`${status}`)) {
+		} else {
+			setStatusEffect(`${statusEffect}  ${status}`);
+		}
+	}
 
 	const setNewCurrentHand = (newHand) => {
 		setCurrentHand(newHand);
@@ -44,17 +54,20 @@ export default function CombatInteraction(props) {
 		const newHand = [...currentHand];
 		let newDiscardPile = [...discardPile];
 
+		const handSizeCheck = newHand.length < 8;
+
 		// Current conditionals below only account for drawing up to 2 cards.
 		// may need to adjust/add conditionals due to combinations of 1 in draw + 2 in discard, for example, not being accounted for.
 
 		if (newDrawPile.length === 0 && newDiscardPile.length === 0) {
 			////no cards left to draw
-			alert("No cards remaining");
 		} else if (newDrawPile.length < x && newDiscardPile.length === 0) {
 			/////   not enough cards in draw pile to draw x amount, none available in discard.
 
 			for (let i = 0; i < newDrawPile.length; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 
 			setCurrentHand(newHand);
@@ -67,7 +80,9 @@ export default function CombatInteraction(props) {
 			setDiscardPile(newDiscardPile);
 
 			for (let i = 0; i < newDrawPile.length; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 
 			setCurrentHand(newHand);
@@ -80,20 +95,27 @@ export default function CombatInteraction(props) {
 			setDiscardPile(newDiscardPile);
 
 			for (let i = 0; i < x; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 
 			setCurrentHand(newHand);
 			setDrawPile(newDrawPile);
 		} else if (newDrawPile.length < x && newDiscardPile.length !== 0) {
 			////not enough cards in draw pile to draw x number, but enough cards available in discard
-			newHand.push(newDrawPile.shift());
+
+			if (handSizeCheck) {
+				newHand.push(newDrawPile.shift());
+			}
 
 			newDrawPile = [...shuffle(newDiscardPile)];
 
 			newDiscardPile = [];
 			for (let i = 0; i < x - 1; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 			setCurrentHand(newHand);
 			setDrawPile(newDrawPile);
@@ -103,7 +125,9 @@ export default function CombatInteraction(props) {
 			newDrawPile = [...shuffle(newDiscardPile)];
 			newDiscardPile = [];
 			for (let i = 0; i < x; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 			setCurrentHand(newHand);
 			setDrawPile(newDrawPile);
@@ -111,7 +135,9 @@ export default function CombatInteraction(props) {
 		} else {
 			//// draw pile has enough cards to draw x
 			for (let i = 0; i < x; i++) {
-				newHand.push(newDrawPile.shift());
+				if (handSizeCheck) {
+					newHand.push(newDrawPile.shift());
+				}
 			}
 
 			setCurrentHand(newHand);
@@ -121,6 +147,9 @@ export default function CombatInteraction(props) {
 
 	const setCombatMessageCB = (message) => {
 		setCombatMessage(() => message);
+		setTimeout(() => {
+			setCombatMessage(() => "");
+		}, 1500);
 	};
 	const endPlayerTurn = () => {
 		props.turnIncr();
@@ -151,13 +180,16 @@ export default function CombatInteraction(props) {
 						<img src={heartImg} alt="sword" /> {props.combatResources.heart}
 					</div>
 					<div>
-						<img src={cardImg} width={35} height={35} alt="draw_img" />
+						<img src={cardImg} alt="draw_img" />
 						{props.drawResource}
 					</div>
-					<button onClick={endPlayerTurn}>End Turn</button>
+					<button onClick={endPlayerTurn}>
+						End Turn{currentHand.length >= 8 ? " - Hand is Full" : null}
+					</button>
 				</div>
 
 				<CardDeck
+					addStatusEffect={addStatusEffect}
 					statusEffect={statusEffect}
 					setStatusEffect={setStatusEffect}
 					setCombatMessage={setCombatMessageCB}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 export default function CardDeck(props) {
+	const statusEffectArr = ["Weakness", "Stun", "Vulnerable"];
 	const handleNewHand = () => {
 		const newHand = [...props.currentHand];
 		const newDrawPile = [...props.drawPile];
@@ -56,11 +57,8 @@ export default function CardDeck(props) {
 				return card.type === "Curse";
 			}).length !== 0;
 
-		if (props.statusEffect === "stun" && !cardUsed.type.includes("Cleanse")) {
+		if (props.statusEffect === "Stun" && !cardUsed.type.includes("Cleanse")) {
 			props.setCombatMessage("You cannot play a card while stunned");
-			setTimeout(() => {
-				props.setCombatMessage("");
-			}, 1500);
 		} else if (
 			!cardUsed.type.includes("Curse") &&
 			curseInHandBoolean &&
@@ -69,9 +67,6 @@ export default function CardDeck(props) {
 			props.setCombatMessage(
 				"You must break through the curse's hold of you before taking action."
 			);
-			setTimeout(() => {
-				props.setCombatMessage("");
-			}, 1500);
 		} else {
 			if (cardUsed.effect === "Exhaust") {
 				exhaustCard(event);
@@ -102,21 +97,21 @@ export default function CardDeck(props) {
 						break;
 					case "Curse":
 						cardTypeArr.shift();
+						const randomStatusEff =
+							statusEffectArr[
+								Math.floor(Math.random() * statusEffectArr.length)
+							];
 						props.setCombatMessage(
-							"Your energy has been sapped by a mysterious force."
+							`Your energy has been sapped by a mysterious force: ${randomStatusEff}`
 						);
-						props.setStatusEffect("");
-						setTimeout(() => {
-							props.setCombatMessage("");
-						}, 1500);
+						props.addStatusEffect(randomStatusEff);
+
 						break;
 					case "Cleanse":
 						cardTypeArr.shift();
 						props.setCombatMessage("You have been cleansed of your ailments.");
 						props.setStatusEffect("");
-						setTimeout(() => {
-							props.setCombatMessage("");
-						}, 1500);
+
 						break;
 					default:
 						alert("card not recognized");
@@ -125,9 +120,9 @@ export default function CardDeck(props) {
 		}
 	};
 
-	function textUnclickable(e) {
-		e.stopPropagation();
-	}
+	// function textUnclickable(e) {
+	// 	e.stopPropagation();
+	// }
 
 	useEffect(() => {
 		if (props.turn === 1) {

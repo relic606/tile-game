@@ -44,6 +44,7 @@ export default function EventTile(props) {
 		<div className="event-tile">
 			<img className="event-image" src={event.image} alt="event_img" />
 			<p>{event.message}</p>
+			<div></div>
 			<button onClick={props.isHiddenToggle}>End Event</button>
 		</div>
 	);
