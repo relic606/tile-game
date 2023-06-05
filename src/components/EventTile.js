@@ -1,7 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function EventTile(props) {
 	const event = props.event;
+
+	const updateStats = (stats) => {
+		if (stats.strength) {
+			props.changeStrength(stats.strength);
+		}
+		if (stats.wisdom) {
+			props.changeWisdom(stats.wisdom);
+		}
+	};
 
 	useEffect(() => {
 		function shuffle(array) {
@@ -35,6 +44,9 @@ export default function EventTile(props) {
 				break;
 			case "card":
 				props.addCardToDeck(event.card);
+				break;
+			case "stats":
+				updateStats(event.statChange);
 				break;
 			default:
 				alert("Event type not recognized.");

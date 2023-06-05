@@ -271,11 +271,64 @@ body {
 }
 
 .player-stats-container {
+	display: flex;
+	justify-content: center;
 	z-index: 0;
 	background-color: white;
 	margin: auto;
-	position: relative;
+	position: absolute;
 	height: 80vh;
 	width: 80vw;
-	top: -750px;
+	top: 50px;
+	left: 50px;
+	padding-left: 20px;
+	flex-direction: column;
+}
+
+.player-skills-list {
+	list-style-type: none;
+}
+.skill-description > img {
+	margin-right: 10px;
+}
+.skill-description {
+	padding: 5px;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+}
+.player-card-deck {
+	display: flex;
+	list-style-type: none;
+	height: 500px;
+	flex-flow: column wrap;
+}
+.player-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	margin-top: 10px;
+	margin-top: 10px;
+	height: 100px;
+	width: 100px;
+	border-radius: 5%;
+	color: black;
+}
+
+.player-card-images {
+	display: flex;
+	object-fit: contain;
+	position: absolute;
+}
+
+.card-value {
+	position: relative;
+	left: 70px;
+	color: white;
+}
+.player-card-text {
+	color: black;
+	position: relative;
+	left: 100px;
 }

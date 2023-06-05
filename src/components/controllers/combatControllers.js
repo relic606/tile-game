@@ -7,7 +7,7 @@ const slash = {
 	value: 1,
 	cost: 1,
 	description:
-		"Slash the enemy for damage equal to your strength, per sword resource spent."
+		"Slash the enemy for damage equal to your strength, per resource."
 };
 
 //// heal amount is wisdom*value
@@ -18,8 +18,7 @@ const heal = {
 	actionType: "heal",
 	value: 2,
 	cost: 1,
-	description:
-		"Heal yourself for an amount equal to your wisdom, per heart resource spent."
+	description: "Heal yourself for an amount equal to your wisdom, per resource."
 };
 
 const defend = {
@@ -28,14 +27,14 @@ const defend = {
 	actionType: "defend",
 	value: 0.3,
 	cost: 1,
-	description: "Defend for 30% of oncoming damage, per shield resource spent."
+	description: "Defend for 30% of oncoming damage, per resource."
 };
 
 const draw = {
 	name: "Draw",
 	message: "You channel energy.",
 	actionType: "draw",
-	description: "Draw 1 card for each card resource spent."
+	description: "Draw 1 card, per resource."
 };
 
 ///level 2
@@ -48,7 +47,8 @@ const holyStrength = {
 	actionType: "strength buff",
 	value: 1,
 	cost: 1,
-	description: "test"
+	description:
+		"Add strength at the value of your wisdom, per resource, for this turn only."
 };
 
 const combatSkills = { slash, heal, defend, draw, holyStrength };

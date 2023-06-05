@@ -68,8 +68,8 @@ function App() {
 	const [level, setLevel] = useState(1);
 	const [experience, setExperience] = useState(0);
 	const [expToNextLevel, setExpToNextLevel] = useState(500);
-	const [health, setHealth] = useState(100);
-	const [maxHealth, setMaxHealth] = useState(100);
+	const [health, setHealth] = useState(80);
+	const [maxHealth, setMaxHealth] = useState(80);
 	const [strength, setStrength] = useState(10);
 	const [wisdom, setWisdom] = useState(5);
 	const [skills, setSkills] = useState([
@@ -109,6 +109,15 @@ function App() {
 	const setHealthToMax = () => {
 		setHealth(() => maxHealth);
 	};
+
+	const changeStrength = (amount) => {
+		setStrength(player.strength + amount);
+	};
+
+	const changeWisdom = (amount) => {
+		setWisdom(player.wisdom + amount);
+	};
+
 	const setNewExperience = (expGained) => {
 		setExperience(() => experience + expGained);
 	};
@@ -150,6 +159,9 @@ function App() {
 			/>
 			{!eventIsHidden && (
 				<EventTile
+					changeStrength={changeStrength}
+					changeWisdom={changeWisdom}
+					setWisdom={setWisdom}
 					event={event}
 					eventsArray={eventsArray}
 					setEventsArray={setNewEventsArray}
