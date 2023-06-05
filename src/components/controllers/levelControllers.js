@@ -7,13 +7,14 @@ export const levelTables = {
 		maxHealth: 10,
 		strength: 2,
 		wisdom: 1,
-		skills: combatSkills.holyStrength
+		skills: combatSkills.holyStrength,
+		card: levelCards.cleanse
 	},
 	3: {
 		expToNextLevel: 99999,
 		maxHealth: 10,
 		strength: 2,
 		wisdom: 1,
-		card: levelCards.cleanse
+		card: levelCards.channel
 	}
 };

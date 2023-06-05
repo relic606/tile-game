@@ -141,15 +141,29 @@ export default function CombatSkills(props) {
 						props.setCombatMessage("Not enough resources!");
 					} else if (defendValue !== 1) {
 						props.setCombatMessage("You reinforce your defenses.");
+
+						const damageReductionPercent = (shieldRes, n) => {
+							const y = (2 * shieldRes) / (shieldRes + n);
+							return y;
+						};
+
 						setDefendValue(
-							defendValue - skillUsed.value * props.combatResources.shield
+							defendValue *
+								(1 - damageReductionPercent(props.combatResources.shield, 10))
 						);
 						props.setShieldResource(
 							-skillUsed.cost * props.combatResources.shield
 						);
 					} else {
+						const damageReductionPercent = (shieldRes, n) => {
+							const y = (2 * shieldRes) / (shieldRes + n);
+							return y;
+						};
+
 						props.setCombatMessage(skillUsed.message);
-						setDefendValue(1 - skillUsed.value * props.combatResources.shield);
+						setDefendValue(
+							1 - damageReductionPercent(props.combatResources.shield, 10)
+						);
 						props.setShieldResource(
 							-skillUsed.cost * props.combatResources.shield
 						);

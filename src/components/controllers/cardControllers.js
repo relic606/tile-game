@@ -93,10 +93,17 @@ const levelCards = {
 		name: "Cleanse",
 		type: "Draw Cleanse",
 		value: 1,
-		key: 13,
+		key: 12,
 		effect: "Exhaust",
 		image: cardImg,
 		imageTwo: waterImg
+	},
+	channel: {
+		name: "Channel",
+		type: "Draw",
+		value: 2,
+		key: 13,
+		image: cardImg
 	}
 };
 
