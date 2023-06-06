@@ -14,7 +14,8 @@ const hack = {
 const bite = {
 	forecast: "The goblin gnashes his teeth together.",
 	message: "The goblin bit you!",
-	value: 5
+	value: 5,
+	effect: "Vulnerable"
 };
 
 const goblin = {
@@ -34,7 +35,7 @@ const club = {
 };
 const bash = {
 	forecast: "The ogre clenches his off hand in a fist",
-	message: "The ogre bashes you with his off hand.  You are stunned!",
+	message: "The ogre bashes you with his off hand.",
 	value: 5,
 	effect: "Stun"
 };
@@ -60,8 +61,8 @@ const slimed = {
 	value: 10
 };
 const envelop = {
-	forecast: "The slime moves towards you, menacingly.",
-	message: "The slime envelops you inside itself.  You are stunned!",
+	forecast: "The slime is attempting to envelop you!",
+	message: "The slime envelops you inside itself.",
 	value: 5,
 	effect: "Stun"
 };
@@ -69,7 +70,7 @@ const weakness = {
 	forecast:
 		"The slime begings to look uncomfortable, as though something is moving inside it.",
 	message:
-		"The slime leans to one side. You weakened by the slime's sudden pungent aroma!",
+		"The slime leans to one side. You feel weak at the smell of the slime's sudden pungent aroma!",
 	value: 5,
 	effect: "Weakness"
 };
@@ -121,32 +122,6 @@ const skeleton = {
 	experience: 500,
 	actions: [stab, headbutt],
 	image: skeletonImage
-};
-////////////////////////////////
-
-const blub = {
-	forecast: "The bogre grips his club tightly, preparing to swing",
-	message: "The ogre slams you with his club!",
-	value: 30
-};
-const pash = {
-	forecast: "The bogre clenches his off hand in a fist",
-	message: "The ogre bashes you with his off hand.  You are stunned!",
-	value: 5,
-	effect: "Stun"
-};
-const tomp = {
-	forecast: "The bogre raises foot, ready to lunge at you",
-	message: "The bogre stomps your toes.",
-	value: 10
-};
-
-const bogre = {
-	name: "Bogre",
-	maxHealth: 120,
-	experience: 1500,
-	actions: [blub, pash, tomp],
-	image: ogreImage
 };
 
 ///////////////////////////////////////////

@@ -11,7 +11,7 @@ export default function CombatOverlay(props) {
 	};
 
 	const [swordResource, setSwordResource] = useState(0);
-	const [shieldResource, setShieldResource] = useState(0);
+	const [shieldResource, setShieldResource] = useState(4);
 	const [heartResource, setHeartResource] = useState(0);
 	const [drawResource, setDrawResource] = useState(0);
 

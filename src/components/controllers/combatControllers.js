@@ -25,7 +25,7 @@ const defend = {
 	name: "Defend",
 	message: "You take a defensive posture.",
 	actionType: "defend",
-	value: 0.3,
+	value: 0.25,
 	cost: 1,
 	description: "Defend for 30% of oncoming damage, per resource."
 };

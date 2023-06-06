@@ -12,18 +12,23 @@ export default function CombatSkills(props) {
 	/////////Enemy action taken after player turn ends
 
 	function enemyAction(defendValue) {
-		if (props.enemy.actions[randomActionNum].effect) {
-			props.setStatusEffect(props.enemy.actions[randomActionNum].effect);
+		const statusEffect = props.enemy.actions[randomActionNum].effect;
+		if (statusEffect) {
+			props.setStatusEffect(statusEffect);
 		}
 		const vulnerable = props.statusEffect.includes("Vulnerable") ? 1.5 : 1;
 		const damageTaken = Math.floor(
 			props.enemy.actions[randomActionNum].value * defendValue * vulnerable
 		);
-
-		props.setCombatMessage(
-			`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken.`
-		);
-
+		if (statusEffect) {
+			props.setCombatMessage(
+				`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken. ${statusEffect} status effect applied.`
+			);
+		} else {
+			props.setCombatMessage(
+				`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken.`
+			);
+		}
 		///////////// Attack value less than player health value
 
 		if (props.player.health > damageTaken) {
@@ -140,29 +145,27 @@ export default function CombatSkills(props) {
 					}
 					break;
 				case "defend":
-					////damage reduction is 100% at n=10 shield resources
-
-					const damageReductionPercent = (shieldRes, n) => {
-						const y = (2 * shieldRes) / (shieldRes + n);
-						return y;
-					};
 					if (props.combatResources.shield < skillUsed.cost) {
 						props.setCombatMessage("Not enough resources!");
 					} else if (defendValue !== 1) {
-						props.setCombatMessage("You reinforce your defenses.");
-
-						setDefendValue(
-							defendValue *
-								(1 - damageReductionPercent(props.combatResources.shield, 10))
+						props.setCombatMessage(
+							`You reinforce your defenses.  Blocking ${
+								100 * (defendValue - props.combatResources.shield * 0.25)
+							}% of incoming damage.`
 						);
+
+						setDefendValue(defendValue - props.combatResources.shield * 0.25);
 						props.setShieldResource(
 							-skillUsed.cost * props.combatResources.shield
 						);
 					} else {
-						props.setCombatMessage(skillUsed.message);
-						setDefendValue(
-							1 - damageReductionPercent(props.combatResources.shield, 10)
+						props.setCombatMessage(
+							skillUsed.message +
+								` Blocking ${
+									100 * props.combatResources.shield * 0.25
+								}% of incoming damage.`
 						);
+						setDefendValue(1 - props.combatResources.shield * 0.25);
 						props.setShieldResource(
 							-skillUsed.cost * props.combatResources.shield
 						);
