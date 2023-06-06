@@ -27,7 +27,7 @@ const defend = {
 	actionType: "defend",
 	value: 0.25,
 	cost: 1,
-	description: "Defend for 30% of oncoming damage, per resource."
+	description: "Defend for 25% of oncoming damage, per resource."
 };
 
 const draw = {

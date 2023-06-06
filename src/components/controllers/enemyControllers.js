@@ -42,7 +42,8 @@ const bash = {
 const stomp = {
 	forecast: "The ogre raises foot, ready to lunge at you",
 	message: "The ogre stomps your toes.",
-	value: 10
+	value: 10,
+	effect: "Slow"
 };
 
 const ogre = {
@@ -88,11 +89,13 @@ const slime = {
 const slack = {
 	forecast: "The boblin raises his axe above his head.",
 	message: "The boblin swung his axe at you!",
+	effect: "Weakness",
 	value: 20
 };
 const fite = {
 	forecast: "The boblin gnashes his teeth together.",
 	message: "The boblin bit you!",
+	effect: "Vulnerable",
 	value: 10
 };
 
@@ -108,12 +111,14 @@ const boblin = {
 const stab = {
 	forecast: "The skeleton is poised, ready to strike.",
 	message: "The skeleton stabs you with his sword!",
-	value: 25
+	value: 25,
+	effect: "Vulnerable"
 };
 const headbutt = {
 	forecast: "The skeleton rears his head back.",
 	message: "The skeleton headbutts you!",
-	value: 15
+	value: 15,
+	effect: "Slow"
 };
 
 const skeleton = {
@@ -132,12 +137,18 @@ const eviscerate = {
 		"The knight strikes you with his blade, searing your skill with unholy energy",
 	value: 25
 };
+const darkCurse = {
+	forecast: "The knight begins to chant a dark incantation",
+	message: "Your body is assualted by dark energy",
+	value: 10,
+	effect: "Weakness Vulnerable"
+};
 
 const evilKnight = {
 	name: "Evil Knight",
 	maxHealth: 120,
 	experience: 1500,
-	actions: [eviscerate],
+	actions: [eviscerate, darkCurse],
 	image: evilKnightImage
 };
 

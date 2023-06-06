@@ -7,13 +7,11 @@ import CombatOverlay from "./components/CombatOverlay";
 
 import { levelTables } from "./components/controllers/levelControllers";
 
-import {
-	events,
-	specialEvents
-} from "./components/controllers/eventControllers";
+import { events } from "./components/controllers/eventControllers";
 import { enemies } from "./components/controllers/enemyControllers";
 import { combatSkills } from "./components/controllers/combatControllers";
 import { starterCardsArr } from "./components/controllers/cardControllers";
+import playerImage from "./assets/character2.png";
 
 function App() {
 	const [gridWidth, setGridWidth] = useState(5);
@@ -100,7 +98,8 @@ function App() {
 		strength: strength,
 		wisdom: wisdom,
 		skills: skills,
-		cardDeck: cardDeck
+		cardDeck: cardDeck,
+		image: playerImage
 	};
 
 	const healthChange = (amount) => {

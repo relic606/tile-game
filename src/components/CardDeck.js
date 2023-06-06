@@ -128,7 +128,10 @@ export default function CardDeck(props) {
 		if (props.turn === 1) {
 			handleNewHand();
 		} else {
-			props.drawXCards(2);
+			if (props.statusEffect.includes("Slow")) props.drawXCards(1);
+			else {
+				props.drawXCards(2);
+			}
 		}
 	}, [props.turn]);
 

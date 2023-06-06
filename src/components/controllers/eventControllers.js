@@ -9,7 +9,7 @@ const unicorn = {
 	message:
 		"You stumble upon a unicorn drinking from a pond.  It looks upon you with an unnerving calm and nearly despicable cuteness.  It dips its head, and you feel blessed by the mythical creature.  Your health has been restored.",
 	type: "health",
-	value: 50
+	value: 25
 };
 
 const seerStone = {
@@ -82,7 +82,6 @@ const events = [
 	unicorn,
 	seerStone,
 	healthTrap,
-	// cardCurse,
 	strengthExchange,
 	wisdomExchange,
 	minorStrengthGain,

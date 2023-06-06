@@ -56,7 +56,7 @@ export default function PlayerStats(props) {
 						return (
 							<li className="player-card" key={card.key}>
 								<div className="card-images">
-									<img src={card.image} alt="" />
+									<img src={card.image} alt="resource" />
 
 									{card.value > 1 ? (
 										<p className="card-value">{`x${card.value}`}</p>

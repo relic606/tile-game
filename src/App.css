@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-	background: radial-gradient(#e3edfc, #bed3f4);
+	background: radial-gradient(#e3edfc, hsl(217, 71%, 85%));
 }
 
 .square {
@@ -96,20 +96,50 @@ body {
 }
 
 .player-combat-div {
-	content: "";
+	/* content: "";
 	background-image: url("./assets/character.png");
 	background-repeat: no-repeat;
 	background-size: 226px 300px;
 	width: 226px;
 	height: 300px;
 	transform: scalex(-1);
-	margin-top: 240px;
+	margin-top: 240px; */
+}
+
+.health-bar {
+	background: #333;
+	border-radius: 5px;
+	width: 100%;
+	height: 18px;
+	width: 200px;
+	padding: 3px;
+}
+
+.health-bar:after {
+	width: var(--width, 0);
+	content: "";
+	display: block;
+	position: absolute;
+	background: green;
+	height: 100%;
+	border-radius: 5px;
+}
+.health-bar-numbers {
+	width: 100%;
+	margin: auto;
+	position: absolute;
+	color: white;
+}
+.player-combat-div {
+	bottom: 20%;
+	position: absolute;
+	left: -150px;
 }
 
 .enemy-combat-div {
 	position: absolute;
 	bottom: 20%;
-	right: 0;
+	right: -150px;
 }
 
 .card-deck > div:hover {
@@ -274,7 +304,7 @@ body {
 	display: flex;
 	justify-content: center;
 	z-index: 2;
-	background-color: white;
+	background-color: hsl(217, 71%, 85%);
 	margin: auto;
 	position: relative;
 	width: 90vw;
@@ -283,6 +313,8 @@ body {
 	left: 50px;
 	padding-left: 20px;
 	flex-direction: column;
+	border: 3px black solid;
+	border-radius: 5px;
 }
 
 .player-skills-list {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CombatInteraction from "./combatInteraction";
 
 export default function CombatOverlay(props) {
@@ -11,7 +11,7 @@ export default function CombatOverlay(props) {
 	};
 
 	const [swordResource, setSwordResource] = useState(0);
-	const [shieldResource, setShieldResource] = useState(4);
+	const [shieldResource, setShieldResource] = useState(0);
 	const [heartResource, setHeartResource] = useState(0);
 	const [drawResource, setDrawResource] = useState(0);
 
@@ -41,7 +41,12 @@ export default function CombatOverlay(props) {
 		return (
 			<div className="combat">
 				<div className="combat-content">
-					<div className="player-combat-div"></div>
+					{/* <div className="health-bar">
+						<div className="health-bar-numbers">
+							{props.player.health} / {props.player.maxHealth}
+						</div>
+					</div> */}
+					<PlayerImage player={props.player} />
 					<EnemyImage enemyImage={props.enemy.image}></EnemyImage>
 				</div>
 				<CombatInteraction
@@ -83,6 +88,16 @@ function EnemyImage(props) {
 		<div style={{ position: "relative" }}>
 			<div className="enemy-combat-div">
 				<img src={props.enemyImage} alt="enemy"></img>
+			</div>
+		</div>
+	);
+}
+
+function PlayerImage(props) {
+	return (
+		<div style={{ position: "relative" }}>
+			<div className="player-combat-div">
+				<img src={props.player.image} alt="player"></img>
 			</div>
 		</div>
 	);
