@@ -208,6 +208,7 @@ export default function CombatInteraction(props) {
 					setDrawPile={setNewDrawPile}
 				></CardDeck>
 				<CombatSkills
+					eventIsHiddenToggle={props.eventIsHiddenToggle}
 					setBoss={props.setBoss}
 					enemyPool={props.enemyPool}
 					enemies={props.enemies}
@@ -239,6 +240,7 @@ export default function CombatInteraction(props) {
 					setBossFight={props.setBossFight}
 					dungeonFloorIncr={props.dungeonFloorIncr}
 					drawXCards={drawXCards}
+					setEvent={props.setEvent}
 				></CombatSkills>
 			</div>
 		</div>

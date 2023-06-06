@@ -28,15 +28,7 @@ const healthTrap = {
 	type: "health",
 	value: -20
 };
-const cardCurse = {
-	id: 3,
-	image: "",
-	name: "Evil Wizard",
-	message:
-		"An evil wizard appears before you, warning you to abandon your foolish quest.  He gestures with his staff and mutters a curse upon you, before vanishing.",
-	type: "card",
-	card: eventCards.cardCurse
-};
+
 const strengthExchange = {
 	id: 4,
 	image: "",
@@ -90,7 +82,7 @@ const events = [
 	unicorn,
 	seerStone,
 	healthTrap,
-	cardCurse,
+	// cardCurse,
 	strengthExchange,
 	wisdomExchange,
 	minorStrengthGain,
@@ -99,7 +91,20 @@ const events = [
 	minorWisdomGain
 ];
 
-export { events };
+////////////////////// Special Events
+
+const cardCurse = {
+	id: 3,
+	image: "",
+	name: "Evil Wizard",
+	message:
+		"An evil wizard appears before you, warning you to abandon your foolish quest.  He gestures with his staff and mutters a curse upon you, before vanishing.",
+	type: "card",
+	card: eventCards.cardCurse
+};
+const specialEvents = { cardCurse };
+
+export { events, specialEvents };
 
 // function EventInput() {
 // 	return <input></input>;

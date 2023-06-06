@@ -86,7 +86,7 @@ body {
 
 	width: 100vw;
 	height: 100vh;
-	top: 0;
+	top: 22px;
 }
 .combat-content {
 	justify-content: space-evenly;
@@ -273,13 +273,13 @@ body {
 .player-stats-container {
 	display: flex;
 	justify-content: center;
-	z-index: 0;
+	z-index: 2;
 	background-color: white;
 	margin: auto;
-	position: absolute;
-	height: 80vh;
-	width: 80vw;
-	top: 50px;
+	position: relative;
+	width: 90vw;
+	top: -800px;
+	bottom: 0px;
 	left: 50px;
 	padding-left: 20px;
 	flex-direction: column;

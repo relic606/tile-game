@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { specialEvents } from "./controllers/eventControllers";
 
 export default function CombatSkills(props) {
 	const [enemyHealth, setEnemyHealth] = useState(0);
@@ -84,6 +85,8 @@ export default function CombatSkills(props) {
 								);
 								props.setBoss(props.enemies.bossEnemiesAll.bossEnemiesDL2[0]);
 								props.setBossFight(false);
+								props.setEvent(specialEvents.cardCurse);
+								props.eventIsHiddenToggle();
 							}
 							props.inCombatChange(false);
 							props.setSwordResource(-props.combatResources.sword);
@@ -137,15 +140,16 @@ export default function CombatSkills(props) {
 					}
 					break;
 				case "defend":
+					////damage reduction is 100% at n=10 shield resources
+
+					const damageReductionPercent = (shieldRes, n) => {
+						const y = (2 * shieldRes) / (shieldRes + n);
+						return y;
+					};
 					if (props.combatResources.shield < skillUsed.cost) {
 						props.setCombatMessage("Not enough resources!");
 					} else if (defendValue !== 1) {
 						props.setCombatMessage("You reinforce your defenses.");
-
-						const damageReductionPercent = (shieldRes, n) => {
-							const y = (2 * shieldRes) / (shieldRes + n);
-							return y;
-						};
 
 						setDefendValue(
 							defendValue *
@@ -155,11 +159,6 @@ export default function CombatSkills(props) {
 							-skillUsed.cost * props.combatResources.shield
 						);
 					} else {
-						const damageReductionPercent = (shieldRes, n) => {
-							const y = (2 * shieldRes) / (shieldRes + n);
-							return y;
-						};
-
 						props.setCombatMessage(skillUsed.message);
 						setDefendValue(
 							1 - damageReductionPercent(props.combatResources.shield, 10)

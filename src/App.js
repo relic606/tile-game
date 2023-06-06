@@ -7,7 +7,10 @@ import CombatOverlay from "./components/CombatOverlay";
 
 import { levelTables } from "./components/controllers/levelControllers";
 
-import { events } from "./components/controllers/eventControllers";
+import {
+	events,
+	specialEvents
+} from "./components/controllers/eventControllers";
 import { enemies } from "./components/controllers/enemyControllers";
 import { combatSkills } from "./components/controllers/combatControllers";
 import { starterCardsArr } from "./components/controllers/cardControllers";
@@ -23,6 +26,7 @@ function App() {
 	const [event, setEvent] = useState(
 		eventsArray[Math.floor(Math.random() * eventsArray.length)]
 	);
+
 	const [enemyPool, setEnemyPool] = useState(
 		enemies.normalEnemiesAll.normalEnemiesDL1
 	);
@@ -190,6 +194,8 @@ function App() {
 				setEnemyPool={setEnemyPool}
 				enemies={enemies}
 				enemyPool={enemyPool}
+				setEvent={setEvent}
+				eventIsHiddenToggle={eventIsHiddenToggle}
 			></CombatOverlay>
 		</div>
 	);

@@ -71,6 +71,8 @@ export default function CombatOverlay(props) {
 					setBossFight={props.setBossFight}
 					dungeonFloorIncr={props.dungeonFloorIncr}
 					dungeonFloor={props.dungeonFloor}
+					setEvent={props.setEvent}
+					eventIsHiddenToggle={props.eventIsHiddenToggle}
 				></CombatInteraction>
 			</div>
 		);
