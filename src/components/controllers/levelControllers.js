@@ -15,6 +15,7 @@ export const levelTables = {
 		maxHealth: 10,
 		strength: 2,
 		wisdom: 1,
-		card: levelCards.channel
+		card: levelCards.channel2,
+		skills: combatSkills.holySmite
 	}
 };

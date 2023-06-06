@@ -12,17 +12,17 @@ class Grid extends React.Component {
 			"red",
 			"red",
 			"red",
+			// "yellow",
 			"yellow",
-			"yellow",
 			"green",
 			"green",
 			"green",
 			"green",
 			"green",
-			"green",
+			"green"
 			// "blue",
 			// "blue", "yellow", "purple",
-			"green"
+			// "green"
 		];
 		let arr = [];
 		let key = 0;

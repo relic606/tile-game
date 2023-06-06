@@ -5,6 +5,8 @@ export default function CombatSkills(props) {
 	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [defendValue, setDefendValue] = useState(1);
 	const [strengthBuff, setStrengthBuff] = useState(0);
+	const [enemyStun, setEnemyStun] = useState(false);
+	const [enemyStunCoolDown, setEnemyStunCoolDown] = useState(false);
 	const [randomActionNum, setRandomActionNum] = useState(
 		Math.floor(Math.random() * props.enemy.actions.length)
 	);
@@ -12,38 +14,44 @@ export default function CombatSkills(props) {
 	/////////Enemy action taken after player turn ends
 
 	function enemyAction(defendValue) {
-		const statusEffect = props.enemy.actions[randomActionNum].effect;
-		if (statusEffect) {
-			props.setStatusEffect(statusEffect);
-		}
-		const vulnerable = props.statusEffect.includes("Vulnerable") ? 1.5 : 1;
-		const damageTaken = Math.floor(
-			props.enemy.actions[randomActionNum].value * defendValue * vulnerable
-		);
-		if (statusEffect) {
-			props.setCombatMessage(
-				`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken. ${statusEffect} status effect applied.`
-			);
+		if (enemyStun === true && enemyStunCoolDown === false) {
+			props.setCombatMessage(`The ${props.enemy.name} is stunned!`);
+			setEnemyStun(false);
+			setEnemyStunCoolDown(true);
 		} else {
-			props.setCombatMessage(
-				`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken.`
+			const statusEffect = props.enemy.actions[randomActionNum].effect;
+			if (statusEffect) {
+				props.setStatusEffect(statusEffect);
+			}
+			const vulnerable = props.statusEffect.includes("Vulnerable") ? 1.5 : 1;
+			const damageTaken = Math.floor(
+				props.enemy.actions[randomActionNum].value * defendValue * vulnerable
 			);
-		}
-		///////////// Attack value less than player health value
+			if (statusEffect) {
+				props.setCombatMessage(
+					`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken. ${statusEffect} status effect applied.`
+				);
+			} else {
+				props.setCombatMessage(
+					`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken.`
+				);
+			}
+			///////////// Attack value less than player health value
 
-		if (props.player.health > damageTaken) {
-			props.healthChange(-damageTaken);
-		}
-		///////////Attack greater than health, player is slain
-		else {
-			props.healthChange(damageTaken);
-			props.setCombatMessage(
-				`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken. You have been slain!`
-			);
-			setTimeout(() => {
-				alert("You have been slain!");
-				window.location.reload();
-			}, 1500);
+			if (props.player.health > damageTaken) {
+				props.healthChange(-damageTaken);
+			}
+			///////////Attack greater than health, player is slain
+			else {
+				props.healthChange(damageTaken);
+				props.setCombatMessage(
+					`${props.enemy.actions[randomActionNum].message} ${damageTaken} damage taken. You have been slain!`
+				);
+				setTimeout(() => {
+					alert("You have been slain!");
+					window.location.reload();
+				}, 1500);
+			}
 		}
 	}
 	/////////// Skills activate based on the value pulled from the event of the element/skill clicked
@@ -197,6 +205,26 @@ export default function CombatSkills(props) {
 						);
 						props.drawXCards(drawAmount);
 						props.setDrawResource(-drawAmount);
+					}
+
+					break;
+				case "stun":
+					if (
+						(props.combatResources.shield &&
+							props.combatResources.shield &&
+							props.combatResources.heart) < 1
+					) {
+						props.setCombatMessage("Not enough resources!");
+					} else {
+						if (enemyStunCoolDown === true) {
+							props.setCombatMessage("Unable to stun the enemy.");
+						} else {
+							props.setCombatMessage(skillUsed.message);
+							setEnemyStun(true);
+							props.setSwordResource(-skillUsed.cost);
+							props.setShieldResource(-skillUsed.cost);
+							props.setHeartResource(-skillUsed.cost);
+						}
 					}
 
 					break;

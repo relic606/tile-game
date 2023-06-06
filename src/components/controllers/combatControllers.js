@@ -4,7 +4,7 @@ const slash = {
 	name: "Slash",
 	message: "You slashed the enemy!",
 	actionType: "attack",
-	value: 3,
+	value: 2,
 	cost: 1,
 	description:
 		"Slash the enemy for damage equal to your strength, per resource."
@@ -50,7 +50,14 @@ const holyStrength = {
 	description:
 		"Add strength at the value of your wisdom, per resource, for this turn only."
 };
+const holySmite = {
+	name: "Holy Smite",
+	message: "You smite the enemy, stunning them!",
+	actionType: "stun",
+	cost: 1,
+	description: "Stun the enemy for this turn.  Usable once per Combat"
+};
 
-const combatSkills = { slash, heal, defend, draw, holyStrength };
+const combatSkills = { slash, heal, defend, draw, holyStrength, holySmite };
 
 export { combatSkills };
