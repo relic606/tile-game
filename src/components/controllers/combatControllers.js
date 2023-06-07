@@ -4,7 +4,7 @@ const slash = {
 	name: "Slash",
 	message: "You slashed the enemy!",
 	actionType: "attack",
-	value: 2,
+	value: 1,
 	cost: 1,
 	description:
 		"Slash the enemy for damage equal to your strength, per resource."
@@ -16,7 +16,7 @@ const heal = {
 	name: "Heal",
 	message: "You are bathed in holy light.",
 	actionType: "heal",
-	value: 2,
+	value: 1,
 	cost: 1,
 	description: "Heal yourself for an amount equal to your wisdom, per resource."
 };

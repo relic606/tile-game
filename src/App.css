@@ -95,26 +95,22 @@ body {
 	height: 728px;
 }
 
-.player-combat-div {
-	/* content: "";
-	background-image: url("./assets/character.png");
-	background-repeat: no-repeat;
-	background-size: 226px 300px;
-	width: 226px;
-	height: 300px;
-	transform: scalex(-1);
-	margin-top: 240px; */
-}
+/* .player-combat-div {
+	position: relative;
+	top: 35%;
+} */
 
 .health-bar {
+	position: relative;
 	background: #333;
 	border-radius: 5px;
 	width: 100%;
 	height: 18px;
 	width: 200px;
 	padding: 3px;
+	bottom: 10px;
 }
-
+/* 
 .health-bar:after {
 	width: var(--width, 0);
 	content: "";
@@ -123,23 +119,49 @@ body {
 	background: green;
 	height: 100%;
 	border-radius: 5px;
+} */
+
+.health-bar-inner {
+	background: green;
+	height: 100%;
+	border-radius: 5px;
+	color: white;
 }
 .health-bar-numbers {
-	width: 100%;
-	margin: auto;
-	position: absolute;
 	color: white;
+	position: absolute;
+	left: 40%;
 }
 .player-combat-div {
 	bottom: 20%;
-	position: absolute;
-	left: -150px;
+	top: 30%;
 }
 
 .enemy-combat-div {
 	position: absolute;
 	bottom: 20%;
 	right: -150px;
+}
+.enemy-health-bar {
+	margin: auto;
+	position: relative;
+	background: #333;
+	border-radius: 5px;
+	height: 18px;
+	width: 200px;
+	padding: 3px;
+	bottom: 10px;
+}
+.enemy-health-bar-inner {
+	background: red;
+	height: 100%;
+	border-radius: 5px;
+	color: white;
+}
+.enemy-health-bar-numbers {
+	color: white;
+	position: absolute;
+	left: 40%;
 }
 
 .card-deck > div:hover {
@@ -304,7 +326,7 @@ body {
 	display: flex;
 	justify-content: center;
 	z-index: 2;
-	background-color: hsl(217, 71%, 85%);
+	background-color: hsl(234, 88%, 84%);
 	margin: auto;
 	position: relative;
 	width: 90vw;

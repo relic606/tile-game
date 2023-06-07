@@ -208,6 +208,8 @@ export default function CombatInteraction(props) {
 					setDrawPile={setNewDrawPile}
 				></CardDeck>
 				<CombatSkills
+					enemyHealth={props.enemyHealth}
+					setEnemyHealth={props.setEnemyHealth}
 					eventIsHiddenToggle={props.eventIsHiddenToggle}
 					setBoss={props.setBoss}
 					enemyPool={props.enemyPool}

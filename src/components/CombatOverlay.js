@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import CombatInteraction from "./combatInteraction";
 
 export default function CombatOverlay(props) {
+	const [enemyHealth, setEnemyHealth] = useState(0);
+
 	const [turn, setTurn] = useState(1);
 	const turnIncr = () => {
 		setTurn((turn) => turn + 1);
@@ -41,15 +43,16 @@ export default function CombatOverlay(props) {
 		return (
 			<div className="combat">
 				<div className="combat-content">
-					{/* <div className="health-bar">
-						<div className="health-bar-numbers">
-							{props.player.health} / {props.player.maxHealth}
-						</div>
-					</div> */}
 					<PlayerImage player={props.player} />
-					<EnemyImage enemyImage={props.enemy.image}></EnemyImage>
+
+					<EnemyImage
+						enemy={props.enemy}
+						enemyHealth={enemyHealth}
+					></EnemyImage>
 				</div>
 				<CombatInteraction
+					enemyHealth={enemyHealth}
+					setEnemyHealth={setEnemyHealth}
 					setBoss={props.setBoss}
 					enemyPool={props.enemyPool}
 					setEnemyPool={props.setEnemyPool}
@@ -84,10 +87,23 @@ export default function CombatOverlay(props) {
 	}
 }
 function EnemyImage(props) {
+	const [enemyMaxHealth, setEnemyMaxHealth] = useState(props.enemy.maxHealth);
 	return (
 		<div style={{ position: "relative" }}>
 			<div className="enemy-combat-div">
-				<img src={props.enemyImage} alt="enemy"></img>
+				<div className="enemy-health-bar">
+					<div
+						className="enemy-health-bar-inner"
+						style={{
+							width: (props.enemyHealth / enemyMaxHealth) * 200
+						}}
+					>
+						<div className="enemy-health-bar-numbers">
+							{props.enemyHealth} / {enemyMaxHealth}
+						</div>
+					</div>
+				</div>
+				<img src={props.enemy.image} alt="enemy"></img>
 			</div>
 		</div>
 	);
@@ -95,10 +111,20 @@ function EnemyImage(props) {
 
 function PlayerImage(props) {
 	return (
-		<div style={{ position: "relative" }}>
-			<div className="player-combat-div">
-				<img src={props.player.image} alt="player"></img>
+		<div className="player-combat-div" style={{ position: "relative" }}>
+			<div className="health-bar">
+				<div
+					className="health-bar-inner"
+					style={{
+						width: (props.player.health / props.player.maxHealth) * 200
+					}}
+				>
+					<div className="health-bar-numbers">
+						{props.player.health} / {props.player.maxHealth}
+					</div>
+				</div>
 			</div>
+			<img src={props.player.image} alt="player"></img>
 		</div>
 	);
 }

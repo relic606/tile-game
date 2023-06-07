@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { specialEvents } from "./controllers/eventControllers";
 
 export default function CombatSkills(props) {
-	const [enemyHealth, setEnemyHealth] = useState(0);
 	const [defendValue, setDefendValue] = useState(1);
 	const [strengthBuff, setStrengthBuff] = useState(0);
 	const [enemyStun, setEnemyStun] = useState(false);
@@ -61,7 +60,7 @@ export default function CombatSkills(props) {
 			return skill.name === event.target.innerHTML;
 		})[0];
 
-		if (props.statusEffect === "Stun") {
+		if (props.statusEffect.includes === "Stun") {
 			props.setCombatMessage(
 				"You are stunned.  No actions can be taken this turn."
 			);
@@ -82,7 +81,7 @@ export default function CombatSkills(props) {
 						);
 						///////////////////////////////// conditional if enemy is slain.
 						if (
-							enemyHealth <=
+							props.enemyHealth <=
 							Math.floor(
 								skillUsed.value *
 									(props.player.strength + strengthBuff) *
@@ -122,8 +121,8 @@ export default function CombatSkills(props) {
 							-skillUsed.cost * props.combatResources.sword
 						);
 
-						setEnemyHealth(
-							enemyHealth -
+						props.setEnemyHealth(
+							props.enemyHealth -
 								Math.floor(
 									skillUsed.value *
 										(props.player.strength + strengthBuff) *
@@ -157,8 +156,8 @@ export default function CombatSkills(props) {
 						props.setCombatMessage("Not enough resources!");
 					} else if (defendValue !== 1) {
 						props.setCombatMessage(
-							`You reinforce your defenses.  Blocking ${
-								100 * (defendValue - props.combatResources.shield * 0.25)
+							`You reinforce your defenses.  Blocking an additional ${
+								100 * (props.combatResources.shield * 0.25)
 							}% of incoming damage.`
 						);
 
@@ -250,7 +249,7 @@ export default function CombatSkills(props) {
 		}
 	}, [props.turn]);
 	useEffect(() => {
-		setEnemyHealth(props.enemy.maxHealth);
+		props.setEnemyHealth(props.enemy.maxHealth);
 	}, [props.enemy]);
 	return (
 		<div className="combat-right-container">
@@ -261,13 +260,7 @@ export default function CombatSkills(props) {
 					</li>
 				))}
 			</ul>
-			<div>
-				Player Health: {props.player.health > 0 ? props.player.health : 0} /{" "}
-				{props.player.maxHealth}
-			</div>
-			<div>
-				{props.enemy.name} Health: {enemyHealth > 0 ? enemyHealth : 0}
-			</div>
+
 			<div>Status Effects: {props.statusEffect}</div>
 			<br></br>
 			<div>Draw pile: {props.drawPileLength}</div>
