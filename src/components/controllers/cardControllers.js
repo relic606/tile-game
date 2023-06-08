@@ -11,7 +11,7 @@ const levelCards = {
 		type: "Draw Cleanse",
 		value: 1,
 		key: 10,
-		effect: "Exhaust",
+		// effect: "Exhaust",
 		image: cardImg,
 		imageTwo: waterImg
 	},
@@ -43,7 +43,7 @@ const levelCards = {
 		type: "Shield",
 		value: 2,
 		key: 14,
-		effect: "Exhaust",
+		// effect: "Exhaust",
 		image: shieldImg
 	},
 	divineInspiration: {
@@ -51,7 +51,7 @@ const levelCards = {
 		type: "Heart",
 		value: 2,
 		key: 15,
-		effect: "Exhaust",
+		// effect: "Exhaust",
 		image: heartImg
 	}
 };

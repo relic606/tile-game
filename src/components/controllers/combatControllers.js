@@ -45,7 +45,7 @@ const holyStrength = {
 	name: "Holy Strength",
 	message: "Your muscles surge with divine strength.",
 	actionType: "strength buff",
-	value: 1,
+	value: 0.5,
 	cost: 1,
 	description:
 		"Add strength at the value of your wisdom, per resource, for this turn only."
@@ -55,7 +55,8 @@ const holySmite = {
 	message: "You smite the enemy, stunning them!",
 	actionType: "stun",
 	cost: 1,
-	description: "Stun the enemy for this turn.  Usable once per Combat"
+	description:
+		"Stun the enemy for this turn.  Usable once per Combat.  Costs 1 sword/shield/heart"
 };
 
 const combatSkills = { slash, heal, defend, draw, holyStrength, holySmite };

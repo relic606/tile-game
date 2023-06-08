@@ -9,18 +9,18 @@ import evilKnightImage from "../../assets/enemies/evilknight.png";
 const hack = {
 	forecast: "The goblin raises his axe above his head.",
 	message: "The goblin swung his axe at you!",
-	value: 10
+	value: 15
 };
 const bite = {
 	forecast: "The goblin gnashes his teeth together.",
 	message: "The goblin bit you!",
-	value: 5,
+	value: 8,
 	effect: "Vulnerable"
 };
 
 const goblin = {
 	name: "Goblin",
-	maxHealth: 30,
+	maxHealth: 60,
 	experience: 500,
 	actions: [hack, bite],
 	image: goblinImage
@@ -36,19 +36,19 @@ const club = {
 const bash = {
 	forecast: "The ogre clenches his off hand in a fist",
 	message: "The ogre bashes you with his off hand.",
-	value: 5,
+	value: 10,
 	effect: "Stun"
 };
 const stomp = {
 	forecast: "The ogre raises foot, ready to lunge at you",
 	message: "The ogre stomps your toes.",
-	value: 10,
+	value: 15,
 	effect: "Slow"
 };
 
 const ogre = {
 	name: "Ogre",
-	maxHealth: 50,
+	maxHealth: 80,
 	experience: 1000,
 	actions: [club, bash, stomp],
 	image: ogreImage
@@ -59,7 +59,7 @@ const ogre = {
 const slimed = {
 	forecast: "The slime is looking very slimy.",
 	message: "The slime slimes you with its slime!",
-	value: 10
+	value: 12
 };
 const envelop = {
 	forecast: "The slime is attempting to envelop you!",
@@ -72,13 +72,13 @@ const weakness = {
 		"The slime begings to look uncomfortable, as though something is moving inside it.",
 	message:
 		"The slime leans to one side. You feel weak at the smell of the slime's sudden pungent aroma!",
-	value: 5,
+	value: 8,
 	effect: "Weakness"
 };
 
 const slime = {
 	name: "Slime",
-	maxHealth: 24,
+	maxHealth: 50,
 	experience: 500,
 	actions: [slimed, envelop, weakness],
 	image: slimeImage
@@ -111,7 +111,7 @@ const boblin = {
 const stab = {
 	forecast: "The skeleton is poised, ready to strike.",
 	message: "The skeleton stabs you with his sword!",
-	value: 25,
+	value: 20,
 	effect: "Vulnerable"
 };
 const headbutt = {
@@ -123,7 +123,7 @@ const headbutt = {
 
 const skeleton = {
 	name: "Skeleton",
-	maxHealth: 50,
+	maxHealth: 70,
 	experience: 500,
 	actions: [stab, headbutt],
 	image: skeletonImage

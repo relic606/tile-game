@@ -9,19 +9,14 @@ export default function PlayerStats(props) {
 		switch (skill.actionType) {
 			case "attack":
 				return swordImg;
-				break;
 			case "defend":
 				return shieldImg;
-				break;
 			case "heal":
 				return heartImg;
-				break;
 			case "strength buff":
 				return heartImg;
-				break;
 			case "draw":
 				return drawImg;
-				break;
 			default:
 		}
 	};

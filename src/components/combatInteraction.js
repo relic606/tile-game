@@ -147,9 +147,9 @@ export default function CombatInteraction(props) {
 
 	const setCombatMessageCB = (message) => {
 		setCombatMessage(() => message);
-		setTimeout(() => {
-			setCombatMessage(() => "");
-		}, 1500);
+		// setTimeout(() => {
+		// 	setCombatMessage(() => "");
+		// }, 1500);
 	};
 	const endPlayerTurn = () => {
 		props.turnIncr();

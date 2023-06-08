@@ -73,7 +73,7 @@ function App() {
 	const [health, setHealth] = useState(80);
 	const [maxHealth, setMaxHealth] = useState(80);
 	const [strength, setStrength] = useState(10);
-	const [wisdom, setWisdom] = useState(5);
+	const [wisdom, setWisdom] = useState(8);
 	const [skills, setSkills] = useState([
 		combatSkills.slash,
 		combatSkills.heal,
@@ -131,7 +131,7 @@ function App() {
 			setExperience(0);
 			setExpToNextLevel(levelTables[player.level + 1].expToNextLevel);
 			setMaxHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
-			setHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
+			// setHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
 			setStrength(player.strength + levelTables[player.level + 1].strength);
 			setWisdom(player.wisdom + levelTables[player.level + 1].wisdom);
 			if (levelTables[player.level + 1].skills) {

@@ -49,7 +49,7 @@ export default function CombatSkills(props) {
 				setTimeout(() => {
 					alert("You have been slain!");
 					window.location.reload();
-				}, 1500);
+				}, 2000);
 			}
 		}
 	}
@@ -245,7 +245,7 @@ export default function CombatSkills(props) {
 			setStrengthBuff(0);
 			setTimeout(() => {
 				props.setCombatMessage(`${props.enemy.actions[randomNum].forecast}`);
-			}, 1500);
+			}, 2500);
 		}
 	}, [props.turn]);
 	useEffect(() => {
