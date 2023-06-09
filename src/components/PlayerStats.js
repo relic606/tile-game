@@ -50,12 +50,16 @@ export default function PlayerStats(props) {
 					{player.cardDeck.map((card) => {
 						return (
 							<li className="player-card" key={card.key}>
-								<div className="card-images">
+								<div className="player-card-images">
 									<img src={card.image} alt="resource" />
+									<div className="card-resource">
+										{card.value > 1 ? (
+											<p className="card-value">{`x${card.value}`}</p>
+										) : (
+											<p className="card-value"></p>
+										)}
+									</div>
 
-									{card.value > 1 ? (
-										<p className="card-value">{`x${card.value}`}</p>
-									) : null}
 									{card.imageTwo ? (
 										<img src={card.imageTwo} alt="image_two" />
 									) : null}

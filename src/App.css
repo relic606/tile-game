@@ -363,7 +363,6 @@ body {
 	align-items: center;
 	background-color: black;
 	margin-top: 10px;
-	margin-top: 10px;
 	height: 100px;
 	width: 100px;
 	border-radius: 5%;
@@ -372,17 +371,17 @@ body {
 
 .player-card-images {
 	display: flex;
-	object-fit: contain;
+	flex-direction: row;
+	object-fit: cover;
 	position: absolute;
+	height: 30px;
 }
 
 .card-value {
-	position: relative;
-	left: 70px;
 	color: white;
 }
 .player-card-text {
 	color: black;
 	position: relative;
-	left: 100px;
+	left: 110px;
 }

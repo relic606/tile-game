@@ -9,7 +9,7 @@ const levelCards = {
 	cleanse: {
 		name: "Cleanse",
 		type: "Draw Cleanse",
-		value: 1,
+		value: 2,
 		key: 10,
 		// effect: "Exhaust",
 		image: cardImg,
