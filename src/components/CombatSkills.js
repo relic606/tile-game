@@ -10,6 +10,30 @@ export default function CombatSkills(props) {
     Math.floor(Math.random() * props.enemy.actions.length)
   );
 
+  let healAudio = new Audio("/heal.ogg");
+
+  const healAudioStart = () => {
+    healAudio.play();
+  };
+
+  let slashAudio = new Audio("/slash.mp4");
+
+  const slashAudioStart = () => {
+    slashAudio.play();
+  };
+
+  let cardAudio = new Audio("/cardPlay.mp4");
+
+  const cardAudioStart = () => {
+    cardAudio.play();
+  };
+
+  let defendAudio = new Audio("/defend.mp4");
+
+  const defendAudioStart = () => {
+    defendAudio.play();
+  };
+
   const setDefendValueCheck = (value) => {
     if (value < 0) {
       setDefendValue(0);
@@ -78,6 +102,7 @@ export default function CombatSkills(props) {
           if (props.combatResources.sword < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else {
+            slashAudioStart();
             const weakness = props.statusEffect.includes("Weakness") ? 0.6 : 1;
             props.setCombatMessage(
               `${skillUsed.message} The enemy has taken ${Math.floor(
@@ -108,7 +133,10 @@ export default function CombatSkills(props) {
                 props.setEvent(specialEvents.cardCurse);
                 props.eventIsHiddenToggle();
               }
-              props.inCombatChange(false);
+              setTimeout(() => {
+                props.inCombatChange(false);
+                /////audio from slash doesn't play before end of battle alerts without minor delay
+              }, 20);
               props.setSwordResource(-props.combatResources.sword);
               props.setShieldResource(-props.combatResources.shield);
               props.setHeartResource(-props.combatResources.heart);
@@ -144,6 +172,7 @@ export default function CombatSkills(props) {
           if (props.combatResources.heart < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else {
+            healAudioStart();
             props.setCombatMessage(
               `${skillUsed.message} ${
                 skillUsed.value *
@@ -167,6 +196,7 @@ export default function CombatSkills(props) {
               `You are already blocking 100% of incoming damage`
             );
           } else if (defendValue !== 1) {
+            defendAudioStart();
             props.setCombatMessage(
               `You reinforce your defenses.  Blocking an additional ${
                 100 * (props.combatResources.shield * 0.25)
@@ -183,6 +213,7 @@ export default function CombatSkills(props) {
               );
             }
           } else {
+            defendAudioStart();
             props.setCombatMessage(
               skillUsed.message +
                 ` Blocking ${
@@ -215,6 +246,7 @@ export default function CombatSkills(props) {
           if (props.combatResources.draw < 1) {
             props.setCombatMessage("Not enough resources!");
           } else {
+            cardAudioStart();
             const drawAmount = props.combatResources.draw;
             props.setCombatMessage(
               `You enter a meditative state.  Draw ${drawAmount} cards.`

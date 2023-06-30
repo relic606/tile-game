@@ -13,11 +13,15 @@ export default function CombatInteraction(props) {
   const [currentHand, setCurrentHand] = useState([]);
   const [discardPile, setDiscardPile] = useState([]);
 
+  let cardAudio = new Audio("/cardPlay.mp4");
+
+  const cardAudioStart = () => {
+    cardAudio.play();
+  };
 
   const [drawPile, setDrawPile] = useState([...shuffle(props.player.cardDeck)]);
 
   function addStatusEffect(status) {
-    console.log(statusEffect);
     if (statusEffect === "") {
       setStatusEffect(status);
     } else if (statusEffect.includes(`${status}`)) {
@@ -152,9 +156,10 @@ export default function CombatInteraction(props) {
 
   const endPlayerTurn = () => {
     props.turnIncr();
+    cardAudioStart()
     if (statusEffect.includes("Slow")) {
-		drawXCards(1)}
-    else {
+      drawXCards(1);
+    } else {
       drawXCards(2);
     }
     props.setSwordResource(-props.combatResources.sword);

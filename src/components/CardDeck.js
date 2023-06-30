@@ -4,6 +4,12 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 export default function CardDeck(props) {
   const statusEffectArr = ["Weakness", "Stun", "Vulnerable"];
 
+  let cardAudio = new Audio("/cardPlay.mp4");
+
+  const cardAudioStart = () => {
+    cardAudio.play();
+  };
+
   const handleNewHand = () => {
     const newHand = [...props.currentHand];
     const newDrawPile = [...props.drawPile];
@@ -34,7 +40,6 @@ export default function CardDeck(props) {
     );
 
     props.setDiscardPile([...props.discardPile, cardRemoved[0]]);
-    // props.setInProp(false);
   };
   const exhaustCard = (e) => {
     const selectedCardKey = Number(e.target.getAttribute("cardKey"));
@@ -74,6 +79,7 @@ export default function CardDeck(props) {
         "You must break through the curse's hold of you before taking action."
       );
     } else {
+      cardAudioStart();
       if (cardUsed.effect === "Exhaust") {
         exhaustCard(event);
       } else {
@@ -127,6 +133,7 @@ export default function CardDeck(props) {
   };
 
   useEffect(() => {
+    cardAudioStart();
     handleNewHand();
   }, []);
   return (
@@ -135,7 +142,6 @@ export default function CardDeck(props) {
         {props.currentHand.map((card) => (
           <CSSTransition
             key={card.key}
-            in={props.inProp}
             timeout={250}
             classNames="card-transition"
           >
