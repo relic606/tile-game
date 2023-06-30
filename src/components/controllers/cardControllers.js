@@ -61,7 +61,7 @@ const starterCardsArr = [
 		value: 1,
 		effect: null,
 		key: 1,
-		image: swordImg
+		image: swordImg,
 	},
 	{
 		type: "Sword",
