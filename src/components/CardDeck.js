@@ -10,6 +10,12 @@ export default function CardDeck(props) {
     cardAudio.play();
   };
 
+  let stunAudio = new Audio("/stunned.mp4");
+
+  const stunAudioStart = () => {
+    stunAudio.play();
+  };
+
   const handleNewHand = () => {
     const newHand = [...props.currentHand];
     const newDrawPile = [...props.drawPile];
@@ -69,6 +75,7 @@ export default function CardDeck(props) {
       props.statusEffect.includes("Stun") &&
       !cardUsed.type.includes("Cleanse")
     ) {
+      stunAudioStart();
       props.setCombatMessage("You cannot play a card while stunned");
     } else if (
       !cardUsed.type.includes("Curse") &&
