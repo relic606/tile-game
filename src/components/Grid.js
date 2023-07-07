@@ -1,10 +1,10 @@
 import React from "react";
 import Square from "./Square";
+import { specialEvents } from "./controllers/eventControllers";
 
 class Grid extends React.Component {
   state = {
     gridWidth: this.props.gridWidth,
-    // selectedSquare: [0, 0],
     selectedSquare: { x: 0, y: 0 },
   };
 
@@ -49,7 +49,11 @@ class Grid extends React.Component {
   };
 
   handleKeyPress = (e) => {
-    if (!this.props.inCombat && this.props.eventIsHidden) {
+    if (
+      !this.props.inCombat &&
+      this.props.eventIsHidden &&
+      this.props.playerStatsHidden
+    ) {
       switch (e.which) {
         case 87:
           this.move(0, 1, e);
@@ -67,10 +71,8 @@ class Grid extends React.Component {
     }
   };
 
-  move = (dir, change, e) => {
-    // let coords = this.state.selectedSquare;
+  move = (dir, change) => {
     let coords = [this.state.selectedSquare.x, this.state.selectedSquare.y];
-    console.log(coords, dir, change);
 
     if (
       coords[dir] + change > -1 &&
@@ -81,8 +83,7 @@ class Grid extends React.Component {
       //Performs movement above, and then searches for the newly "selected" square below
 
       setTimeout(() => {
-        // console.log(e.target)
-        const selectedSqrElem = e.target.getElementsByClassName("selected");
+        const selectedSqrElem = document.getElementsByClassName("selected");
         if (selectedSqrElem[0].className.includes("red")) {
           alert("Combat Engaged!");
           this.props.inCombatChange(true);
@@ -97,13 +98,14 @@ class Grid extends React.Component {
         } else if (selectedSqrElem[0].className.includes("black")) {
           this.props.setBossFight(true);
           this.props.setEnemy(this.props.boss);
+          this.props.setEvent(specialEvents.cardCurse);
           alert("Boss battle!");
           this.props.inCombatChange(true);
           this.setState({ selectedSquare: { x: 0, y: 0 } });
         }
       }, 10);
 
-      ///////need minor timout delay for character to visually move before ineracting with square
+      ///////need minor timout delay for character to visually move before ineracting with square, as well as to trigger the combat/event
     }
     this.setState({
       selectedSquare: { x: coords[0], y: coords[1] },

@@ -327,10 +327,10 @@ body {
   display: flex;
   justify-content: center;
   z-index: 2;
-  background-color: hsl(234, 88%, 84%);
+  background-color: hsl(235, 90%, 92%);
   margin: auto;
   position: relative;
-  width: 90vw;
+  width: 70vw;
   top: -800px;
   bottom: 0px;
   left: 50px;
@@ -338,6 +338,78 @@ body {
   flex-direction: column;
   border: 3px black solid;
   border-radius: 5px;
+}
+
+#player-stats-btn {
+  z-index: 3;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100px;
+  height: 2em;
+  color: white;
+  background-color: darkblue;
+  border-radius: 15%;
+}
+#player-stats-btn:hover {
+  background-color: white;
+  color: darkblue;
+  transition: 0.3s;
+}
+.player-stats-top-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.player-stat-numbers {
+  margin-right: 150px;
+}
+.player-stat-numbers > ul {
+  list-style: none;
+  padding-left: 10px;
+}
+.player-stat-numbers > ul > li {
+  padding-top: 10px;
+}
+.player-stats-combat > p {
+  display: flex;
+  align-items: center;
+}
+.player-stats-combat > p > img {
+  margin-left: 5px;
+}
+.movement-info {
+  display: flex;
+  align-items: center;
+}
+.movement-info > p {
+  margin-right: 25px;
+}
+.movement-info > img {
+  position: relative;
+  bottom: 10px;
+}
+.tile-list {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.tile-list > li {
+  height: 1em;
+  display: flex;
+  margin: 5px;
+  align-items: center;
+}
+.tile-list > p {
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.tile-example {
+  height: 20px;
+  width: 20px;
+  margin: 10px;
+  background-color: black;
 }
 
 .player-skills-list {

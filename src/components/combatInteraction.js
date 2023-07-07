@@ -54,7 +54,7 @@ export default function CombatInteraction(props) {
     return array;
   }
 
-  const drawXCards = (x) => {
+  const drawCards = (x) => {
     let newDrawPile = [...drawPile];
     const newHand = [...currentHand];
     let newDiscardPile = [...discardPile];
@@ -158,9 +158,9 @@ export default function CombatInteraction(props) {
     props.turnIncr();
     cardAudioStart()
     if (statusEffect.includes("Slow")) {
-      drawXCards(1);
+      drawCards(1);
     } else {
-      drawXCards(2);
+      drawCards(2);
     }
     props.setSwordResource(-props.combatResources.sword);
     props.setShieldResource(-props.combatResources.shield);
@@ -208,7 +208,7 @@ export default function CombatInteraction(props) {
           setShieldResource={props.setShieldResource}
           setHeartResource={props.setHeartResource}
           setDrawResource={props.setDrawResource}
-          drawXCards={drawXCards}
+          drawCards={drawCards}
           currentHand={currentHand}
           setCurrentHand={setNewCurrentHand}
           drawPile={drawPile}
@@ -250,8 +250,8 @@ export default function CombatInteraction(props) {
           bossFight={props.bossFight}
           setBossFight={props.setBossFight}
           dungeonFloorIncr={props.dungeonFloorIncr}
-          drawXCards={drawXCards}
-          setEvent={props.setEvent}
+          drawCards={drawCards}
+          // setEvent={props.setEvent}
         ></CombatSkills>
       </div>
     </div>

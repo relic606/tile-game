@@ -16,7 +16,7 @@ import playerImage from "./assets/character2.png";
 function App() {
   const [gridWidth, setGridWidth] = useState(5);
   const [eventIsHidden, setEventIsHidden] = useState(true);
-  const [playerStatsHidden, setPlayerStatsHidden] = useState(true);
+  const [playerStatsHidden, setPlayerStatsHidden] = useState(false);
   const [inCombat, setInCombat] = useState(false);
   const [bossFight, setBossFight] = useState(false);
   const [dungeonFloor, setDungeonFloor] = useState(1);
@@ -31,6 +31,25 @@ function App() {
   const [boss, setBoss] = useState(enemies.bossEnemiesAll.bossEnemiesDL1[0]);
 
   const [enemy, setEnemy] = useState({});
+
+  let combatMusic = new Audio("/combat.mp4");
+  let worldMusic = new Audio("/world.mp4");
+
+  const [combatAudio, setCombatAudio] = useState(combatMusic);
+  const [worldAudio, setWorldAudio] = useState(worldMusic);
+
+  const setInCombatCB = (bool) => {
+    if (inCombat === false) {
+      worldAudio.pause();
+      worldAudio.load();
+      combatAudio.play();
+    } else {
+      combatAudio.pause();
+      combatAudio.load();
+      worldAudio.play();
+    }
+    setInCombat(bool);
+  };
 
   const setNewEnemy = (enemy) => {
     setEnemy(enemy);
@@ -144,11 +163,15 @@ function App() {
       }
     }
   }, [player.experience]);
-
+ 
   return (
     <div className="App">
-      <button onClick={playerStatsHiddenToggle}>Player Info</button>
+      <button onClick={playerStatsHiddenToggle} id="player-stats-btn">
+        Game Info
+      </button>
       <Grid
+        setEvent={setEvent}
+        playerStatsHidden={playerStatsHidden}
         setEnemy={setEnemy}
         enemyPool={enemyPool}
         boss={boss}
@@ -157,7 +180,7 @@ function App() {
         dungeonFloor={dungeonFloor}
         gridWidth={gridWidth}
         inCombat={inCombat}
-        inCombatChange={setInCombat}
+        inCombatChange={setInCombatCB}
         setBossFight={setNewBossFight}
       />
       {!eventIsHidden && (
@@ -173,7 +196,9 @@ function App() {
           addCardToDeck={addCardToDeck}
         />
       )}
-      {!playerStatsHidden && <PlayerStats player={player}></PlayerStats>}
+      {!playerStatsHidden && (
+        <PlayerStats player={player} dungeonFloor={dungeonFloor}></PlayerStats>
+      )}
       <CombatOverlay
         setBoss={setBoss}
         enemy={enemy}
@@ -185,7 +210,7 @@ function App() {
         setHealthToMax={setHealthToMax}
         healthChange={healthChange}
         inCombat={inCombat}
-        inCombatChange={setInCombat}
+        inCombatChange={setInCombatCB}
         player={player}
         bossFight={bossFight}
         setBossFight={setNewBossFight}

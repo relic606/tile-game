@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { specialEvents } from "./controllers/eventControllers";
+
 
 export default function CombatSkills(props) {
   const [defendValue, setDefendValue] = useState(1);
@@ -10,7 +10,7 @@ export default function CombatSkills(props) {
     Math.floor(Math.random() * props.enemy.actions.length)
   );
 
-  let healAudio = new Audio("/heal.ogg");
+  let healAudio = new Audio("/heal.mp4");
 
   const healAudioStart = () => {
     healAudio.play();
@@ -130,13 +130,11 @@ export default function CombatSkills(props) {
                 );
                 props.setBoss(props.enemies.bossEnemiesAll.bossEnemiesDL2[0]);
                 props.setBossFight(false);
-                props.setEvent(specialEvents.cardCurse);
                 props.eventIsHiddenToggle();
               }
-              setTimeout(() => {
-                props.inCombatChange(false);
-                /////audio from slash doesn't play before end of battle alerts without minor delay
-              }, 20);
+              props.inCombatChange(false);
+              /////audio from slash doesn't play before end of battle alerts without minor delay
+
               props.setSwordResource(-props.combatResources.sword);
               props.setShieldResource(-props.combatResources.shield);
               props.setHeartResource(-props.combatResources.heart);
@@ -251,7 +249,7 @@ export default function CombatSkills(props) {
             props.setCombatMessage(
               `You enter a meditative state.  Draw ${drawAmount} cards.`
             );
-            props.drawXCards(drawAmount);
+            props.drawCards(drawAmount);
             props.setDrawResource(-drawAmount);
           }
 
