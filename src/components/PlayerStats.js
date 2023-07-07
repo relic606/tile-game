@@ -5,6 +5,10 @@ import heartImg from "../assets/heart.png";
 import drawImg from "../assets/cards1.png";
 import moveImg from "../assets/wasd.png";
 import waterImg from "../assets/water.png";
+import swordHeartImg from "../assets/sword-heart.png";
+import shieldHeartImg from "../assets/shield-heart.png";
+import swordShieldImg from "../assets/sword-shield.png"
+import swordShieldHeartImg from "../assets/sword-heart-shield.png"
 
 export default function PlayerStats(props) {
   const resourceCheck = (skill) => {
@@ -20,9 +24,9 @@ export default function PlayerStats(props) {
       case "Draw":
         return drawImg;
       case "Stun":
-        return shieldImg;
+        return swordShieldHeartImg;
       case "Weakness":
-        return swordImg;
+        return swordShieldImg;
       default:
     }
   };

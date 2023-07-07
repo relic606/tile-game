@@ -20,13 +20,13 @@ const bite = {
 
 const goblin = {
 	name: "Goblin",
-	maxHealth: 60,
+	maxHealth: 80,
 	experience: 500,
 	actions: [hack, bite],
 	image: goblinImage
 };
 
-//////////////////////////////////////////
+////////////////////////////////////////// DL 1 Boss
 
 const club = {
 	forecast: "The ogre grips his club tightly, preparing to swing",
@@ -48,7 +48,7 @@ const stomp = {
 
 const ogre = {
 	name: "Ogre",
-	maxHealth: 80,
+	maxHealth: 100,
 	experience: 1000,
 	actions: [club, bash, stomp],
 	image: ogreImage
@@ -84,7 +84,7 @@ const slime = {
 	image: slimeImage
 };
 
-/////////////////////////////////////// Dungeon level 2
+/////////////////////////////////////// DL 2
 
 const slack = {
 	forecast: "The boblin raises his axe above his head.",
@@ -101,7 +101,7 @@ const fite = {
 
 const boblin = {
 	name: "Boblin",
-	maxHealth: 70,
+	maxHealth: 100,
 	experience: 700,
 	actions: [slack, fite],
 	image: goblinImage
@@ -123,13 +123,13 @@ const headbutt = {
 
 const skeleton = {
 	name: "Skeleton",
-	maxHealth: 70,
+	maxHealth: 80,
 	experience: 500,
 	actions: [stab, headbutt],
 	image: skeletonImage
 };
 
-///////////////////////////////////////////
+/////////////////////////////////////////// DL2 boss
 
 const eviscerate = {
 	forecast: "The knights blade begins to glow",
@@ -146,7 +146,7 @@ const darkCurse = {
 
 const evilKnight = {
 	name: "Evil Knight",
-	maxHealth: 120,
+	maxHealth: 150,
 	experience: 1500,
 	actions: [eviscerate, darkCurse],
 	image: evilKnightImage
