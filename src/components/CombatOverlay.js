@@ -38,8 +38,6 @@ export default function CombatOverlay(props) {
     draw: drawResource,
   };
 
-  const [slashAnimation, setSlashAnimation] = useState(null);
-
   const animateSlash = () => {
     let img = document.createElement("img");
     const animationContainer = document.getElementById(

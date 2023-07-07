@@ -192,7 +192,7 @@ export default function CombatInteraction(props) {
             <img src={cardImg} alt="draw_img" />
             {props.drawResource}
           </div>
-          <button onClick={endPlayerTurn}>
+          <button onClick={endPlayerTurn} className="level-up-btn">
             End Turn{currentHand.length >= 8 ? " - Hand is Full" : null}
           </button>
         </div>
