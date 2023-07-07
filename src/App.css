@@ -79,6 +79,7 @@ body {
 }
 
 .combat {
+  z-index: 1;
   position: fixed;
   background-image: url(./assets/combatImage2.jpg);
   background-repeat: no-repeat;
@@ -86,7 +87,7 @@ body {
 
   width: 100vw;
   height: 100vh;
-  top: 22px;
+  top: 0px;
 }
 .combat-content {
   justify-content: space-evenly;
@@ -202,7 +203,7 @@ body {
   border: black 1px solid;
   background-color: white;
   padding: 10px;
-  height: 19px;
+  /* height: 19px; */
   margin: auto;
   width: 1900px;
 }
@@ -340,7 +341,8 @@ body {
   border-radius: 5px;
 }
 
-#player-stats-btn {
+#game-info-btn {
+  position: relative;
   z-index: 3;
   margin-top: 10px;
   margin-left: 10px;
@@ -350,7 +352,24 @@ body {
   background-color: darkblue;
   border-radius: 15%;
 }
-#player-stats-btn:hover {
+#game-info-btn:hover {
+  background-color: white;
+  color: darkblue;
+  transition: 0.3s;
+}
+
+#level-up-btn {
+  position: relative;
+  /* z-index: 3; */
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100px;
+  height: 2em;
+  color: white;
+  background-color: darkblue;
+  border-radius: 15%;
+}
+#level-up-btn:hover {
   background-color: white;
   color: darkblue;
   transition: 0.3s;

@@ -251,7 +251,6 @@ export default function CombatInteraction(props) {
           setBossFight={props.setBossFight}
           dungeonFloorIncr={props.dungeonFloorIncr}
           drawCards={drawCards}
-          // setEvent={props.setEvent}
         ></CombatSkills>
       </div>
     </div>

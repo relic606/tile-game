@@ -19,7 +19,7 @@ export default function CardDeck(props) {
   const handleNewHand = () => {
     const newHand = [...props.currentHand];
     const newDrawPile = [...props.drawPile];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       newHand.push(newDrawPile.shift());
     }
     props.setCurrentHand(newHand);

@@ -17,6 +17,7 @@ function App() {
   const [gridWidth, setGridWidth] = useState(5);
   const [eventIsHidden, setEventIsHidden] = useState(true);
   const [playerStatsHidden, setPlayerStatsHidden] = useState(false);
+  const [levelUpToggle, setLevelUpToggle] = useState(false);
   const [inCombat, setInCombat] = useState(false);
   const [bossFight, setBossFight] = useState(false);
   const [dungeonFloor, setDungeonFloor] = useState(1);
@@ -79,6 +80,9 @@ function App() {
   };
 
   const playerStatsHiddenToggle = () => {
+    if (!playerStatsHidden && !inCombat) {
+      worldAudio.play();
+    }
     setPlayerStatsHidden(!playerStatsHidden);
   };
 
@@ -98,6 +102,7 @@ function App() {
     combatSkills.heal,
     combatSkills.defend,
     combatSkills.draw,
+    combatSkills.weakeningFlurry,
   ]);
 
   const [cardDeck, setCardDeck] = useState(starterCardsArr);
@@ -143,32 +148,42 @@ function App() {
   const setNewExperience = (expGained) => {
     setExperience(() => experience + expGained);
   };
+
+  const levelUp = () => {
+    setLevelUpToggle(false);
+    alert(`You have reached level ${player.level + 1}!`);
+    setLevel(player.level + 1);
+    setExperience(0);
+    setExpToNextLevel(levelTables[player.level + 1].expToNextLevel);
+    setMaxHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
+    setStrength(player.strength + levelTables[player.level + 1].strength);
+    setWisdom(player.wisdom + levelTables[player.level + 1].wisdom);
+    if (levelTables[player.level + 1].skills) {
+      setSkills([...player.skills, levelTables[player.level + 1].skills]);
+      alert(`New skill: ${levelTables[player.level + 1].skills.name}`);
+    }
+    if (levelTables[player.level + 1].card) {
+      addCardToDeck(levelTables[player.level + 1].card);
+      alert(`New card: ${levelTables[player.level + 1].card.name}`);
+    }
+  };
+
   useEffect(() => {
     if (player.experience >= player.expToNextLevel) {
-      alert(`You have reached level ${player.level + 1}!`);
-      setLevel(player.level + 1);
-      setExperience(0);
-      setExpToNextLevel(levelTables[player.level + 1].expToNextLevel);
-      setMaxHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
-      // setHealth(player.maxHealth + levelTables[player.level + 1].maxHealth);
-      setStrength(player.strength + levelTables[player.level + 1].strength);
-      setWisdom(player.wisdom + levelTables[player.level + 1].wisdom);
-      if (levelTables[player.level + 1].skills) {
-        setSkills([...player.skills, levelTables[player.level + 1].skills]);
-        alert(`New skill: ${levelTables[player.level + 1].skills.name}`);
-      }
-      if (levelTables[player.level + 1].card) {
-        addCardToDeck(levelTables[player.level + 1].card);
-        alert(`New card: ${levelTables[player.level + 1].card.name}`);
-      }
+      setLevelUpToggle(true);
     }
   }, [player.experience]);
- 
+
   return (
     <div className="App">
-      <button onClick={playerStatsHiddenToggle} id="player-stats-btn">
+      <button onClick={playerStatsHiddenToggle} id="game-info-btn">
         Game Info
       </button>
+      {levelUpToggle && (
+        <button onClick={levelUp} id="level-up-btn">
+          Level up!
+        </button>
+      )}
       <Grid
         setEvent={setEvent}
         playerStatsHidden={playerStatsHidden}

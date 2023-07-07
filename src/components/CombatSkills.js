@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-
 export default function CombatSkills(props) {
   const [defendValue, setDefendValue] = useState(1);
   const [strengthBuff, setStrengthBuff] = useState(0);
   const [enemyStun, setEnemyStun] = useState(false);
   const [enemyStunCoolDown, setEnemyStunCoolDown] = useState(false);
+  const [enemyStatusEffect, setEnemyStatusEffect] = useState("");
   const [randomActionNum, setRandomActionNum] = useState(
     Math.floor(Math.random() * props.enemy.actions.length)
   );
@@ -55,8 +55,13 @@ export default function CombatSkills(props) {
         props.setStatusEffect(statusEffect);
       }
       const vulnerable = props.statusEffect.includes("Vulnerable") ? 1.5 : 1;
+      const weakness = enemyStatusEffect.includes("Weakness") ? 0.6 : 1;
+
       const damageTaken = Math.floor(
-        props.enemy.actions[randomActionNum].value * defendValue * vulnerable
+        props.enemy.actions[randomActionNum].value *
+          defendValue *
+          vulnerable *
+          weakness
       );
       if (statusEffect) {
         props.setCombatMessage(
@@ -71,6 +76,7 @@ export default function CombatSkills(props) {
 
       if (props.player.health > damageTaken) {
         props.healthChange(-damageTaken);
+        setEnemyStatusEffect("");
       }
       ///////////Attack greater than health, player is slain
       else {
@@ -98,7 +104,7 @@ export default function CombatSkills(props) {
       );
     } else {
       switch (skillUsed.actionType) {
-        case "attack":
+        case "Attack":
           if (props.combatResources.sword < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else {
@@ -133,7 +139,6 @@ export default function CombatSkills(props) {
                 props.eventIsHiddenToggle();
               }
               props.inCombatChange(false);
-              /////audio from slash doesn't play before end of battle alerts without minor delay
 
               props.setSwordResource(-props.combatResources.sword);
               props.setShieldResource(-props.combatResources.shield);
@@ -166,7 +171,7 @@ export default function CombatSkills(props) {
             );
           }
           break;
-        case "heal":
+        case "Heal":
           if (props.combatResources.heart < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else {
@@ -186,7 +191,7 @@ export default function CombatSkills(props) {
             props.setHeartResource(-props.combatResources.heart);
           }
           break;
-        case "defend":
+        case "Defend":
           if (props.combatResources.shield < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else if (defendValue === 0) {
@@ -215,7 +220,9 @@ export default function CombatSkills(props) {
             props.setCombatMessage(
               skillUsed.message +
                 ` Blocking ${
-                  100 * props.combatResources.shield * 0.25
+                  100 * props.combatResources.shield * 0.25 < 100
+                    ? 100 * props.combatResources.shield * 0.25
+                    : 100
                 }% of incoming damage.`
             );
             setDefendValueCheck(1 - props.combatResources.shield * 0.25);
@@ -224,7 +231,7 @@ export default function CombatSkills(props) {
             );
           }
           break;
-        case "strength buff":
+        case "Strength Buff":
           if (props.combatResources.heart < skillUsed.cost) {
             props.setCombatMessage("Not enough resources!");
           } else {
@@ -240,7 +247,7 @@ export default function CombatSkills(props) {
             );
           }
           break;
-        case "draw":
+        case "Draw":
           if (props.combatResources.draw < 1) {
             props.setCombatMessage("Not enough resources!");
           } else {
@@ -254,9 +261,9 @@ export default function CombatSkills(props) {
           }
 
           break;
-        case "stun":
+        case "Stun":
           if (
-            (props.combatResources.shield &&
+            (props.combatResources.sword &&
               props.combatResources.shield &&
               props.combatResources.heart) < 1
           ) {
@@ -273,6 +280,26 @@ export default function CombatSkills(props) {
             }
           }
 
+          break;
+        case "Weakness":
+          if (props.combatResources.sword && props.combatResources.shield < 1) {
+            props.setCombatMessage("Not enough resources!");
+          } else {
+            props.setCombatMessage(
+              skillUsed.message +
+                ` The enemy has taken ${Math.floor(
+                  skillUsed.value * props.enemyHealth
+                )} damage.`
+            );
+            props.setSwordResource(-skillUsed.cost);
+            props.setShieldResource(-skillUsed.cost);
+            setEnemyStatusEffect("Weakness");
+
+            props.setEnemyHealth(
+              props.enemyHealth -
+                Math.floor(skillUsed.value * props.enemyHealth)
+            );
+          }
           break;
         default:
           alert("Action type not recognized");
@@ -307,8 +334,9 @@ export default function CombatSkills(props) {
           </li>
         ))}
       </ul>
-
-      <div>Status Effects: {props.statusEffect}</div>
+      <div>Defending - {100 * (1 - defendValue)}%</div>
+      <div>Player Status Effects: {props.statusEffect}</div>
+      <div>Enemy Status Effects: {enemyStatusEffect}</div>
       <br></br>
       <div>Draw pile: {props.drawPileLength}</div>
       <div>Discard pile: {props.discardPileLength}</div>

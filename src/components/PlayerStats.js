@@ -9,16 +9,20 @@ import waterImg from "../assets/water.png";
 export default function PlayerStats(props) {
   const resourceCheck = (skill) => {
     switch (skill.actionType) {
-      case "attack":
+      case "Attack":
         return swordImg;
-      case "defend":
+      case "Defend":
         return shieldImg;
-      case "heal":
+      case "Heal":
         return heartImg;
-      case "strength buff":
+      case "Strength Buff":
         return heartImg;
-      case "draw":
+      case "Draw":
         return drawImg;
+      case "Stun":
+        return shieldImg;
+      case "Weakness":
+        return swordImg;
       default:
     }
   };
@@ -89,7 +93,7 @@ export default function PlayerStats(props) {
             <img src={drawImg}></img>
           </p>
           <p>Activate Combat Skills with the resources generated</p>
-          <p>Draw 2 cards at start of player's next turn</p>
+          <p>Draw 5 cards at start of combat. Draw 2 cards per turn</p>
           <p>Enemy takes their action between player turns</p>
           <h4>Status Effects</h4>
           <ul>
