@@ -179,8 +179,8 @@ function App() {
       <button onClick={playerStatsHiddenToggle} id="game-info-btn">
         Game Info
       </button>
-      {levelUpToggle && (
-        <button onClick={levelUp} id="level-up-btn">
+      {levelUpToggle && playerStatsHidden && (
+        <button onClick={levelUp} className="level-up-btn">
           Level up!
         </button>
       )}
@@ -212,7 +212,13 @@ function App() {
         />
       )}
       {!playerStatsHidden && (
-        <PlayerStats player={player} dungeonFloor={dungeonFloor}></PlayerStats>
+        <PlayerStats
+          player={player}
+          dungeonFloor={dungeonFloor}
+          levelUp={levelUp}
+          inCombat={inCombat}
+          levelUpToggle={levelUpToggle}
+        ></PlayerStats>
       )}
       <CombatOverlay
         setBoss={setBoss}

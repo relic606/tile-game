@@ -7,8 +7,8 @@ import moveImg from "../assets/wasd.png";
 import waterImg from "../assets/water.png";
 import swordHeartImg from "../assets/sword-heart.png";
 import shieldHeartImg from "../assets/shield-heart.png";
-import swordShieldImg from "../assets/sword-shield.png"
-import swordShieldHeartImg from "../assets/sword-heart-shield.png"
+import swordShieldImg from "../assets/sword-shield.png";
+import swordShieldHeartImg from "../assets/sword-heart-shield.png";
 
 export default function PlayerStats(props) {
   const resourceCheck = (skill) => {
@@ -48,6 +48,11 @@ export default function PlayerStats(props) {
               Health: {player.health} / {player.maxHealth}
             </li>
           </ul>
+          {props.levelUpToggle && (
+            <button onClick={props.levelUp} className="level-up-btn">
+              Level up!
+            </button>
+          )}
         </div>
         <div className="game-info">
           <h3>Map Info</h3>
@@ -99,6 +104,9 @@ export default function PlayerStats(props) {
           <p>Activate Combat Skills with the resources generated</p>
           <p>Draw 5 cards at start of combat. Draw 2 cards per turn</p>
           <p>Enemy takes their action between player turns</p>
+          <p>
+            The enemy's next attack will forecast at the start of player turn
+          </p>
           <h4>Status Effects</h4>
           <ul>
             <li>Vulnerable - Receive 50% increased damage</li>

@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: radial-gradient(#e3edfc, hsl(217, 71%, 85%));
+  background: #e3edfc radial-gradient(#e3edfc, hsl(217, 71%, 85%));
 }
 
 .square {
@@ -358,9 +358,9 @@ body {
   transition: 0.3s;
 }
 
-#level-up-btn {
+.level-up-btn {
   position: relative;
-  /* z-index: 3; */
+  z-index: 3;
   margin-top: 10px;
   margin-left: 10px;
   width: 100px;
@@ -369,7 +369,7 @@ body {
   background-color: darkblue;
   border-radius: 15%;
 }
-#level-up-btn:hover {
+.level-up-btn:hover {
   background-color: white;
   color: darkblue;
   transition: 0.3s;

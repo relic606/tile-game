@@ -54,8 +54,7 @@ const holySmite = {
   message: "You smite the enemy, stunning them!",
   actionType: "Stun",
   cost: 1,
-  description:
-    "Stun the enemy for this turn.  Usable once per Combat.  Cost 1 sword/shield/heart",
+  description: "Stun the enemy for this turn.  Usable once per Combat.",
 };
 const weakeningFlurry = {
   name: "Weakening Flurry",
@@ -64,7 +63,7 @@ const weakeningFlurry = {
   value: 0.1,
   cost: 1,
   description:
-    "Deal damage equal to 10% of the enemy's current health, also applying weakness to the enemy for this turn.  Cost 1 sword/shield.",
+    "Deal damage equal to 10% of the enemy's current health, also applying weakness to the enemy for this turn.",
 };
 
 const combatSkills = {
