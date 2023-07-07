@@ -109,6 +109,7 @@ export default function CombatSkills(props) {
             props.setCombatMessage("Not enough resources!");
           } else {
             slashAudioStart();
+            props.animateSlash();
             const weakness = props.statusEffect.includes("Weakness") ? 0.6 : 1;
             props.setCombatMessage(
               `${skillUsed.message} The enemy has taken ${Math.floor(
@@ -291,6 +292,8 @@ export default function CombatSkills(props) {
                   skillUsed.value * props.enemyHealth
                 )} damage.`
             );
+            slashAudioStart();
+            props.animateSlash();
             props.setSwordResource(-skillUsed.cost);
             props.setShieldResource(-skillUsed.cost);
             setEnemyStatusEffect("Weakness");

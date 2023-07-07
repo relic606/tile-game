@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CombatInteraction from "./combatInteraction";
+import slashImg from "../assets/slash.png";
 
 export default function CombatOverlay(props) {
   const [enemyHealth, setEnemyHealth] = useState(0);
@@ -37,20 +38,35 @@ export default function CombatOverlay(props) {
     draw: drawResource,
   };
 
+  const [slashAnimation, setSlashAnimation] = useState(null);
+
+  const animateSlash = () => {
+    let img = document.createElement("img");
+    const animationContainer = document.getElementById(
+      "combat-animation-container"
+    );
+    img.src = slashImg;
+    img.id = "combat-animation";
+    animationContainer.appendChild(img);
+    setTimeout(() => {
+      img.remove();
+    }, 500);
+  };
+
   if (!props.inCombat) {
     return null;
   } else {
     return (
       <div className="combat">
         <div className="combat-content">
-          <PlayerImage player={props.player} />
-
+          <PlayerImage player={props.player} turn={turn} />
           <EnemyImage
             enemy={props.enemy}
             enemyHealth={enemyHealth}
           ></EnemyImage>
         </div>
         <CombatInteraction
+          animateSlash={animateSlash}
           enemyHealth={enemyHealth}
           setEnemyHealth={setEnemyHealth}
           setBoss={props.setBoss}
@@ -88,6 +104,7 @@ export default function CombatOverlay(props) {
 }
 function EnemyImage(props) {
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(props.enemy.maxHealth);
+
   return (
     <div style={{ position: "relative" }}>
       <div className="enemy-combat-div">
@@ -104,12 +121,25 @@ function EnemyImage(props) {
           </div>
         </div>
         <img src={props.enemy.image} alt="enemy"></img>
+        <div id="combat-animation-container"></div>
       </div>
     </div>
   );
 }
 
 function PlayerImage(props) {
+  const [shake, setShake] = useState(false);
+
+  useEffect(() => {
+    if (props.turn !== 1) {
+      const animate = () => {
+        setShake(true);
+        setTimeout(() => setShake(false), 700);
+      };
+      animate();
+    }
+  }, [props.turn]);
+
   return (
     <div className="player-combat-div" style={{ position: "relative" }}>
       <div className="health-bar">
@@ -124,7 +154,11 @@ function PlayerImage(props) {
           </div>
         </div>
       </div>
-      <img src={props.player.image} alt="player"></img>
+      <img
+        src={props.player.image}
+        alt="player"
+        className={shake ? "shake" : null}
+      ></img>
     </div>
   );
 }

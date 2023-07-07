@@ -156,7 +156,7 @@ export default function CombatInteraction(props) {
 
   const endPlayerTurn = () => {
     props.turnIncr();
-    cardAudioStart()
+    cardAudioStart();
     if (statusEffect.includes("Slow")) {
       drawCards(1);
     } else {
@@ -217,6 +217,7 @@ export default function CombatInteraction(props) {
           setDrawPile={setNewDrawPile}
         ></CardDeck>
         <CombatSkills
+          animateSlash={props.animateSlash}
           enemyHealth={props.enemyHealth}
           setEnemyHealth={props.setEnemyHealth}
           eventIsHiddenToggle={props.eventIsHiddenToggle}
