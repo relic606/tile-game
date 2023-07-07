@@ -434,6 +434,22 @@ body {
   color: darkblue;
   transition: 0.3s;
 }
+
+.end-turn-btn {
+  position: relative;
+  z-index: 3;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 3px;
+  color: white;
+  background-color: darkblue;
+  border-radius: 15%;
+}
+.end-turn-btn:hover {
+  background-color: white;
+  color: darkblue;
+  transition: 0.3s;
+}
 .player-stats-top-section {
   display: flex;
   flex-direction: row;
