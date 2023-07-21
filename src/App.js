@@ -33,7 +33,7 @@ function App() {
 
 	const [enemy, setEnemy] = useState({});
 
-	let combatMusic = new Audio("/combat.mp4");
+	let combatMusic = new Audio("/projects/game/combat.mp4");
 	let worldMusic = new Audio("/projects/game/world.mp4");
 
 	const [combatAudio, setCombatAudio] = useState(combatMusic);
