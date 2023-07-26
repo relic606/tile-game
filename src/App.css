@@ -1,555 +1,567 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: #e3edfc radial-gradient(#e3edfc, hsl(217, 71%, 85%));
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: #e3edfc radial-gradient(#e3edfc, hsl(217, 71%, 85%));
 }
 
 .square {
-  box-sizing: border-box;
-  width: 150px;
-  height: 150px;
-  display: block;
-  float: left;
-  margin: 0;
+	box-sizing: border-box;
+	width: 150px;
+	height: 150px;
+	display: block;
+	float: left;
+	margin: 0;
 }
 
 .selected {
-  border: solid 5px #fff;
-  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.3);
+	border: solid 5px #fff;
+	box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.3);
 }
 
 .selected::before {
-  position: absolute;
-  content: "";
-  background-image: url("./assets/character.png");
-  background-repeat: no-repeat;
-  background-size: 120px 300px;
-  background-position: 13% 0%;
-  width: 200px;
-  height: 300px;
-  pointer-events: none;
-  transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
+	position: absolute;
+	content: "";
+	background-image: url("./assets/character.png");
+	background-repeat: no-repeat;
+	background-size: 120px 300px;
+	background-position: 13% 0%;
+	width: 200px;
+	height: 300px;
+	pointer-events: none;
+	transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
 }
 
 .grid-box {
-  position: relative;
-  margin: 40px auto 0;
-  transform: rotateX(60deg) rotateY(0deg) rotateZ(-135deg);
-  z-index: 0;
+	position: relative;
+	margin: 40px auto 0;
+	transform: rotateX(60deg) rotateY(0deg) rotateZ(-135deg);
+	z-index: 0;
 }
 
 .grid-box:focus {
-  outline: none;
+	outline: none;
 }
 
 .red {
-  background-color: #ba1446;
+	background-color: #ba1446;
 }
 .black {
-  background-color: black;
+	background-color: black;
 }
 .black::before {
-  position: absolute;
-  content: "";
-  background-image: url("./assets/skull&crossbones.png");
-  background-repeat: no-repeat;
-  background-size: 100px 240px;
-  background-position: 13% 0%;
-  width: 200px;
-  height: 300px;
-  pointer-events: none;
-  transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
+	position: absolute;
+	content: "";
+	background-image: url("./assets/skull&crossbones.png");
+	background-repeat: no-repeat;
+	background-size: 100px 240px;
+	background-position: 13% 0%;
+	width: 200px;
+	height: 300px;
+	pointer-events: none;
+	transform: rotateX(0deg) rotateY(0deg) rotateZ(135deg);
 }
 
 .blue {
-  background-color: #1f1f91;
+	background-color: #1f1f91;
 }
 
 .purple {
-  background-color: #6b1087;
+	background-color: #6b1087;
 }
 
 .green {
-  background-color: #237031;
+	background-color: #237031;
 }
 
 .yellow {
-  background-color: #d39e17;
+	background-color: #d39e17;
 }
 
 .combat {
-  z-index: 1;
-  position: fixed;
-  background-image: url(./assets/combatImage2.jpg);
-  background-repeat: no-repeat;
-  background-position: top, center;
+	z-index: 1;
+	position: fixed;
+	background-image: url(./assets/combatImage2.jpg);
+	background-repeat: no-repeat;
+	background-position: top, center;
 
-  width: 100vw;
-  height: 100vh;
-  top: 0px;
+	width: 100vw;
+	height: 100vh;
+	top: 0px;
 }
 .combat-content {
-  justify-content: space-evenly;
-  display: flex;
-  width: 100%;
-  height: 728px;
+	justify-content: space-evenly;
+	display: flex;
+	width: 100%;
+	height: 728px;
 }
 
 .health-bar {
-  position: relative;
-  background: #333;
-  border-radius: 5px;
-  width: 100%;
-  height: 18px;
-  width: 200px;
-  padding: 3px;
-  bottom: 10px;
+	position: relative;
+	background: #333;
+	border-radius: 5px;
+	width: 100%;
+	height: 18px;
+	width: 200px;
+	padding: 3px;
+	bottom: 10px;
 }
 
 .health-bar-inner {
-  background: green;
-  height: 100%;
-  border-radius: 5px;
-  color: white;
+	background: green;
+	height: 100%;
+	border-radius: 5px;
+	color: white;
 }
 .health-bar-numbers {
-  color: white;
-  position: absolute;
-  left: 40%;
+	color: white;
+	position: absolute;
+	left: 40%;
 }
 .player-combat-div {
-  top: 30%;
+	top: 30%;
 }
 .shake.shake {
-  animation: shake 1s infinite;
+	animation: shake 1s infinite;
 }
 @keyframes shake {
-  0% {
-    transform: translate(2px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-2deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(3deg);
-  }
-  30% {
-    transform: translate(0px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(2px, 1px) rotate(-2deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(4deg);
-  }
-  90% {
-    transform: translate(2px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
+	0% {
+		transform: translate(2px, 1px) rotate(0deg);
+	}
+	10% {
+		transform: translate(-1px, -2px) rotate(-2deg);
+	}
+	20% {
+		transform: translate(-3px, 0px) rotate(3deg);
+	}
+	30% {
+		transform: translate(0px, 2px) rotate(0deg);
+	}
+	40% {
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		transform: translate(-3px, 1px) rotate(0deg);
+	}
+	70% {
+		transform: translate(2px, 1px) rotate(-2deg);
+	}
+	80% {
+		transform: translate(-1px, -1px) rotate(4deg);
+	}
+	90% {
+		transform: translate(2px, 2px) rotate(0deg);
+	}
+	100% {
+		transform: translate(1px, -2px) rotate(-1deg);
+	}
 }
 
 .enemy-combat-div {
-  position: absolute;
-  bottom: 20%;
-  right: -150px;
+	position: absolute;
+	bottom: 20%;
+	right: -150px;
 }
 .enemy-health-bar {
-  margin: auto;
-  position: relative;
-  background: #333;
-  border-radius: 5px;
-  height: 18px;
-  width: 200px;
-  padding: 3px;
-  bottom: 10px;
+	margin: auto;
+	position: relative;
+	background: #333;
+	border-radius: 5px;
+	height: 18px;
+	width: 200px;
+	padding: 3px;
+	bottom: 10px;
 }
 .enemy-health-bar-inner {
-  background: red;
-  height: 100%;
-  border-radius: 5px;
-  color: white;
+	background: red;
+	height: 100%;
+	border-radius: 5px;
+	color: white;
 }
 .enemy-health-bar-numbers {
-  color: white;
-  position: absolute;
-  left: 40%;
+	color: white;
+	position: absolute;
+	left: 40%;
 }
 
 .card-deck > div:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 .combat-menu {
-  border: 1px black dotted;
+	border: 1px black dotted;
 }
 
 .combat-interaction-container {
-  position: relative;
-  bottom: 111px;
+	position: relative;
+	bottom: 111px;
 }
 
 .combat-interaction {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  background-color: white;
-  width: 1920px;
-  height: 250px;
-  border: 3px black solid;
-  margin: auto;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	background-color: white;
+	width: 1920px;
+	height: 250px;
+	border: 3px black solid;
+	margin: auto;
 }
 #combat-animation {
-  position: absolute;
-  height: 225px;
-  width: 360px;
-  right: 200px;
-  top: 20%;
-  opacity: 1;
-  animation: fade 0.5s linear;
+	position: absolute;
+	height: 225px;
+	width: 360px;
+	right: 200px;
+	top: 20%;
+	opacity: 1;
+	animation: fade 0.5s linear;
 }
 
 @keyframes fade {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+	0%,
+	100% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 .combat-right-container {
-  margin-right: 300px;
+	margin-right: 300px;
 }
 
 .skill-list {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: 5em;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	height: 5em;
 }
 .skill-list > li {
-  padding-right: 10px;
+	padding-right: 10px;
 }
 
 .skill-list > li:hover {
-  color: blue;
-  cursor: pointer;
+	color: blue;
+	cursor: pointer;
 }
 .skill-hovering {
-  position: absolute;
-  right: 100px;
+	position: absolute;
+	right: 100px;
 }
 
 .combat-message {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  border: black 1px solid;
-  background-color: white;
-  padding: 10px;
-  /* height: 19px; */
-  margin: auto;
-  width: 1900px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	border: black 1px solid;
+	background-color: white;
+	padding: 10px;
+	/* height: 19px; */
+	margin: auto;
+	width: 1900px;
 }
 
 .sword {
-  color: blue;
+	color: blue;
 }
 
 .card-deck-container > * {
-  position: absolute;
-  height: 300px;
-  width: 800px;
-  left: calc(50% - 450px);
-  display: flex;
+	position: absolute;
+	height: 300px;
+	width: 800px;
+	left: calc(50% - 450px);
+	display: flex;
 }
 .card-transition-enter {
-  opacity: 0;
-  bottom: 50px;
+	opacity: 0;
+	bottom: 50px;
 }
 .card-transition-enter-active {
-  opacity: 1;
-  bottom: 0px;
+	opacity: 1;
+	bottom: 0px;
 }
 .card-transition-exit {
-  opacity: 1;
-  bottom: 0px;
+	opacity: 1;
+	bottom: 0px;
 }
 .card-transition-exit-active {
-  opacity: 0;
-  bottom: 100px;
+	opacity: 0;
+	bottom: 100px;
 }
 
 .card {
-  display: flex;
-  height: 200px;
-  width: 140px;
-  background-color: #17141d;
-  border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
-  transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
+	display: flex;
+	height: 200px;
+	width: 140px;
+	background-color: #17141d;
+	border-radius: 10px;
+	box-shadow: -1rem 0 3rem #000;
+	transition: 0.4s ease-out;
+	position: relative;
+	left: 0px;
 }
 
 .card > * {
-  cursor: default;
+	cursor: default;
 }
 
 .card > div {
-  font-size: small;
-  color: white;
+	font-size: small;
+	color: white;
 }
 
 .card:not(:first-child) {
-  margin-left: -50px;
+	margin-left: -50px;
 }
 
 .card:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
+	transform: translateY(-20px);
+	transition: 0.4s ease-out;
 }
 
 .card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
+	position: relative;
+	left: 50px;
+	transition: 0.4s ease-out;
 }
 
 .card-image {
-  margin-left: 5px;
-  margin-top: 5px;
+	margin-left: 5px;
+	margin-top: 5px;
 }
 .card-image > p {
-  position: relative;
-  bottom: 15px;
-  left: 10px;
+	position: relative;
+	bottom: 15px;
+	left: 10px;
 }
 .card-effect {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
 }
 
 .card-title {
-  color: white;
-  font-weight: 300;
-  position: absolute;
-  left: 20px;
-  top: 50px;
+	color: white;
+	font-weight: 300;
+	position: absolute;
+	left: 20px;
+	top: 50px;
 }
 
 .turn-resource-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-left: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	margin-left: 200px;
 }
 
 .event-tile {
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  position: relative;
-  height: 80vh;
-  width: 80vw;
-  background-color: white;
-  z-index: 0;
-  top: -750px;
-  padding-bottom: 40px;
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	position: relative;
+	height: 80vh;
+	width: 80vw;
+	background-color: white;
+	z-index: 0;
+	top: -750px;
+	padding-bottom: 40px;
 }
 .event-tile > p {
-  width: 75%;
+	width: 75%;
 }
 
 .event-image {
-  margin: auto;
+	margin: auto;
 }
 
 .player-stats-container {
-  display: flex;
-  justify-content: center;
-  z-index: 2;
-  background-color: hsl(235, 90%, 92%);
-  margin: auto;
-  position: relative;
-  width: 70vw;
-  top: -800px;
-  bottom: 0px;
-  left: 50px;
-  padding-left: 20px;
-  flex-direction: column;
-  border: 3px black solid;
-  border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	z-index: 2;
+	background-color: hsl(235, 90%, 92%);
+	margin: auto;
+	position: relative;
+	width: 70vw;
+	top: -800px;
+	bottom: 0px;
+	left: 50px;
+	padding-left: 20px;
+	flex-direction: column;
+	border: 3px black solid;
+	border-radius: 5px;
 }
 
 #game-info-btn {
-  position: relative;
-  z-index: 3;
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 100px;
-  height: 2em;
-  color: white;
-  background-color: darkblue;
-  border-radius: 15%;
+	position: relative;
+	z-index: 3;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 100px;
+	height: 2em;
+	color: white;
+	background-color: darkblue;
+	border-radius: 15%;
 }
 #game-info-btn:hover {
-  background-color: white;
-  color: darkblue;
-  transition: 0.3s;
+	background-color: white;
+	color: darkblue;
+	transition: 0.3s;
 }
 
 .level-up-btn {
-  position: relative;
-  z-index: 3;
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 100px;
-  height: 2em;
-  color: white;
-  background-color: darkblue;
-  border-radius: 15%;
+	position: relative;
+	z-index: 3;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 100px;
+	height: 2em;
+	color: white;
+	background-color: darkblue;
+	border-radius: 15%;
 }
 .level-up-btn:hover {
-  background-color: white;
-  color: darkblue;
-  transition: 0.3s;
+	background-color: white;
+	color: darkblue;
+	transition: 0.3s;
 }
 
 .end-turn-btn {
-  position: relative;
-  z-index: 3;
-  margin-top: 10px;
-  margin-left: 10px;
-  padding: 3px;
-  color: white;
-  background-color: darkblue;
-  border-radius: 15%;
+	position: relative;
+	z-index: 3;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 3px;
+	color: white;
+	background-color: darkblue;
+	border-radius: 15%;
 }
 .end-turn-btn:hover {
-  background-color: white;
-  color: darkblue;
-  transition: 0.3s;
+	background-color: white;
+	color: darkblue;
+	transition: 0.3s;
 }
+.close-player-stats {
+	color: red;
+	cursor: pointer;
+	padding-right: 12px;
+	padding-top: 12px;
+}
+
+.game-info-title {
+	display: flex;
+	justify-content: space-between;
+}
+
 .player-stats-top-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 .player-stat-numbers {
-  margin-right: 150px;
+	margin-right: 150px;
 }
 .player-stat-numbers > ul {
-  list-style: none;
-  padding-left: 10px;
+	list-style: none;
+	padding-left: 10px;
 }
 .player-stat-numbers > ul > li {
-  padding-top: 10px;
+	padding-top: 10px;
 }
 .player-stats-combat > p {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .player-stats-combat > p > img {
-  margin-left: 5px;
+	margin-left: 5px;
 }
 .movement-info {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .movement-info > p {
-  margin-right: 25px;
+	margin-right: 25px;
 }
 .movement-info > img {
-  position: relative;
-  bottom: 10px;
+	position: relative;
+	bottom: 10px;
 }
 .tile-list {
-  list-style: none;
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
+	list-style: none;
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
 }
 .tile-list > li {
-  height: 1em;
-  display: flex;
-  margin: 5px;
-  align-items: center;
+	height: 1em;
+	display: flex;
+	margin: 5px;
+	align-items: center;
 }
 .tile-list > p {
-  margin-left: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 .tile-example {
-  height: 20px;
-  width: 20px;
-  margin: 10px;
-  background-color: black;
+	height: 20px;
+	width: 20px;
+	margin: 10px;
+	background-color: black;
 }
 
 .player-skills-list {
-  list-style-type: none;
+	list-style-type: none;
 }
 .skill-description > img {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 .skill-description {
-  padding: 5px;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+	padding: 5px;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
 }
 .player-card-deck {
-  display: flex;
-  list-style-type: none;
-  height: 500px;
-  flex-flow: column wrap;
+	display: flex;
+	list-style-type: none;
+	height: 500px;
+	flex-flow: column wrap;
 }
 .player-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  margin-top: 10px;
-  height: 100px;
-  width: 100px;
-  border-radius: 5%;
-  color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	margin-top: 10px;
+	height: 100px;
+	width: 100px;
+	border-radius: 5%;
+	color: black;
 }
 
 .player-card-images {
-  display: flex;
-  flex-direction: row;
-  object-fit: cover;
-  position: absolute;
-  height: 30px;
+	display: flex;
+	flex-direction: row;
+	object-fit: cover;
+	position: absolute;
+	height: 30px;
 }
 
 .card-value {
-  color: white;
+	color: white;
 }
 .player-card-text {
-  color: black;
-  position: relative;
-  left: 110px;
+	color: black;
+	position: relative;
+	left: 110px;
 }

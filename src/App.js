@@ -218,6 +218,7 @@ function App() {
 					levelUp={levelUp}
 					inCombat={inCombat}
 					levelUpToggle={levelUpToggle}
+					playerStatsHiddenToggle={playerStatsHiddenToggle}
 				></PlayerStats>
 			)}
 			<CombatOverlay
