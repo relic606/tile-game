@@ -443,7 +443,6 @@ body {
 	padding: 3px;
 	color: white;
 	background-color: darkblue;
-	border-radius: 15%;
 }
 .end-turn-btn:hover {
 	background-color: white;
@@ -451,10 +450,13 @@ body {
 	transition: 0.3s;
 }
 .close-player-stats {
-	color: red;
+	color: white;
 	cursor: pointer;
-	padding-right: 12px;
-	padding-top: 12px;
+	height: 1rem;
+	padding: 5px;
+	border: black solid 1px;
+	border-radius: 25%;
+	background-color: darkblue;
 }
 
 .game-info-title {
