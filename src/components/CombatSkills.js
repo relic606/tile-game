@@ -13,7 +13,7 @@ export default function CombatSkills(props) {
   const [strengthBuff, setStrengthBuff] = useState(0);
   const [enemyStun, setEnemyStun] = useState(false);
   const [enemyStunCoolDown, setEnemyStunCoolDown] = useState(false);
-  const [enemyStatusEffect, setEnemyStatusEffect] = useState("");
+  // const [enemyStatusEffect, setEnemyStatusEffect] = useState("");
   const [randomActionNum, setRandomActionNum] = useState(
     Math.floor(Math.random() * props.enemy.actions.length)
   );
@@ -83,7 +83,7 @@ export default function CombatSkills(props) {
         props.setStatusEffect(statusEffect);
       }
       const vulnerable = props.statusEffect.includes("Vulnerable") ? 1.5 : 1;
-      const weakness = enemyStatusEffect.includes("Weakness") ? 0.6 : 1;
+      const weakness = props.enemyStatusEffect.includes("Weakness") ? 0.6 : 1;
 
       const damageTaken = Math.floor(
         props.enemy.actions[randomActionNum].value *
@@ -104,7 +104,7 @@ export default function CombatSkills(props) {
 
       if (props.player.health > damageTaken) {
         props.healthChange(-damageTaken);
-        setEnemyStatusEffect("");
+        props.setEnemyStatusEffect("");
       }
       ///////////Attack greater than health, player is slain
       else {
@@ -327,7 +327,7 @@ export default function CombatSkills(props) {
             props.animateSlash();
             props.setSwordResource(-skillUsed.cost);
             props.setShieldResource(-skillUsed.cost);
-            setEnemyStatusEffect("Weakness");
+            props.setEnemyStatusEffect("Weakness");
 
             props.setEnemyHealth(
               props.enemyHealth -
@@ -374,10 +374,8 @@ export default function CombatSkills(props) {
           );
         })}
       </div>
-      <div className="status-container">
+      <div className="card-count-container">
         <div>Defending - {100 * (1 - defendValue)}%</div>
-        <div>Player Status Effects: {props.statusEffect}</div>
-        <div>Enemy Status Effects: {enemyStatusEffect}</div>
         <br></br>
         <div>Draw pile: {props.drawPileLength}</div>
         <div>Discard pile: {props.discardPileLength}</div>

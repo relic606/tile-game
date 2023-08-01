@@ -9,7 +9,6 @@ import cardImg from "../assets/cards1.png";
 
 export default function CombatInteraction(props) {
   const [combatMessage, setCombatMessage] = useState("");
-  const [statusEffect, setStatusEffect] = useState("");
   const [currentHand, setCurrentHand] = useState([]);
   const [discardPile, setDiscardPile] = useState([]);
 
@@ -20,15 +19,6 @@ export default function CombatInteraction(props) {
   };
 
   const [drawPile, setDrawPile] = useState([...shuffle(props.player.cardDeck)]);
-
-  function addStatusEffect(status) {
-    if (statusEffect === "") {
-      setStatusEffect(status);
-    } else if (statusEffect.includes(`${status}`)) {
-    } else {
-      setStatusEffect(`${statusEffect}  ${status}`);
-    }
-  }
 
   const setNewCurrentHand = (newHand) => {
     setCurrentHand(newHand);
@@ -157,7 +147,7 @@ export default function CombatInteraction(props) {
   const endPlayerTurn = () => {
     props.turnIncr();
     cardAudioStart();
-    if (statusEffect.includes("Slow")) {
+    if (props.statusEffect.includes("Slow")) {
       drawCards(1);
     } else {
       drawCards(2);
@@ -177,9 +167,9 @@ export default function CombatInteraction(props) {
       <div className="combat-interaction">
         <div>
           <CardDeck
-            addStatusEffect={addStatusEffect}
-            statusEffect={statusEffect}
-            setStatusEffect={setStatusEffect}
+            addStatusEffect={props.addStatusEffect}
+            statusEffect={props.statusEffect}
+            setStatusEffect={props.setStatusEffect}
             setCombatMessage={setCombatMessageCB}
             turn={props.turn}
             cardDeck={props.player.cardDeck}
@@ -214,12 +204,14 @@ export default function CombatInteraction(props) {
               {props.drawResource}
             </div>
             <button onClick={endPlayerTurn} className="end-turn-btn">
+              <div> Turn: {props.turn}</div>
               End Turn{currentHand.length >= 8 ? " - Hand Full" : null}
             </button>
-            <div> Turn: {props.turn}</div>
           </div>
 
           <CombatSkills
+            enemyStatusEffect={props.enemyStatusEffect}
+            setEnemyStatusEffect={props.setEnemyStatusEffect}
             animateSlash={props.animateSlash}
             enemyHealth={props.enemyHealth}
             setEnemyHealth={props.setEnemyHealth}
@@ -228,8 +220,8 @@ export default function CombatInteraction(props) {
             enemyPool={props.enemyPool}
             enemies={props.enemies}
             setEnemyPool={props.setEnemyPool}
-            statusEffect={statusEffect}
-            setStatusEffect={setStatusEffect}
+            statusEffect={props.statusEffect}
+            setStatusEffect={props.setStatusEffect}
             drawPileLength={drawPile.length}
             discardPileLength={discardPile.length}
             setExperience={props.setExperience}

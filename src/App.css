@@ -122,6 +122,15 @@ body {
 .player-combat-div {
   top: 30%;
 }
+.player-status-banner {
+  width: fit-content;
+  background-color: white;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
 .shake.shake {
   animation: shake 1s infinite;
 }
@@ -188,6 +197,16 @@ body {
   left: 40%;
 }
 
+.enemy-status-banner {
+  position: absolute;
+  width: fit-content;
+  background-color: white;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
 .card-deck > div:hover {
   cursor: pointer;
 }
@@ -235,7 +254,6 @@ body {
 
 .combat-right-container {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
 }
 .combat-skill-div {
@@ -260,16 +278,14 @@ body {
   font-weight: bold;
 }
 .skill-list {
-  border: solid black 1pt;
   display: flex;
   flex-direction: column;
   padding: 3px;
   width: fit-content;
   height: fit-content;
-  /* flex-wrap: wrap; */
-  /* height: 5em; */
 }
-.status-container {
+.card-count-container {
+  background-color: white;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -304,7 +320,7 @@ body {
   height: 300px;
   width: 800px;
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 .card-transition-enter {
   opacity: 0;
@@ -451,8 +467,8 @@ body {
   z-index: 3;
   margin-top: 10px;
   margin-left: 10px;
-  width: 100px;
-  height: 2em;
+  width: 200px;
+  height: 3em;
   color: white;
   background-color: darkblue;
   border-radius: 15%;
@@ -478,6 +494,8 @@ body {
   transition: 0.3s;
 }
 .close-player-stats {
+  padding: 2px;
+  margin: 2px;
   color: white;
   cursor: pointer;
   height: 1rem;
@@ -485,6 +503,11 @@ body {
   border: black solid 1px;
   border-radius: 25%;
   background-color: darkblue;
+}
+.close-player-stats:hover {
+  background-color: white;
+  color: darkblue;
+  transition: 0.3s;
 }
 
 .game-info-title {

@@ -13,6 +13,18 @@ export default function CombatOverlay(props) {
     setTurn(1);
   };
 
+  const [statusEffect, setStatusEffect] = useState("");
+  const [enemyStatusEffect, setEnemyStatusEffect] = useState("");
+
+  function addStatusEffect(status) {
+    if (statusEffect === "") {
+      setStatusEffect(status);
+    } else if (statusEffect.includes(`${status}`)) {
+    } else {
+      setStatusEffect(`${statusEffect}  ${status}`);
+    }
+  }
+
   const [swordResource, setSwordResource] = useState(0);
   const [shieldResource, setShieldResource] = useState(0);
   const [heartResource, setHeartResource] = useState(0);
@@ -57,13 +69,24 @@ export default function CombatOverlay(props) {
     return (
       <div className="combat">
         <div className="combat-content">
-          <PlayerImage player={props.player} turn={turn} />
+          <PlayerImage
+            player={props.player}
+            turn={turn}
+            statusEffect={statusEffect}
+          />
           <EnemyImage
+            enemyStatusEffect={enemyStatusEffect}
+            setEnemyStatusEffect={setEnemyStatusEffect}
             enemy={props.enemy}
             enemyHealth={enemyHealth}
           ></EnemyImage>
         </div>
         <CombatInteraction
+          enemyStatusEffect={enemyStatusEffect}
+          setEnemyStatusEffect={setEnemyStatusEffect}
+          addStatusEffect={addStatusEffect}
+          statusEffect={statusEffect}
+          setStatusEffect={setStatusEffect}
           animateSlash={animateSlash}
           enemyHealth={enemyHealth}
           setEnemyHealth={setEnemyHealth}
@@ -120,6 +143,17 @@ function EnemyImage(props) {
         </div>
         <img src={props.enemy.image} alt="enemy"></img>
         <div id="combat-animation-container"></div>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {props.enemyStatusEffect ? (
+            <div className="enemy-status-banner">{props.enemyStatusEffect}</div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -157,6 +191,9 @@ function PlayerImage(props) {
         alt="player"
         className={shake ? "shake" : null}
       ></img>
+      {props.statusEffect ? (
+        <div className="player-status-banner">{props.statusEffect}</div>
+      ) : null}
     </div>
   );
 }
