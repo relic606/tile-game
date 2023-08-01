@@ -169,10 +169,12 @@ export default function CombatSkills(props) {
                 props.eventIsHiddenToggle();
               }
               props.inCombatChange(false);
-
+              props.setStatusEffect("");
+              props.setEnemyStatusEffect("");
               props.setSwordResource(-props.combatResources.sword);
               props.setShieldResource(-props.combatResources.shield);
               props.setHeartResource(-props.combatResources.heart);
+              props.setDrawResource(-props.combatResources.draw);
               props.setExperience(props.enemy.experience);
               setStrengthBuff(0);
               alert(
