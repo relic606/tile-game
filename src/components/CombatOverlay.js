@@ -73,6 +73,7 @@ export default function CombatOverlay(props) {
             player={props.player}
             turn={turn}
             statusEffect={statusEffect}
+            enemyStatusEffect={enemyStatusEffect}
           />
           <EnemyImage
             enemyStatusEffect={enemyStatusEffect}
@@ -189,7 +190,7 @@ function PlayerImage(props) {
       <img
         src={props.player.image}
         alt="player"
-        className={shake ? "shake" : null}
+        className={shake&&props.enemyStatusEffect!== "Stun" ? "shake" : null}
       ></img>
       {props.statusEffect ? (
         <div className="player-status-banner">{props.statusEffect}</div>

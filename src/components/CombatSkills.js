@@ -305,6 +305,7 @@ export default function CombatSkills(props) {
               props.setCombatMessage("Unable to stun the enemy.");
             } else {
               props.setCombatMessage(skillUsed.message);
+              props.setEnemyStatusEffect("Stun");
               setEnemyStun(true);
               props.setSwordResource(-skillUsed.cost);
               props.setShieldResource(-skillUsed.cost);
