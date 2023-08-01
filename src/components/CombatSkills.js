@@ -376,9 +376,11 @@ export default function CombatSkills(props) {
       </div>
       <div className="card-count-container">
         <div>Defending - {100 * (1 - defendValue)}%</div>
-        <br></br>
-        <div>Draw pile: {props.drawPileLength}</div>
-        <div>Discard pile: {props.discardPileLength}</div>
+
+        <div>
+          <div>Draw pile: {props.drawPileLength}</div>
+          <div>Discard pile: {props.discardPileLength}</div>
+        </div>
       </div>
     </div>
   );

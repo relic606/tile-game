@@ -285,10 +285,10 @@ body {
   height: fit-content;
 }
 .card-count-container {
-  background-color: white;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 .skills-resource-container {
   display: flex;
