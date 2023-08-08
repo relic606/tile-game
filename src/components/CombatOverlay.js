@@ -188,8 +188,10 @@ function PlayerImage(props) {
         break;
       case "Slow":
         newImage = "";
+        break;
       default:
         newImage = "";
+        break;
     }
     setStatusImg(newImage);
   }, [props.statusEffect]);
@@ -221,7 +223,11 @@ function PlayerImage(props) {
         ></img>
       </div>
       {props.statusEffect && props.statusEffect !== "Stun" ? (
-        <img src={statusImg} className="player-status-image"></img>
+        <img
+          src={statusImg}
+          className="player-status-image"
+          alt="Player status image"
+        ></img>
       ) : null}
     </div>
   );
