@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CombatInteraction from "./combatInteraction";
 import slashImg from "../assets/slash.png";
+import vulnerableImg from "../assets/icon-vulnerable.png";
+import weaknessImg from "../assets/icon-weakness.png";
+import stunImg from "../assets/stun-icon.png";
 
 export default function CombatOverlay(props) {
   const [enemyHealth, setEnemyHealth] = useState(0);
@@ -162,6 +165,7 @@ function EnemyImage(props) {
 
 function PlayerImage(props) {
   const [shake, setShake] = useState(false);
+  const [statusImg, setStatusImg] = useState("");
 
   useEffect(() => {
     if (props.turn !== 1) {
@@ -173,8 +177,28 @@ function PlayerImage(props) {
     }
   }, [props.turn]);
 
+  useEffect(() => {
+    let newImage = "";
+    switch (props.statusEffect) {
+      case "Vulnerable":
+        newImage = vulnerableImg;
+        break;
+      case "Weakness":
+        newImage = weaknessImg;
+        break;
+      case "Slow":
+        newImage = "";
+      default:
+        newImage = "";
+    }
+    setStatusImg(newImage);
+  }, [props.statusEffect]);
+
   return (
     <div className="player-combat-div" style={{ position: "relative" }}>
+      {props.statusEffect === "Stun" ? (
+        <img src={stunImg} style={{ position: "absolute", zIndex: 1 }}></img>
+      ) : null}
       <div className="health-bar">
         <div
           className="health-bar-inner"
@@ -187,13 +211,17 @@ function PlayerImage(props) {
           </div>
         </div>
       </div>
-      <img
-        src={props.player.image}
-        alt="player"
-        className={shake&&props.enemyStatusEffect!== "Stun" ? "shake" : null}
-      ></img>
-      {props.statusEffect ? (
-        <div className="player-status-banner">{props.statusEffect}</div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <img
+          src={props.player.image}
+          alt="player"
+          className={
+            shake && props.enemyStatusEffect !== "Stun" ? "shake" : null
+          }
+        ></img>
+      </div>
+      {props.statusEffect && props.statusEffect !== "Stun" ? (
+        <img src={statusImg} className="player-status-image"></img>
       ) : null}
     </div>
   );
