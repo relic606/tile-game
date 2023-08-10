@@ -222,12 +222,11 @@ function PlayerImage(props) {
           }
         ></img>
       </div>
-      {props.statusEffect && props.statusEffect !== "Stun" ? (
-        <img
-          src={statusImg}
-          className="player-status-image"
-          alt="Player status image"
-        ></img>
+      {/* {props.statusEffect && props.statusEffect !== "Stun" ? (
+        <img src={statusImg} className="player-status-image"></img>
+      ) : null} */}
+      {props.statusEffect ? (
+        <div className="player-status-banner">{props.statusEffect}</div>
       ) : null}
     </div>
   );
